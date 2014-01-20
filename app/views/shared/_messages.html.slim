@@ -1,0 +1,7 @@
+- unless flash.empty?
+  .flash
+    - flash.each do |type, message|
+      - next if message.blank?
+      div class="message #{type}"
+        a.close_flash &times;
+        = simple_format(message.strip)

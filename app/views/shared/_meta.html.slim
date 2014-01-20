@@ -1,0 +1,6 @@
+- unless !obj.respond_to?(:keywords) || obj.keywords.blank?
+  meta name="keywords" content=obj.keywords
+- unless !obj.respond_to?(:description) || obj.description.blank?
+  meta name="description" content=obj.description
+- unless !obj.respond_to?(:robots) || obj.robots.blank?
+  meta name="robots" content=obj.robots

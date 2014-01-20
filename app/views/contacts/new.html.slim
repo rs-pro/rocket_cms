@@ -1,0 +1,10 @@
+= render 'shared/obj', obj: @seo_page
+
+#rocket_cms_contact_form
+  = simple_form_for @contact_message do |f|
+    = f.input :name
+    = f.input :email
+    = f.input :phone
+    = f.input :content
+    = f.input :captcha
+    = f.submit 'Отправить'
