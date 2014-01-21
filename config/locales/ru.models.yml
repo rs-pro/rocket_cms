@@ -18,6 +18,9 @@ ru:
     content: Содержимое
     time: Время
     excerpt: Превью
+    sort: Сортировка
+    link: Ссылка
+    url: URL
 
   mongoid:
     models:

@@ -1,16 +1,9 @@
 class Menu
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include ActiveModel::ForbiddenAttributesProtection
-
-  include Mongoid::Audit::Trackable
-  track_history track_create: true, track_destroy: true
+  include RocketCMS::Model
+  include Enableable
 
   field :name, type: String
-  include ManualSlug
   manual_slug :name
-
-  include Enableable
 
   has_and_belongs_to_many :pages, inverse_of: :menu
 

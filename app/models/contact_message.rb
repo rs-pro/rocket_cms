@@ -1,9 +1,6 @@
 class ContactMessage
-  include Mongoid::Document
-  include Mongoid::Timestamps::Short
-  include ActiveModel::ForbiddenAttributesProtection
+  include RocketCMS::Model
 
-  include SimpleCaptcha::ModelHelpers
   apply_simple_captcha
 
   field :name, type: String

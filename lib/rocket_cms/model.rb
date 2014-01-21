@@ -6,8 +6,12 @@ module RocketCMS
       include Mongoid::Timestamps::Short
       include ActiveModel::ForbiddenAttributesProtection
       include Trackable
-      include Enableable
+      include BooleanField
+      include SortField
       include Mongoid::Paperclip
+      include ManualSlug
+      include SmartExcerpt
+      include SimpleCaptcha::ModelHelpers
     end
   end
 end

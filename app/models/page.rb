@@ -1,8 +1,6 @@
 class Page
-  include Mongoid::Document
-  include Mongoid::Timestamps::Short
-  include ActiveModel::ForbiddenAttributesProtection
-  include Trackable
+  include RocketCMS::Model
+  include Enableable
   include Seoable
 
   field :regexp, type: String
@@ -19,10 +17,7 @@ class Page
 
   acts_as_nested_set
 
-  include ManualSlug
   manual_slug :name
-
-  include Enableable
 
   before_save do
     self.fullpath = "/pages/#{slug}" if self.fullpath.blank?

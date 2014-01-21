@@ -1,8 +1,5 @@
 class News
-  include Mongoid::Document
-  include Mongoid::Timestamps::Short
-  include ActiveModel::ForbiddenAttributesProtection
-  include Trackable
+  include RocketCMS::Model
   include Seoable
   include Enableable
 
@@ -24,7 +21,6 @@ class News
     self.time = Time.now if self.time.blank?
   end
 
-  include ManualSlug
   def report_slug
     time.strftime('%Y-%m-%d') + '-' + name[0..20]
   end
@@ -43,7 +39,6 @@ class News
 
   paginates_per RocketCMS.configuration.news_per_page
 
-  include SmartExcerpt
   smart_excerpt :excerpt, :content
 
   rails_admin do
