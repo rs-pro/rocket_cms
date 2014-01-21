@@ -1,7 +1,13 @@
 module Enableable
   extend ActiveSupport::Concern
   included do
-    field :enabled, type: Mongoid::Boolean, default: true
-    scope :enabled, -> { where(enabled: true) }
+    boolean_field(:enabled)
+  end
+
+  module ClassMethods
+    def boolean_field(name, default = true)
+      field name, type: Mongoid::Boolean, default: default
+      scope name, -> { where(name => true) }
+    end
   end
 end

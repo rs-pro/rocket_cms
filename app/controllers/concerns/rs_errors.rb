@@ -16,8 +16,7 @@ module RsErrors
     unless exception.nil?
       capture_exception(exception) if respond_to?(:capture_exception)
     end
-
-    render template: 'errors/error_404', formats: [:html], handlers: [:haml, :slim], layout: 'layouts/application', status: 404
+    render_error(404)
   end
 
   def render_500(exception)
@@ -32,7 +31,11 @@ module RsErrors
       end
     rescue
     end
-    render template: 'errors/error_500', formats: [:html], handlers: [:haml, :slim], layout: 'layouts/application', status: 500
+    render_error(500)
+  end
+
+  def render_error(code = 500)
+    render template: "errors/error_#{code}", formats: [:html], handlers: [:haml, :slim], layout: RocketCMS.configuration.error_layout, status: code
   end
 
 end

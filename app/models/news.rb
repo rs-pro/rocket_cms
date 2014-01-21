@@ -4,10 +4,11 @@ class News
   include ActiveModel::ForbiddenAttributesProtection
   include Trackable
   include Seoable
+  include Enableable
 
   field :time, type: Time
   index({enabled: 1, time: 1})
-  scope :after_now, -> { where(:time.gt => Time.now) }
+  scope :after_now, -> { where(:time.lt => Time.now) }
 
   field :excerpt, type: String
   field :content, type: String
@@ -36,6 +37,9 @@ class News
   def format_date
     time.strftime('%d.%m.%Y')
   end
+  
+  scope :by_date, -> { desc(:time) }
+  scope :recent, ->(count = 5) { enabled.after_now.by_date.limit(count) }
 
   paginates_per RocketCMS.configuration.news_per_page
 

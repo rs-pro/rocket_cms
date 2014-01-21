@@ -54,6 +54,7 @@ module RocketCMS
   class Configuration
     attr_accessor :news_image_styles
     attr_accessor :news_per_page
+    attr_accessor :error_layout
 
     def initialize
       @news_image_styles = {
@@ -62,11 +63,14 @@ module RocketCMS
       }
 
       @news_per_page = 10
+
+      @error_layout = 'application'
     end
   end
 end
 
+require 'rocket_cms/model'
 require 'rocket_cms/engine'
 require 'rocket_cms/railtie'
 require 'rocket_cms/controller'
-
+require 'no_extra_ul'
