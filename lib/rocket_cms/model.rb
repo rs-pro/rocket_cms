@@ -9,7 +9,6 @@ module RocketCMS
       include BooleanField
       include SortField
       include Mongoid::Paperclip
-      include ManualSlug
       include SmartExcerpt
       include SimpleCaptcha::ModelHelpers
     end

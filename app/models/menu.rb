@@ -3,6 +3,8 @@ class Menu
   include Enableable
 
   field :name, type: String
+
+  include ManualSlug
   manual_slug :name
 
   has_and_belongs_to_many :pages, inverse_of: :menu

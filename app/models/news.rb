@@ -21,6 +21,7 @@ class News
     self.time = Time.now if self.time.blank?
   end
 
+  include ManualSlug
   def report_slug
     time.strftime('%Y-%m-%d') + '-' + name[0..20]
   end

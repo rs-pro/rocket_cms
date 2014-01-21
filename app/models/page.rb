@@ -17,6 +17,7 @@ class Page
 
   acts_as_nested_set
 
+  include ManualSlug
   manual_slug :name
 
   before_save do
