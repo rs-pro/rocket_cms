@@ -1,0 +1,27 @@
+- if params[:associations].nil?
+  = form.collection_check_boxes field.method_name, form.object.class.send(field.method_name).values.map { |v| [t("enumerize.#{form.object.class.name.downcase}.#{field.method_name}.#{v}"), v] }, :last, :first, {}, {} { |i| i.label( class: 'checkbox' ) { i.check_box + i.text } }
+- else  
+  :ruby
+    related_id = params[:associations] && params[:associations][field.name.to_s]
+    config = field.associated_model_config
+    source_abstract_model = RailsAdmin.config(form.object.class).abstract_model
+
+    if form.object.new_record? && related_id.present? && related_id != 'new'
+      selected = [config.abstract_model.get(related_id)]
+    else
+      selected = form.object.send(field.name)
+    end
+    selected_ids = selected.map{|s| s.send(field.associated_primary_key)}
+
+    current_action = params[:action].in?(['create', 'new']) ? 'create' : 'update'
+
+    xhr = !field.associated_collection_cache_all
+
+    collection = if xhr
+      selected.map { |o| [o.send(field.associated_object_label_method), o.send(field.associated_primary_key)] }
+    else
+      i = 0
+      controller.list_entries(config, :index, field.associated_collection_scope, false).map { |o| [o.send(field.associated_object_label_method), o.send(field.associated_primary_key)] }.sort_by {|a| [selected_ids.index(a[1]) || selected_ids.size, i+=1] }
+    end
+
+  = form.collection_check_boxes field.method_name, collection, :last, :first, {}, {} { |i| i.label( class: 'checkbox' ) { i.check_box + i.text } }
