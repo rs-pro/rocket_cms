@@ -8,5 +8,5 @@ ol
   li
     .title= link_to (r._highlight.nil? || r._highlight['name'].nil?) ? r.name : r._highlight['name'].join(' ... ').html_safe, url_for(r)
     .text
-      == (r._highlight.nil? || r._highlight['content'].nil?) ? SmartExcerpt.truncate(r.content) : r._highlight['content'].join(' ... ')
+      == (r._highlight.nil? || r._highlight['content'].nil?) ? (r.content.blank? ? '' : SmartExcerpt.truncate(r.content)) : r._highlight['content'].join(' ... ')
       span.more= link_to '', url_for(r)
