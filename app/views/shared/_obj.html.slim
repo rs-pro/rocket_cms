@@ -7,4 +7,6 @@
     - else
       = raw obj.content
 
-  = render 'shared/o_meta', obj: obj
+  - content_for :meta do
+    = render 'shared/meta', obj: obj
+    = render 'shared/og', title: obj.get_og_title, image: obj.og_image

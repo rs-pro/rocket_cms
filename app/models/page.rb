@@ -70,6 +70,10 @@ class Page
     end
   end
 
+  if RocketCMS.configuration.search_enabled
+    include RocketCMS::ElasticSearch
+  end
+
   rails_admin do
     navigation_label 'CMS'
 
@@ -90,17 +94,17 @@ class Page
       field :content, :ckeditor
 
       group :menu do
-        label "Меню"
+        label t('rs.menu')
         field :menus
 
         field :fullpath, :string do
-          help "c начальным слешем"
+          help t('rs.with_final_slash')
         end
         field :regexp, :string do
-          help "Регулярное выражение, по которому определяется является ли этот пункт активным"
+          help t('rs.page_url_regex')
         end
         field :redirect, :string do
-          help "В меню сразу отдается конечная ссылка"
+          help t('rs.final_in_menu')
         end
       end
 
@@ -108,7 +112,7 @@ class Page
     end
 
     nested_set({
-        max_depth: 2
+      max_depth: RocketCMS.configuration.menu_max_depth
     })
   end
 end

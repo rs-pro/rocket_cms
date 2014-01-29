@@ -37,10 +37,13 @@ class News
   
   scope :by_date, -> { desc(:time) }
   scope :recent, ->(count = 5) { enabled.after_now.by_date.limit(count) }
-
   paginates_per RocketCMS.configuration.news_per_page
 
   smart_excerpt :excerpt, :content
+
+  if RocketCMS.configuration.search_enabled
+    include RocketCMS::ElasticSearch
+  end
 
   rails_admin do
     navigation_label 'Новости'

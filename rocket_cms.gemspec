@@ -24,39 +24,29 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mongoid', '~> 4.0.0.alpha2'
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'glebtv-mongoid_nested_set'
-
   spec.add_dependency 'simple_form', '~> 3.0.0'
   spec.add_dependency 'glebtv-simple_captcha'
-
   spec.add_dependency 'yajl-ruby'
-
   spec.add_dependency 'rs_russian'
-
   spec.add_dependency 'htmlentities'
   spec.add_dependency 'sanitize'
-
   spec.add_dependency 'coffee-rails'
   spec.add_dependency 'devise'
   spec.add_dependency 'validates_email_format_of'
-
   spec.add_dependency 'glebtv-mongoid-paperclip'
   spec.add_dependency 'rails_admin'
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'
   spec.add_dependency 'glebtv-ckeditor'
   spec.add_dependency 'rails_admin_settings'
-
   spec.add_dependency 'glebtv-mongoid-paperclip'
   spec.add_dependency 'mongoid-audit'
   spec.add_dependency 'mongoid_slug'
-
   spec.add_dependency 'simple-navigation'
-  
   spec.add_dependency 'unicorn'
   spec.add_dependency 'x-real-ip'
-
   spec.add_dependency 'sitemap_generator'
   spec.add_dependency 'kaminari'
-
   spec.add_dependency 'addressable'
+  spec.add_dependency "ruby-progressbar"
 end
