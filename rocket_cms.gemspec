@@ -39,7 +39,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_toggleable'
   spec.add_dependency 'glebtv-ckeditor'
   spec.add_dependency 'rails_admin_settings'
-  spec.add_dependency 'glebtv-mongoid-paperclip'
   spec.add_dependency 'mongoid-audit'
   spec.add_dependency 'mongoid_slug'
   spec.add_dependency 'simple-navigation'
