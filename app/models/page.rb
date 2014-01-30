@@ -94,17 +94,17 @@ class Page
       field :content, :ckeditor
 
       group :menu do
-        label t('rs.menu')
+        label I18n.t('rs.menu')
         field :menus
 
         field :fullpath, :string do
-          help t('rs.with_final_slash')
+          help I18n.t('rs.with_final_slash')
         end
         field :regexp, :string do
-          help t('rs.page_url_regex')
+          help I18n.t('rs.page_url_regex')
         end
         field :redirect, :string do
-          help t('rs.final_in_menu')
+          help I18n.t('rs.final_in_menu')
         end
       end
 
