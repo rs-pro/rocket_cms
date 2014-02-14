@@ -51,10 +51,9 @@ ru:
         image: Картинка
         hidden: Скрытая
         menus: Меню
-      
+
   activemodel:
     errors:
       messages:
         invalid_email_address: Неверный e-mail
-
 

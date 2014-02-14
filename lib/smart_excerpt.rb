@@ -22,21 +22,23 @@ module SmartExcerpt
   end
 
   @@h = Helper.new
-  @@he = HTMLEntities.new 
+  @@he = HTMLEntities.new
 
   def smart_truncate(obj, base_field, excerpt_field, words)
     if obj.send(excerpt_field).blank?
       tx = obj.send(base_field)
-      if tx.blank?
-        ''
-      else
-        tx = tx.gsub(/<h\d[^>]*?>(.*)<\/h\d>/mi, '').gsub("\n", ' ').gsub("\r", '').gsub("\t", '').strip
-        tx = @@he.decode(tx)
-        tx = @@h.strip_tags(tx)
-        @@h.smart_truncate(tx, words: words)
-      end
     else
-      obj.send(excerpt_field)
+      tx = obj.send(excerpt_field)
+      words *= 1.2
+    end
+
+    if tx.blank?
+      ''
+    else
+      tx = tx.gsub(/<h\d[^>]*?>(.*)<\/h\d>/mi, '').gsub("\n", ' ').gsub("\r", '').gsub("\t", '').strip
+      tx = @@he.decode(tx)
+      tx = @@h.strip_tags(tx)
+      @@h.smart_truncate(tx, words: words)
     end
   end
 
@@ -44,7 +46,7 @@ module SmartExcerpt
     base.send(:extend, ClassMethods)
     base.send(:include, InstanceMethods)
   end
-  
+
   def self.decode(str)
     @@he.decode(str)
   end
@@ -70,8 +72,8 @@ module SmartExcerpt
 
   module ClassMethods
     def smart_excerpt(excerpt_field, base_field, words = 25)
-      define_method("get_#{excerpt_field}".to_sym) do
-        smart_truncate(self, base_field, excerpt_field, words)
+      define_method("get_#{excerpt_field}".to_sym) do |c_words = words|
+        smart_truncate(self, base_field, excerpt_field, c_words)
       end
     end
   end

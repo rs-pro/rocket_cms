@@ -55,6 +55,8 @@ module RocketCMS
   class Configuration
     attr_accessor :news_image_styles
     attr_accessor :news_per_page
+    attr_accessor :news_excerpt
+
     attr_accessor :error_layout
     attr_accessor :menu_max_depth
 
@@ -62,18 +64,27 @@ module RocketCMS
     attr_accessor :search_per_page
     attr_accessor :search_models
 
+    # attr_accessor :album_image_styles
+
     def initialize
       @news_image_styles = {
         main:  '400x200>',
         thumb: '200x100>',
       }
       @news_per_page = 10
+      @news_excerpt = 12
+
       @error_layout = 'application'
       @menu_max_depth = 2
 
       @search_enabled = false
       @search_per_page = 10
       @search_models = []
+
+      #@album_image_styles = {
+      #  thumb: '182x155#',
+      #  main: '800x600>'
+      #}
     end
 
     def search_enabled=(val)

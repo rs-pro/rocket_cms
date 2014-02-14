@@ -27,11 +27,11 @@ module RsMenu
     Proc.new do |primary|
       SimpleNavigation.config.autogenerate_item_ids = false
       begin
-        menus = ::Menu.find(type).pages.to_a
+        menus = ::Menu.find(type.to_s).pages.to_a
         menus.select { |m| m.parent_id.nil? && !m.name.blank? }.each do |item|
           render_with_subs(menus, primary, item)
         end
-      rescue Exception => e
+      rescue Exception => exception
         Rails.logger.error exception.message
         Rails.logger.error exception.backtrace.join("\n")
         capture_exception(exception) if respond_to?(:capture_exception)

@@ -10,7 +10,7 @@ module RsErrors
       rescue_from Mongoid::Errors::InvalidFind, with: :render_404
     end
   end
-  
+
   protected
   def render_404(exception = nil)
     unless exception.nil?
@@ -23,7 +23,7 @@ module RsErrors
     Rails.logger.error exception.message
     Rails.logger.error exception.backtrace.join("\n")
     capture_exception(exception) if respond_to?(:capture_exception)
-    
+
     begin
       if rails_admin_controller?
         return render text: 'Внутренняя ошибка'
