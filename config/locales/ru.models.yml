@@ -51,6 +51,11 @@ ru:
         image: Картинка
         hidden: Скрытая
         menus: Меню
+      contact_message:
+        name: Ваше имя
+        email: Ваш е-мейл
+        phone: Ваш телефон
+        content: Ваше сообщение
 
   activemodel:
     errors:

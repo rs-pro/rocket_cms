@@ -64,6 +64,8 @@ module RocketCMS
     attr_accessor :search_per_page
     attr_accessor :search_models
 
+    attr_accessor :contacts_captcha
+
     # attr_accessor :album_image_styles
 
     def initialize
@@ -85,6 +87,8 @@ module RocketCMS
       #  thumb: '182x155#',
       #  main: '800x600>'
       #}
+
+      @contacts_captcha = false
     end
 
     def search_enabled=(val)

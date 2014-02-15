@@ -5,13 +5,16 @@ class ContactsController < ApplicationController
 
   def create
     @contact_message = ContactMessage.new(message_params)
+    if RocketCMS.configuration.contacts_captcha
+      meth = :save_with_captcha
+    else
+      meth = :save
+    end
 
-    if @contact_message.save_with_captcha
+    if @contact_message.send(meth)
       redirect_to :contacts_sent
     else
-      if @contact_message.errors.any?
-        flash.now[:alert] = @contact_message.errors.full_messages.join("\n")
-      end
+      flash.now[:alert] = @contact_message.errors.full_messages.join("\n")
       render action: "new"
     end
   end
