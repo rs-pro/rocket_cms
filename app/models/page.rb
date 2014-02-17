@@ -74,45 +74,5 @@ class Page
     include RocketCMS::ElasticSearch
   end
 
-  rails_admin do
-    navigation_label 'CMS'
-
-    list do
-      field :enabled,  :toggle
-      field :menus
-      field :name
-      field :fullpath do
-        pretty_value do
-          bindings[:view].content_tag(:a, bindings[:object].fullpath, href: bindings[:object].fullpath)
-        end
-      end
-      field :redirect
-    end
-
-    edit do
-      field :name
-      field :content, :ckeditor
-
-      group :menu do
-        label I18n.t('rs.menu')
-        field :menus
-
-        field :fullpath, :string do
-          help I18n.t('rs.with_final_slash')
-        end
-        field :regexp, :string do
-          help I18n.t('rs.page_url_regex')
-        end
-        field :redirect, :string do
-          help I18n.t('rs.final_in_menu')
-        end
-      end
-
-      group :seo, &Seoable.seo_config
-    end
-
-    nested_set({
-      max_depth: RocketCMS.configuration.menu_max_depth
-    })
-  end
+  rails_admin &RocketCMS.page_config
 end
