@@ -3,6 +3,7 @@ module SmartExcerpt
     include ActionView::Helpers::TextHelper
 
     def smart_truncate(s, opts = {})
+      return '' if s.blank?
       opts = {:words => 12}.merge(opts)
       if opts[:sentences]
         return s.split(/\.(\s|$)+/)[0, opts[:sentences]].map{|s| s.strip}.join('. ') + '.'
