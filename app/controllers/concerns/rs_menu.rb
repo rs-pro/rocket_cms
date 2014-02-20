@@ -14,7 +14,6 @@ module RsMenu
       end
     end
     cr = item.clean_regexp
-
     primary.item(
       item.slug,
       item.name,

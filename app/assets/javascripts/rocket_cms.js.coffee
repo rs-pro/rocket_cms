@@ -1,3 +1,10 @@
-$(document).on('click.close_flash', 'a.close_flash', ->
-  $(this).parents('.message').fadeOut()
-)
+#= require jquery
+#= require jquery_ujs
+#= require turbolinks
+#= require head.load.js
+#= require rocket_cms/map
+#= require rocket_cms/flash
+#= require jquery.placeholder.js
+
+$(document).on 'page:change', ->
+  $('input, textarea').placeholder()

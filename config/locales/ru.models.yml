@@ -21,6 +21,12 @@ ru:
     sort: Сортировка
     link: Ссылка
     url: URL
+    address: Адрес
+    map_address: Адрес для карты
+    map_hint: Подсказка для карты
+    coordinates: Координаты из геокодирования
+    lat: Широта (вручную)
+    lon: Долгота (вручную)
 
   mongoid:
     models:

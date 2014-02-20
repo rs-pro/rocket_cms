@@ -8,8 +8,6 @@ class Page
   field :content, type: String
   field :fullpath, type: String
 
-  field :enabled, type: Mongoid::Boolean, default: true
-  scope :enabled, -> { where(enabled: true).order_by([:lft, :asc]) }
   scope :sorted, -> { order_by([:lft, :asc]) }
   scope :menu, ->(menu_id) { enabled.sorted.where(menu_ids: menu_id) }
 
