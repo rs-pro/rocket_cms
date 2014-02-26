@@ -1,7 +1,6 @@
 class NewsController < ApplicationController
   def index
     @news = News.after_now.page(params[:page])
-    p @news
   end
 
   def show
