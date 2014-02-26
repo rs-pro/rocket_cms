@@ -18,7 +18,7 @@ module RsPages
     if path[0] != '/'
       path = '/' + path
     end
-    if path[-1] == '/'
+    if path.length > 1 && path[-1] == '/'
       path = path[0..-2]
       do_redirect = true
     end

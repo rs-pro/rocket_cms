@@ -1,10 +1,11 @@
 class NewsController < ApplicationController
   def index
-    @news = News.all.page(params[:page])
+    @news = News.after_now.page(params[:page])
+    p @news
   end
 
   def show
-    @news = News.find(params[:id])
+    @news = News.after_now.find(params[:id])
   end
   
   private

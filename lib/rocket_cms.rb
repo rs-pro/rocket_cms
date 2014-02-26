@@ -65,6 +65,8 @@ module RocketCMS
     attr_accessor :search_models
 
     attr_accessor :contacts_captcha
+    attr_accessor :contacts_fields
+    attr_accessor :contacts_message_required
 
     # attr_accessor :album_image_styles
 
@@ -89,6 +91,8 @@ module RocketCMS
       #}
 
       @contacts_captcha = false
+      @contacts_fields = {}
+      @contacts_message_required = true
     end
 
     def search_enabled=(val)
@@ -102,7 +106,7 @@ module RocketCMS
 
   def self.page_config
     Proc.new {
-      navigation_label 'CMS'
+      navigation_label I18n.t('rs.cms')
       list do
         field :enabled,  :toggle
         field :menus

@@ -47,7 +47,7 @@ class News
   end
 
   rails_admin do
-    navigation_label 'Новости'
+    navigation_label I18n.t('rs.cms')
 
     list do
       field :enabled, :toggle

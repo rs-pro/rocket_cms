@@ -24,6 +24,6 @@ class ContactsController < ApplicationController
 
   private
   def message_params
-    params.require(:contact_message).permit(:name, :email, :phone, :content, :captcha, :captcha_key)
+    params.require(:contact_message).permit(RocketCMS.configuration.contacts_fields.keys + [:name, :email, :phone, :content, :captcha, :captcha_key])
   end
 end
