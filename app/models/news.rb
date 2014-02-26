@@ -38,7 +38,9 @@ class News
 
   scope :by_date, -> { desc(:time) }
   scope :recent, ->(count = 5) { enabled.after_now.by_date.limit(count) }
-  paginates_per RocketCMS.configuration.news_per_page
+  unless RocketCMS.configuration.news_per_page.nil?
+    paginates_per RocketCMS.configuration.news_per_page
+  end
 
   smart_excerpt :excerpt, :content, RocketCMS.configuration.news_excerpt
 

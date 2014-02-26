@@ -1,6 +1,10 @@
 class NewsController < ApplicationController
   def index
-    @news = News.after_now.page(params[:page])
+    @news = News.after_now
+
+    unless RocketCMS.configuration.news_per_page.nil?
+      @news = @news.page(params[:page])
+    end
   end
 
   def show
