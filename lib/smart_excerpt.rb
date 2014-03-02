@@ -36,7 +36,7 @@ module SmartExcerpt
     if tx.blank?
       ''
     else
-      tx = tx.gsub(/<h\d[^>]*?>(.*)<\/h\d>/mi, '').gsub("\n", ' ').gsub("\r", '').gsub("\t", '').strip
+      tx = tx.gsub(/<h\d[^>]*?>(.*?)<\/h\d>/mi, '').gsub("\n", ' ').gsub("\r", '').gsub("\t", '').strip
       tx = @@he.decode(tx)
       tx = @@h.strip_tags(tx)
       @@h.smart_truncate(tx, words: words)
