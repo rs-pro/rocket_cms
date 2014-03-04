@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
   def index
-    @news = News.after_now
+    @news = News.after_now.by_date
 
     unless RocketCMS.configuration.news_per_page.nil?
       @news = @news.page(params[:page])
