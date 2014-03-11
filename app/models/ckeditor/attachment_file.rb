@@ -3,7 +3,7 @@ class Ckeditor::AttachmentFile < Ckeditor::Asset
                             :url => "/ckeditor_assets/attachments/:id/:filename",
                             :path => ":rails_root/public/ckeditor_assets/attachments/:id/:filename"
   if respond_to?(:do_not_validate_attachment_file_type)
-    do_not_validate_attachment_file_type :data
+    do_not_validate_attachment_file_type :data, if: :data?
   end
   
   validates_attachment_size :data, :less_than => 100.megabytes

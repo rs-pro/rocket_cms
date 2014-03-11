@@ -19,4 +19,4 @@ $(document).on 'page:change', ->
   if window.ymaps
     ya_init()
   else
-    head.load "//api-maps.yandex.ru/2.0/?load=package.full&mode=debug&lang=ru-RU&onload=ya_init"
+    head.load "//api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU&onload=ya_init"

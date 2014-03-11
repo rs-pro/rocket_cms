@@ -4,7 +4,7 @@ class Ckeditor::Picture < Ckeditor::Asset
                             :path => ":rails_root/public/ckeditor_assets/pictures/:id/:style_:basename.:extension",
                             :styles => { :content => '800>', :thumb => '118x100#' }
   if respond_to?(:validates_attachment_content_type)
-    validates_attachment_content_type :data, :content_type => ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'], if: :image?
+    validates_attachment_content_type :data, :content_type => ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'], if: :data?
   end
   
   validates_attachment_size :data, :less_than => 2.megabytes
