@@ -10,7 +10,7 @@ class ContactMailer < ActionMailer::Base
 
     mail(
         to: Settings.form_email(default: 'glebtv@ya.ru'),
-        subject: "[ML форма] #{message.name} #{message.email}"
+        subject: "[с сайта] #{message.name} #{message.email}"
     )
   end
 end
