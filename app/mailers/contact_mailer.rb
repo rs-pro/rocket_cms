@@ -9,7 +9,7 @@ class ContactMailer < ActionMailer::Base
     mail(
         from: Settings.default_email_from(default: 'noreply@rscx.ru'),
         to: Settings.form_email(default: 'glebtv@ya.ru'),
-        subject: "[с сайта] #{message.name} #{message.email}"
+        subject: "[#{Settings.email_topic(default: 'с сайта')}] #{message.name} #{message.email}"
     )
   end
 end
