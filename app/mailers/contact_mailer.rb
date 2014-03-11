@@ -1,6 +1,4 @@
 class ContactMailer < ActionMailer::Base
-  default from: "noreply@vashvkus.ru"
-
   def new_message_email(message)
     @message = message
 
@@ -9,6 +7,7 @@ class ContactMailer < ActionMailer::Base
     #end
 
     mail(
+        from: Settings.default_email_from(default: 'noreply@rscx.ru'),
         to: Settings.form_email(default: 'glebtv@ya.ru'),
         subject: "[с сайта] #{message.name} #{message.email}"
     )
