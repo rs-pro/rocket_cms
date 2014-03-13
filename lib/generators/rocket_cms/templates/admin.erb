@@ -1,0 +1,53 @@
+RailsAdmin.config do |config|
+  ## == Devise ==
+  config.authenticate_with do
+    warden.authenticate! scope: :user
+  end
+  config.current_user_method(&:current_user)
+
+  ## == Cancan ==
+  config.authorize_with :cancan
+
+  ## == MongoidAudit
+  config.audit_with :mongoid_audit, 'HistoryTracker'
+
+  config.actions do
+    dashboard # mandatory
+
+    # collection actions
+    index
+    new
+    export
+    bulk_delete
+
+    # member actions
+    show
+    edit
+    delete
+
+    history_index
+    history_show
+
+    nested_set do
+      visible do
+        ['Page', 'Slide', 'Partner'].include? bindings[:abstract_model].model_name
+      end
+    end
+    
+    custom_show_in_app do
+      visible do
+        ['Page', 'News'].include? bindings[:abstract_model].model_name
+      end
+    end
+    
+    toggle
+  end
+
+  config.main_app_name = ['<%= Rails.application.class.name.split('::')[0] %>', 'Админка']
+
+  config.excluded_models = [
+      'RailsAdmin::CustomShowInApp', 'HistoryTracker',
+      'Ckeditor::Asset', 'Ckeditor::AttachmentFile', 'Ckeditor::Picture',
+      'Menu'
+  ]
+end

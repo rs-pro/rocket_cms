@@ -28,18 +28,20 @@ class ContactMessage
     ContactMailer.new_message_email(self).deliver
   end
 
+  RocketCMS.apply_patches self
+
   rails_admin do
     navigation_label I18n.t('rs.settings')
-
-    list do
-      field :c_at
-      field :name
-      field :content
-      field :email
-      field :phone
-      RocketCMS.configuration.contacts_fields.each_pair do |fn, ft|
-        field fn
-      end
+    field :c_at do
+      read_only true
     end
+    field :name
+    field :content
+    field :email
+    field :phone
+
+    RocketCMS.apply_patches self
+    RocketCMS.only_patches self, [:show, :list, :edit, :export]
   end
 end
+

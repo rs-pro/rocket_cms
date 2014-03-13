@@ -14,9 +14,7 @@ module RailsAdmin
 
         register_instance_option :controller do
           Proc.new do
-            if @object.class.name == 'Item'
-              redirect_to main_app.item_url(@object)
-            elsif @object.class.name == 'Page'
+            if @object.class.name == 'Page'
               redirect_to main_app.page_url(@object)
             else
               redirect_to main_app.url_for(@object)
@@ -25,7 +23,7 @@ module RailsAdmin
         end
 
         register_instance_option :link_icon do
-          'icon-eye-open'
+          'fa fa-eye'
         end
 
         register_instance_option :pjax? do

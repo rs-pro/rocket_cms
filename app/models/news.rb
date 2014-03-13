@@ -47,31 +47,27 @@ class News
   if RocketCMS.configuration.search_enabled
     include RocketCMS::ElasticSearch
   end
+  RocketCMS.apply_patches self
 
   rails_admin do
     navigation_label I18n.t('rs.cms')
 
-    list do
-      field :enabled, :toggle
-      field :time
-      field :name
-      unless RocketCMS.configuration.news_image_styles.nil?
-        field :image
-      end
-      field :excerpt
+    field :enabled, :toggle
+    field :time
+    field :name
+    unless RocketCMS.configuration.news_image_styles.nil?
+      field :image
     end
+    field :excerpt
+    RocketCMS.apply_patches self
 
     edit do
-      field :name
-      field :time
-      unless RocketCMS.configuration.news_image_styles.nil?
-        field :image
-      end
-      field :excerpt
       field :content, :ckeditor
-
+      RocketCMS.apply_patches self
       group :seo, &Seoable.seo_config
     end
+
+    RocketCMS.only_patches self, [:show, :list, :export]
   end
 end
 

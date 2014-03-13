@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
   
-  spec.add_dependency 'mongoid', '~> 4.0.0.alpha2'
+  spec.add_dependency 'mongoid', '~> 4.0.0.beta1'
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'glebtv-mongoid_nested_set'
   spec.add_dependency 'simple_form', '~> 3.0.0'
@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sanitize'
   spec.add_dependency 'coffee-rails'
   spec.add_dependency 'devise'
+  spec.add_dependency 'turbolinks'
   spec.add_dependency 'validates_email_format_of'
   spec.add_dependency 'glebtv-mongoid-paperclip'
   spec.add_dependency 'rails_admin'

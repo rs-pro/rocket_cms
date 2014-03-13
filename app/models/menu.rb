@@ -9,10 +9,13 @@ class Menu
 
   has_and_belongs_to_many :pages, inverse_of: :menu
 
+  RocketCMS.apply_patches self
   rails_admin do
     navigation_label 'CMS'
-
     field :text_slug
     field :name
+    RocketCMS.apply_patches self
+    RocketCMS.only_patches self, [:show, :list, :edit, :export]
   end
 end
+

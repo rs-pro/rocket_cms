@@ -68,6 +68,8 @@ class Page
     end
   end
 
+  RocketCMS.apply_patches self
+
   if RocketCMS.configuration.search_enabled
     include RocketCMS::ElasticSearch
   end
