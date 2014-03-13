@@ -1,17 +1,17 @@
 .rs-search-results
-  h1 Результаты поиска
+  %h1 Результаты поиска
   = form_tag search_path, method: :get, class: 'nav_search'
     = text_field_tag 'query', params[:query], placeholder: "Поиск"
     = submit_tag ''
-ol
+%ol
   - any = false
   - @results.each do |r|
     - any = true
-    li
+    %li
       .title= link_to (r._highlight.nil? || r._highlight['name'].nil?) ? r.name : r._highlight['name'].join(' ... ').html_safe, url_for(r)
       .text
-        == (r._highlight.nil? || r._highlight['content'].nil?) ? (r.content.blank? ? '' : SmartExcerpt.truncate(r.content)) : r._highlight['content'].join(' ... ')
-        span.more= link_to '', url_for(r)
+        = raw (r._highlight.nil? || r._highlight['content'].nil?) ? (r.content.blank? ? '' : SmartExcerpt.truncate(r.content)) : r._highlight['content'].join(' ... ')
+        %span.more= link_to '', url_for(r)
 - unless any
   .rs-search-no-results К сожалению, ничего не найдено
 
