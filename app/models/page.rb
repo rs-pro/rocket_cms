@@ -67,6 +67,10 @@ class Page
       end
     end
   end
+  
+  def nav_options
+    {}
+  end
 
   RocketCMS.apply_patches self
 

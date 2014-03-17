@@ -1,7 +1,7 @@
 require 'rocket_cms/version'
 
 require 'mongoid'
-require 'yajl/json_gem'
+# require 'yajl/json_gem'
 require 'devise'
 
 require 'rs_russian'
@@ -38,10 +38,7 @@ require 'sitemap_generator'
 require 'kaminari'
 require 'addressable/uri'
 require 'turbolinks'
-
-# nav
 require 'simple-navigation'
-require 'no_extra_ul' # simple navigation renderer that doesn't render empty UL
 
 require 'rocket_cms/configuration'
 require 'rocket_cms/patch'

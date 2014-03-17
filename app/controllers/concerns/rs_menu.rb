@@ -7,19 +7,22 @@ module RsMenu
   def render_with_subs(items, primary, item)
     subs = items.select { |i| i.parent_id == item.id && !i.name.blank? && i.enabled }
     if subs.empty?
-      block = Proc.new {}
+      block = nil
     else
       block = Proc.new do |sub_nav|
         subs.each { |sub| render_with_subs(items, sub_nav, sub) }
       end
     end
     cr = item.clean_regexp
-    primary.item(
-      item.slug,
-      item.name,
-      item.fullpath,
-      &block
-    )
+    navigation_item(primary, item, block)
+  end
+  
+  def navigation_item(primary, item, block=nil)
+    if block.nil?
+      primary.item(item.slug, item.name, item.fullpath, item.nav_options)
+    else
+      primary.item(item.slug, item.name, item.fullpath, item.nav_options, &block)
+    end
   end
 
   def navigation(type)
