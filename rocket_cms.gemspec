@@ -49,5 +49,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sitemap_generator'
   spec.add_dependency 'kaminari'
   spec.add_dependency 'addressable'
-  spec.add_dependency 'ruby-progressbar'
 end

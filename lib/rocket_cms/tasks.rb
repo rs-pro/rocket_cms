@@ -10,14 +10,5 @@ namespace :rs do
   task :require do
     Rake::Task['environment'].invoke
   end
-  desc "reindex ElasticSearch"
-  task :reindex => ['rs:require'] do
-    RocketCMS.configuration.search_models.each do |model_name|
-      pb = nil
-      model_name.constantize.es.index_all do |steps, step|
-        pb = ProgressBar.create(title: model_name, total: steps, format: '%t: %p%% %a |%b>%i| %E') if pb.nil?
-        pb.increment
-      end
-    end
-  end
+
 end

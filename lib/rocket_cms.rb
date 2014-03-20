@@ -4,8 +4,6 @@ require 'mongoid'
 # require 'yajl/json_gem'
 require 'devise'
 
-require 'rs_russian'
-
 require 'simple_form'
 require 'glebtv-simple_captcha'
 
@@ -22,6 +20,8 @@ require 'filename_to_slug'
 # admin
 require 'rails_admin'
 require 'rails_admin/custom_show_in_app'
+
+require 'rs_russian'
 
 require 'glebtv-mongoid_nested_set'
 require 'rails_admin_nested_set'
