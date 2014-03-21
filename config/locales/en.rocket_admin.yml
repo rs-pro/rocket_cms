@@ -1,0 +1,6 @@
+en:
+  admin:
+    actions:
+      custom_show_in_app:
+        title: 'Show in app'
+        menu: "Show in app"

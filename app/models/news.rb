@@ -62,7 +62,7 @@ class News
     RocketCMS.apply_patches self
 
     edit do
-      field :content, :ckeditor
+      field :content, :ck_editor
       RocketCMS.apply_patches self
       group :seo, &Seoable.seo_config
     end

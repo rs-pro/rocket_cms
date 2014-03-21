@@ -1,0 +1,6 @@
+en:
+  admin:
+    actions:
+      custom_show_in_app:
+        title: 'В приложении'
+        menu: "Показать на сайте"

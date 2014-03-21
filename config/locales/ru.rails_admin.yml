@@ -17,7 +17,7 @@ ru:
       bulk_menu_title: "Выбранные элементы..."
       remove: "Убрfnm"
       add_new: "Добавить новый"
-      chosen: "Выборать %{name}"
+      chosen: "Выбрать %{name}"
       chose_all: "Выборать все"
       clear_all: "Убрать выделение"
       up: "Вверх"
@@ -107,9 +107,6 @@ ru:
         menu: "История"
         breadcrumb: "история"
       show_in_app:
-        title: 'В приложении'
-        menu: "Показать на сайте"
-      custom_show_in_app:
         title: 'В приложении'
         menu: "Показать на сайте"
     form:
