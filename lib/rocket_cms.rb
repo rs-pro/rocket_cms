@@ -48,3 +48,5 @@ require 'rocket_cms/model'
 require 'rocket_cms/engine'
 require 'rocket_cms/railtie'
 require 'rocket_cms/controller'
+
+require 'rocket_cms/models/news'
