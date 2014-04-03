@@ -1,5 +1,6 @@
 module Seoable
   extend ActiveSupport::Concern
+  include Mongoid::Paperclip
   
   included do
     field :name, type: String
