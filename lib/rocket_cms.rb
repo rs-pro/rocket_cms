@@ -42,14 +42,18 @@ require 'simple-navigation'
 
 require 'rocket_cms/configuration'
 require 'rocket_cms/patch'
-require 'rocket_cms/page_config'
+require 'rocket_cms/admin'
 require 'rocket_cms/elastic_search' # FTS, optional
 require 'rocket_cms/model'
 require 'rocket_cms/engine'
 require 'rocket_cms/railtie'
 require 'rocket_cms/controller'
 
-require 'rocket_cms/models/news'
-require 'rocket_cms/models/menu'
-require 'rocket_cms/models/page'
-require 'rocket_cms/models/contact_message'
+module RocketCMS
+  module Models
+    autoload :Menu, 'rocket_cms/models/menu'
+    autoload :Page, 'rocket_cms/models/page'
+    autoload :News, 'rocket_cms/models/news'
+    autoload :ContactMessage, 'rocket_cms/models/contact_message'
+  end
+end

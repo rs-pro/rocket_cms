@@ -1,7 +1,8 @@
 module Sortable
   extend ActiveSupport::Concern
+  include SortField
+  
   included do
-    include SortField
     sort_field
   end
 end

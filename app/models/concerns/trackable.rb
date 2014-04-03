@@ -1,7 +1,7 @@
 module Trackable
   extend ActiveSupport::Concern
+  include Mongoid::Audit::Trackable
   included do
-    include Mongoid::Audit::Trackable
     track_history track_create: true, track_destroy: true
   end
 end

@@ -1,8 +1,6 @@
 module ManualSlug
   extend ActiveSupport::Concern
-  included do
-    include Mongoid::Slug
-  end
+  include Mongoid::Slug
 
   def text_slug
     self._slugs.empty? ? '' : self._slugs.last

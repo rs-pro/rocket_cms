@@ -2,12 +2,18 @@ module RocketCMS
   module Models
     module News
       extend ActiveSupport::Concern
-
+      include RocketCMS::Model
+      include Seoable
+      include Enableable  
+      if RocketCMS.configuration.search_enabled
+        include RocketCMS::ElasticSearch
+      end
+      unless RocketCMS.configuration.news_image_styles.nil?
+        include Mongoid::Paperclip
+      end
+      include ManualSlug
+        
       included do
-        include RocketCMS::Model
-        include Seoable
-        include Enableable
-
         field :time, type: Time
         index({enabled: 1, time: 1})
         scope :after_now, -> { where(:time.lt => Time.now) }
@@ -16,7 +22,6 @@ module RocketCMS
         field :content, type: String
 
         unless RocketCMS.configuration.news_image_styles.nil?
-          include Mongoid::Paperclip
           has_mongoid_attached_file :image, styles: RocketCMS.configuration.news_image_styles
           validates_attachment_content_type :image, :content_type => ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'], if: :image?
         end
@@ -27,7 +32,6 @@ module RocketCMS
           self.time = Time.now if self.time.blank?
         end
 
-        include ManualSlug
         manual_slug :report_slug
 
         scope :by_date, -> { desc(:time) }
@@ -38,31 +42,7 @@ module RocketCMS
 
         smart_excerpt :excerpt, :content, RocketCMS.configuration.news_excerpt
 
-        if RocketCMS.configuration.search_enabled
-          include RocketCMS::ElasticSearch
-        end
         RocketCMS.apply_patches self
-
-        rails_admin do
-          navigation_label I18n.t('rs.cms')
-
-          field :enabled, :toggle
-          field :time
-          field :name
-          unless RocketCMS.configuration.news_image_styles.nil?
-            field :image
-          end
-          field :excerpt
-          RocketCMS.apply_patches self
-
-          edit do
-            field :content, :ck_editor
-            RocketCMS.apply_patches self
-            group :seo, &Seoable.seo_config
-          end
-
-          RocketCMS.only_patches self, [:show, :list, :export]
-        end
       end
 
       def report_slug

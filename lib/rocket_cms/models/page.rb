@@ -3,11 +3,15 @@ module RocketCMS
     module Page
       extend ActiveSupport::Concern
 
+      include RocketCMS::Model
+      include Enableable
+      include Seoable
+      include ManualSlug
+      if RocketCMS.configuration.search_enabled
+        include RocketCMS::ElasticSearch
+      end
+        
       included do
-        include RocketCMS::Model
-        include Enableable
-        include Seoable
-
         field :regexp, type: String
         field :redirect, type: String
         field :content, type: String
@@ -19,25 +23,14 @@ module RocketCMS
         has_and_belongs_to_many :menus, inverse_of: :pages
 
         acts_as_nested_set
-
-        include ManualSlug
+        
         manual_slug :name
 
         before_save do
           self.fullpath = "/pages/#{slug}" if self.fullpath.blank?
         end
 
-
         validates_presence_of :name
-
-
-        RocketCMS.apply_patches self
-
-        if RocketCMS.configuration.search_enabled
-          include RocketCMS::ElasticSearch
-        end
-
-        rails_admin &RocketCMS.page_config
       end
 
       def get_fullpath

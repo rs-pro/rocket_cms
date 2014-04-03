@@ -2,10 +2,9 @@ module RocketCMS
   module Models
     module ContactMessage
       extend ActiveSupport::Concern
+      include RocketCMS::Model
 
       included do
-        include RocketCMS::Model
-
         apply_simple_captcha
 
         field :name, type: String
@@ -31,22 +30,6 @@ module RocketCMS
 
         after_create do
           ContactMailer.new_message_email(self).deliver
-        end
-
-        RocketCMS.apply_patches self
-
-        rails_admin do
-          navigation_label I18n.t('rs.settings')
-          field :c_at do
-            read_only true
-          end
-          field :name
-          field :content
-          field :email
-          field :phone
-
-          RocketCMS.apply_patches self
-          RocketCMS.only_patches self, [:show, :list, :edit, :export]
         end
       end
     end

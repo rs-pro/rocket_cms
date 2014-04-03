@@ -1,5 +1,6 @@
 module Seoable
   extend ActiveSupport::Concern
+  
   included do
     field :name, type: String
     field :h1, type: String
@@ -21,19 +22,9 @@ module Seoable
     og_title.blank? ? name : og_title
   end
 
+  # deprecated
   def self.seo_config
-    Proc.new {
-      active false
-      label "SEO"
-      field :h1, :string
-      field :title, :string
-      field :keywords, :string
-      field :description, :string
-      field :robots, :string
-
-      field :og_title, :string
-      field :og_image
-    }
+    RocketCMS.seo_config
   end
 end
 
