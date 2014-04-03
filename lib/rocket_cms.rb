@@ -50,3 +50,6 @@ require 'rocket_cms/railtie'
 require 'rocket_cms/controller'
 
 require 'rocket_cms/models/news'
+require 'rocket_cms/models/menu'
+require 'rocket_cms/models/page'
+require 'rocket_cms/models/contact_message'
