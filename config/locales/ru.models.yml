@@ -27,7 +27,15 @@ ru:
     coordinates: Координаты из геокодирования
     lat: Широта (вручную)
     lon: Долгота (вручную)
-
+    description: SEO Description
+    email: Email
+    keywords: SEO Keywords
+    modifier_id: Кто правил
+    og_title: Og title
+    robots: Robots
+    title: Title
+    version: Version
+    
   mongoid:
     models:
       user: Пользователь
