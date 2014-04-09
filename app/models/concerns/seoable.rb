@@ -22,7 +22,11 @@ module Seoable
   def get_og_title
     og_title.blank? ? name : og_title
   end
-
+  
+  def self.admin
+    RocketCMS.seo_config
+  end
+  
   # deprecated
   def self.seo_config
     RocketCMS.seo_config

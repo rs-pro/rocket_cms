@@ -1,5 +1,20 @@
 module RocketCMS
   class << self
+    def map_config
+      Proc.new {
+        active true
+        label I18n.t('rs.map')
+        field :address, :string
+        field :map_address, :string
+        field :map_hint, :string
+        field :coordinates, :string do
+          read_only true
+        end
+        field :lat
+        field :lon
+      }
+    end
+    
     def seo_config
       Proc.new {
         active false
@@ -14,6 +29,7 @@ module RocketCMS
         field :og_image
       }
     end
+    
     def page_config
       Proc.new {
         RocketCMS.apply_patches self
