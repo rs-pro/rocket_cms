@@ -27,13 +27,33 @@ module Mappable
   end
   
   def get_lat
-    lat.blank? ? coordinates[1] : lat
+    if lat.blank? 
+      if coordinates.nil?
+        nil
+      else
+        coordinates[1]
+      end
+    else
+      lat
+    end
   end
   def get_lon
-    lon.blank? ? coordinates[0] : lon
+    if lon.blank? 
+      if coordinates.nil?
+        nil
+      else
+        coordinates[0]
+      end
+    else
+      lon
+    end
   end
   
-  def as_json(options = {})
+  def has_map?
+    (!lat.blank? && !lon.blank?) || !coordinates.nil?
+  end
+  
+  def to_map
     {
       id: id.to_s,
       hint: map_hint,
