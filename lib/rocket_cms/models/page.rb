@@ -78,7 +78,7 @@ module RocketCMS
       end
       
       def nav_options
-        {}
+        {highlights_on: clean_regexp}
       end
     end
   end
