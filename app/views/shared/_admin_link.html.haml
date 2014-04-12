@@ -1,0 +1,3 @@
+- if user_signed_in? && respond_to?(:can?) && can?(:access, :rails_admin) && can?(:edit, obj)
+  %div.admin_link
+    = link_to t('rs.edit'), rails_admin.edit_path(obj.class.model_name.i18n_key.to_s.gsub('/', '~'), obj.id), 'data-no-turbolink' => true

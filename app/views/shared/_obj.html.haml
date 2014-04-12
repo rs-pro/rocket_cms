@@ -4,8 +4,10 @@
       %h1= @seo_page.h1
     - if obj.content.blank?
       = raw @seo_page.page_content unless @seo_page.nil?
+      = render 'shared/admin_link', obj: @seo_page
     - else
       = raw obj.content
+      = render 'shared/admin_link', obj: obj
 
   - content_for :meta do
     = render 'shared/meta', obj: obj
