@@ -26,9 +26,10 @@ module RocketCMS
         
         manual_slug :name
 
-        before_save do
+        before_validation do
           self.fullpath = "/pages/#{slug}" if self.fullpath.blank?
         end
+        validates_uniqueness_of :fullpath
 
         validates_presence_of :name
       end

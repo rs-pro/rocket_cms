@@ -63,6 +63,9 @@ module RocketCMS
             field :redirect, :string do
               help I18n.t('rs.final_in_menu')
             end
+            field :text_slug do
+              read_only true
+            end
           end
           group :seo, &RocketCMS.seo_config
         end
