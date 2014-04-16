@@ -18,10 +18,11 @@ module RsMenu
   end
   
   def navigation_item(primary, item, block=nil)
+    url = item.redirect.blank? ? item.fullpath : item.redirect
     if block.nil?
-      primary.item(item.slug, item.name, item.fullpath, item.nav_options)
+      primary.item(item.slug, item.name, url, item.nav_options)
     else
-      primary.item(item.slug, item.name, item.fullpath, item.nav_options, &block)
+      primary.item(item.slug, item.name, url, item.nav_options, &block)
     end
   end
 
