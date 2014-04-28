@@ -1,11 +1,11 @@
 module RocketCMS::Controller
   extend ActiveSupport::Concern
   included do
-    protect_from_forgery with: :exception
-
     include RsErrors
     include RsPages
     include RsMenu
+    protect_from_forgery with: :exception
+
 
     helper_method :page_title
 
