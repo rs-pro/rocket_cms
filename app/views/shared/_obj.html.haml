@@ -1,7 +1,7 @@
 - unless obj.nil?
   .text_content
     - unless obj.h1.blank?
-      %h1= @seo_page.h1
+      %h1= obj.h1
     - if obj.content.blank?
       = raw @seo_page.page_content unless @seo_page.nil?
       = render 'shared/admin_link', obj: @seo_page
