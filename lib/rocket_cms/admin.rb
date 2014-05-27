@@ -36,7 +36,7 @@ module RocketCMS
         navigation_label I18n.t('rs.cms')
         list do
           field :enabled,  :toggle
-          field :menus
+          field :menus, :menu
           field :name
           field :fullpath do
             pretty_value do

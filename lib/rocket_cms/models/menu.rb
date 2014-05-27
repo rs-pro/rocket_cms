@@ -9,7 +9,7 @@ module RocketCMS
       included do
         field :name, type: String
         manual_slug :name
-        has_and_belongs_to_many :pages, inverse_of: :menu
+        has_and_belongs_to_many :pages, inverse_of: :menus
       end
     end
   end
