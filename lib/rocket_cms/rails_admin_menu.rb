@@ -14,7 +14,6 @@ module RailsAdmin
               ::Menu.all.map { |m| {id: m.id.to_s, name: m.name } }
             end
             menus.each do |m|
-              p obj.menu_ids, m
               on = obj.menu_ids.include?(BSON::ObjectId.from_string(m[:id]))
               ret << bindings[:view].link_to(
                 m[:name],
