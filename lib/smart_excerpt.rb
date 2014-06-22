@@ -4,7 +4,7 @@ module SmartExcerpt
 
     def smart_truncate(s, opts = {})
       return '' if s.blank?
-      opts = {words: 12}.merge(opts)
+      opts = {words: 25}.merge(opts)
       if opts[:sentences]
         return s.split(/\.(\s|$)+/)[0, opts[:sentences]].map{|s| s.strip}.join('. ') + '.'
       end
@@ -36,8 +36,8 @@ module SmartExcerpt
       words *= 1.2 if words.is_a?(Fixnum)
     end
     
-    if words.is_a?(Fixnum)
-      options = {words: words}
+    if words.is_a?(Numeric)
+      options = {words: words.to_i}
     elsif words.is_a?(Hash)
       options = words
     else
