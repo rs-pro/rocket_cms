@@ -4,9 +4,12 @@ module SmartExcerpt
 
     def smart_truncate(s, opts = {})
       return '' if s.blank?
-      opts = {:words => 12}.merge(opts)
+      opts = {words: 12}.merge(opts)
       if opts[:sentences]
         return s.split(/\.(\s|$)+/)[0, opts[:sentences]].map{|s| s.strip}.join('. ') + '.'
+      end
+      if opts[:letters]
+        return truncate(s, length: opts[:letters], separator: ' ', omission: '...')
       end
       a = s.split(/\s/) # or /[ ]+/ to only split on spaces
       n = opts[:words]
@@ -30,16 +33,25 @@ module SmartExcerpt
       tx = obj.send(base_field)
     else
       tx = obj.send(excerpt_field)
-      words *= 1.2
+      words *= 1.2 if words.is_a?(Fixnum)
+    end
+    
+    if words.is_a?(Fixnum)
+      options = {words: words}
+    elsif words.is_a?(Hash)
+      options = words
+    else
+      raise 'bad parameter for get_excerpt'
     end
 
     if tx.blank?
       ''
     else
+      # kill headers and newlines
       tx = tx.gsub(/<h\d[^>]*?>(.*?)<\/h\d>/mi, '').gsub("\n", ' ').gsub("\r", '').gsub("\t", '').strip
       tx = @@he.decode(tx)
       tx = @@h.strip_tags(tx)
-      @@h.smart_truncate(tx, words: words)
+      @@h.smart_truncate(tx, options)
     end
   end
 
