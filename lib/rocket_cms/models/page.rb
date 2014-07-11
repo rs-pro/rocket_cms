@@ -35,7 +35,7 @@ module RocketCMS
       end
 
       def get_fullpath
-        redirect.blank? ? fullpath: redirect
+        redirect.blank? ? fullpath : redirect
       end
 
       def has_content?
