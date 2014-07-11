@@ -32,10 +32,8 @@ module RocketCMS
     end
 
     config.after_initialize do
-      if Rails.env.development?
-        # trigger autoload so models are registered in Mongoid::Elasticearch
-        RocketCMS.configuration.search_models.map(&:constantize)
-      end
+      # trigger autoload so models are registered in Mongoid::Elasticearch
+      RocketCMS.configuration.search_models.map(&:constantize)
     end
   end
 end
