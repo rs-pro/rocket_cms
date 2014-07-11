@@ -12,6 +12,13 @@ module RocketCMS
       end
     end
 
+    initializer "rocket_cms.elasticsearch" do
+      if Rails.env.development?
+        # trigger autoload so models are registered in Mongoid::Elasticearch
+        RocketCMS.configuration.search_models.map(&:constantize)
+      end
+    end
+
     initializer 'rocket_cms.mongoid-audit' do
       Mongoid::Audit.tracker_class_name = :history_tracker
       Mongoid::Audit.current_user_method = :current_user

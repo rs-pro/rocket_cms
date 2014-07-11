@@ -3,10 +3,6 @@ class SearchController < ApplicationController
     if params[:query].blank?
       @results = []
     else
-      if Rails.env.development?
-        # trigger autoload so models are registered in Mongoid::Elasticearch
-        RocketCMS.configuration.search_models.map(&:constantize)
-      end
       @results = Mongoid::Elasticsearch.search({
         body: {
           query: {
