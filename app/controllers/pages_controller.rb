@@ -1,12 +1,4 @@
 class PagesController < ApplicationController
-  def show
-    if @seo_page.nil? || !@seo_page.persisted?
-      unless params[:id].blank?
-        @seo_page = Page.enabled.find(params[:id])
-      end
-    end
-    if @seo_page.nil?
-      render_404
-    end
-  end
+  include RocketCMS::Controllers::Pages
 end
+

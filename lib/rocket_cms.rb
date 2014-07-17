@@ -54,4 +54,11 @@ module RocketCMS
     autoload :News, 'rocket_cms/models/news'
     autoload :ContactMessage, 'rocket_cms/models/contact_message'
   end
+
+  module Controllers
+    autoload :Contacts, 'rocket_cms/controllers/contacts'
+    autoload :News, 'rocket_cms/controllers/news'
+    autoload :Pages, 'rocket_cms/controlers/pages'
+    autoload :Search, 'rocket_cms/controllers/search'
+  end
 end

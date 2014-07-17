@@ -25,6 +25,7 @@ module RocketCMS
         end
 
         RocketCMS.configuration.contacts_fields.each_pair do |fn, ft|
+          next if ft.nil?
           field fn, type: ft
         end
 
