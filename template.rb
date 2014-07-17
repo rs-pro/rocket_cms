@@ -5,6 +5,7 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
+gem 'spring', group: 'development'
 TEXT
 end
 #gsub_file 'Gemfile', /^(.*)sass-rails(.*)$/, ''
