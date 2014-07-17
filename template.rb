@@ -105,11 +105,18 @@ test:
 TEXT
 end
 
+generate "devise:install"
+generate "devise", "User"
+gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable', '# :confirmable, :registerable, :timeoutable and :omniauthable'
+gsub_file 'app/models/user.rb', ':registerable,', ' :lockable,'
+gsub_file 'app/models/user.rb', '# field :failed_attempts', 'field :failed_attempts'
+gsub_file 'app/models/user.rb', '# field :unlock_token', 'field :unlock_token'
+gsub_file 'app/models/user.rb', '# field :locked_at', 'field :locked_at'
+
 generate "rocket_cms:admin"
 generate "rocket_cms:ability"
 generate "rocket_cms:layout"
-generate "devise:install"
-generate "devise", "User"
+
 generate "rspec:install"
 
 route "resources :news, only: [:index, :show]"
