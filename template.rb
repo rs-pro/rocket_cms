@@ -8,6 +8,15 @@ source 'https://rubygems.org'
 gem 'spring', group: 'development'
 TEXT
 end
+
+remove_file 'app/controllers/application_controller.rb'
+create_file 'app/controllers/application_controller.rb' do <<-TEXT
+class ApplicationController < ActionController::Base
+  include RocketCMS::Controller
+end
+TEXT
+end
+
 #gsub_file 'Gemfile', /^(.*)sass-rails(.*)$/, ''
 gem 'rocket_cms'
 
