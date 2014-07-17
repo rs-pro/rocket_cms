@@ -411,8 +411,8 @@ application do <<-TEXT
 TEXT
 end
 
-remove_file 'app/assets/stylesheets/applicaiton.css'
-create_file 'app/assets/stylesheets/applicaiton.css.sass' do <<-TEXT
+remove_file 'app/assets/stylesheets/application.css'
+create_file 'app/assets/stylesheets/application.css.sass' do <<-TEXT
 @import 'compass'
 @import 'rocket_cms'
 
@@ -431,8 +431,8 @@ create_file 'app/assets/stylesheets/applicaiton.css.sass' do <<-TEXT
 TEXT
 end
 
-remove_file 'app/assets/javascripts/applicaiton.js'
-create_file 'app/assets/javascripts/applicaiton.js.coffee' do <<-TEXT
+remove_file 'app/assets/javascripts/application.js'
+create_file 'app/assets/javascripts/application.js.coffee' do <<-TEXT
 #= require rocket_cms
 TEXT
 end
