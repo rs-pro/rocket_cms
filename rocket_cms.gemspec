@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
   
+  spec.add_dependency 'rails', '~> 4.1.4'
   spec.add_dependency 'mongoid', '~> 4.0.0.beta1'
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'glebtv-mongoid_nested_set'
@@ -47,4 +48,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sitemap_generator'
   spec.add_dependency 'kaminari'
   spec.add_dependency 'addressable'
+  spec.add_dependency 'thor'
+  spec.add_dependency 'uglifier'
 end

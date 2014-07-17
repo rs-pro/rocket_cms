@@ -1,0 +1,22 @@
+doctype html
+html lang="ru"
+  head
+    meta charset="UTF-8"
+    meta name="viewport" content="width=device-width, maximum-scale=1"
+    title
+    = favicon_link_tag '/favicon.ico'
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+    /[if lt IE 9]
+      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"
+  body
+    #root
+      = render 'shared/messages'
+      #sidebar
+        = render_navigation &navigation(:main)
+      #content
+        = yield
+      #root_footer
+    #footer
+      = render 'blocks/footer'
+

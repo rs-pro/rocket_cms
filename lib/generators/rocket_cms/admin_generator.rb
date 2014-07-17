@@ -8,11 +8,12 @@ module RocketCms
     source_root File.expand_path('../templates', __FILE__)
     include Generators::Utils::InstanceMethods
     
-    argument :_namespace, type: :string, required: false, desc: 'RailsAdmin url namespace'
+    #argument :_namespace, type: :string, required: false, desc: 'RailsAdmin url namespace'
     desc 'RocketCMS RailsAdmin config generator'
 
     def install
-      namespace = ask_for('Where do you want to mount rails_admin?', 'admin', _namespace)
+      #namespace = ask_for('Where do you want to mount rails_admin?', 'admin', _namespace)
+      namespace = 'admin'
       route("mount RailsAdmin::Engine => '/#{namespace}', as: 'rails_admin'")
       template 'admin.erb', 'config/initializers/rails_admin.rb'
     end

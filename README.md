@@ -25,7 +25,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Using app generator
+
+    rails new my_app -T -O -m https://raw.github.com/rs-pro/rocket_cms/master/template.rb
+
+    generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
+
+### Documentation
+
+It's basically Mongoid + Rails Admin + some of our common models and controllers, capistrano config, etc.
+
+See their documentation for more info
 
 ## Contributing
 
