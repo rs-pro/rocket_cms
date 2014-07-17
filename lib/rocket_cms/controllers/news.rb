@@ -17,7 +17,7 @@ module RocketCMS
       
       private
       def model
-        News
+        ::News
       end
       def page_title
         if @news.class.name == 'News'
