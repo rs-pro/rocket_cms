@@ -58,7 +58,7 @@ module RocketCMS
   module Controllers
     autoload :Contacts, 'rocket_cms/controllers/contacts'
     autoload :News, 'rocket_cms/controllers/news'
-    autoload :Pages, 'rocket_cms/controlers/pages'
+    autoload :Pages, 'rocket_cms/controllers/pages'
     autoload :Search, 'rocket_cms/controllers/search'
   end
 end
