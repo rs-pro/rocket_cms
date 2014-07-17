@@ -27,14 +27,20 @@ Or install it yourself as:
 
 ### Using app generator
 
-    # make sure you have rails 4.1 installed
-    # rails -v
-    # if not uninstall rails and install again
-    # gem uninstall rails
-    # gem install rocket_cms
+Make sure you have rails 4.1 installed
+
+    rails -v
+
+If not, uninstall rails and install again
+
+    gem uninstall rails
+    gem install rocket_cms
+    
+Then run:
+    
     rails new my_app -T -O -m https://raw.github.com/rs-pro/rocket_cms/master/template.rb
 
-    generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
+generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
 
 ### Documentation
 
