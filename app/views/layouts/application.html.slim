@@ -3,7 +3,8 @@ html lang="ru"
   head
     meta charset="UTF-8"
     meta name="viewport" content="width=device-width, maximum-scale=1"
-    title
+    title= page_title
+    = csrf_meta_tags
     = favicon_link_tag '/favicon.ico'
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
