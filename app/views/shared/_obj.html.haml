@@ -8,6 +8,7 @@
         = render 'shared/admin_link', obj: @seo_page
     - else
       = raw obj.content
+    - if !obj.nil? && (@seo_page.nil? || obj.id != @seo_page.id || obj.class.name != @seo_page.class.name)
       = render 'shared/admin_link', obj: obj
 
   - content_for :meta do
