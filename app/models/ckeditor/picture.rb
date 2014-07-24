@@ -7,7 +7,7 @@ class Ckeditor::Picture < Ckeditor::Asset
     validates_attachment_content_type :data, :content_type => ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'], if: :data?
   end
   
-  validates_attachment_size :data, :less_than => 2.megabytes
+  validates_attachment_size :data, :less_than => 10.megabytes
   validates_attachment_presence :data
 
   def url_content
