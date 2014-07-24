@@ -1,6 +1,6 @@
-en:
+ru:
   admin:
     actions:
       custom_show_in_app:
-        title: 'В приложении'
+        title: 'На сайте'
         menu: "Показать на сайте"
