@@ -1,3 +1,13 @@
+rails_spec = (Gem.loaded_specs["railties"] || Gem.loaded_specs["rails"])
+version = rails_spec.version.to_s
+
+if Gem::Version.new(version) < Gem::Version.new('4.1.0')
+  puts "You are using an old version of Rails (#{version})"
+  puts "Please update"
+  puts "Stopping"
+  exit 1
+end
+
 gem 'mongoid', '~> 4.0.0'
 gem 'sass', '~> 3.3.9'
 
