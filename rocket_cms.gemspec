@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mongoid', '~> 4.0.0.beta1'
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'glebtv-mongoid_nested_set'
-  spec.add_dependency 'simple_form', '~> 3.0'
+  spec.add_dependency 'simple_form'
   spec.add_dependency 'glebtv-simple_captcha'
   spec.add_dependency 'htmlentities'
   spec.add_dependency 'sanitize'
