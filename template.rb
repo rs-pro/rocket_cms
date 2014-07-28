@@ -235,7 +235,15 @@ rails_env = ENV['RAILS_ENV'] || 'production'
 
 deploy_to = "/data/#{app_name.downcase}/app"
 #{'rails_root = "#{deploy_to}/current"'}
-#{'pid_file = "#{deploy_to}/shared/tmp/pids/unicorn.pid"'}
+
+#{'tmp_dir = "#{deploy_to}/shared/tmp"
+pid_dir = "#{tmp_dir}/pids"
+if File.directory?(tmp_dir) && !File.directory?(pid_dir)
+  puts "creating pid dir #{pid_dir}"
+  Dir.mkdir(pid_dir)
+end
+pid_file = "#{pid_dir}/unicorn.pid"'}
+
 #{'log_file = "#{deploy_to}/shared/log/unicorn.log"'}
 #{'err_log_file = "#{deploy_to}/shared/log/unicorn.error.log"'}
 
