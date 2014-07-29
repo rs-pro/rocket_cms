@@ -118,7 +118,6 @@ Rails.application.routes.draw do
 end
 TEXT
 end
-route "mount Ckeditor::Engine => '/ckeditor'"
 
 application "config.i18n.enforce_available_locales = true"
 application "config.i18n.available_locales = [:ru, :en]"
@@ -163,20 +162,24 @@ gsub_file 'app/models/user.rb', '# field :failed_attempts', 'field :failed_attem
 gsub_file 'app/models/user.rb', '# field :unlock_token', 'field :unlock_token'
 gsub_file 'app/models/user.rb', '# field :locked_at', 'field :locked_at'
 
+route "mount Ckeditor::Engine => '/ckeditor'"
 generate "rocket_cms:admin"
 generate "rocket_cms:ability"
 generate "rocket_cms:layout"
 
 generate "rspec:install"
 
-route "resources :news, only: [:index, :show]"
-route "get 'search' => 'search#index', as: :search"
-route "get 'contacts' => 'contacts#new', as: :contacts"
-route "post 'contacts' => 'contacts#create', as: :create_contacts"
-route "get 'contacts/sent' => 'contacts#sent', as: :contacts_sent"
 route "root 'home#index'"
-route "resources :pages, only: [:show]"
 route "get '*slug' => 'pages#show'"
+route "resources :pages, only: [:show]"
+
+route "get 'search' => 'search#index', as: :search"
+
+route "get 'contacts/sent' => 'contacts#sent', as: :contacts_sent"
+route "post 'contacts' => 'contacts#create', as: :create_contacts"
+route "get 'contacts' => 'contacts#new', as: :contacts"
+
+route "resources :news, only: [:index, :show]"
 
 gsub_file 'config/application.rb', /^(.*)config.time_zone(.*)$/, "config.time_zone = 'Europe/Moscow'"
 
