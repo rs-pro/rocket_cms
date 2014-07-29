@@ -8,14 +8,12 @@ if Gem::Version.new(version) < Gem::Version.new('4.1.0')
   exit 1
 end
 
-gem 'mongoid', '~> 4.0.0'
-gem 'sass', '~> 3.3.9'
-
 remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
 gem 'spring', group: 'development'
+
 TEXT
 end
 
@@ -69,32 +67,33 @@ TEXT
 end
 
 #gsub_file 'Gemfile', /^(.*)sass-rails(.*)$/, ''
+
+gem 'rails', '4.1.4'
+
+gem 'mongoid', '~> 4.0.0'
+gem 'sass', '~> 3.3.9'
+
 gem 'rocket_cms'
 
 gem 'sass-rails', github: 'rails/sass-rails', ref: '3a9e47db7d769221157c82229fc1bade55b580f0'
 gem 'compass-rails', '~> 2.0.0'
 gem 'compass', '~> 1.0.0.alpha.20'
-
 gem 'slim-rails'
 gem 'rs_russian'
 gem 'sentry-raven'
-
 gem 'cancancan'
 
 gem_group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry-rails'
-
   gem 'capistrano', '~> 3.2.0', require: false
   gem 'rvm1-capistrano3', require: false
   gem 'glebtv-capistrano-unicorn', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-rails-console'
-
   gem 'hipchat'
-
   gem 'coffee-rails-source-maps'
   gem 'compass-rails-source-maps'
 end
