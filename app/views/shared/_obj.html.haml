@@ -1,6 +1,6 @@
 - unless obj.nil?
   .text_content
-    - unless obj.h1.blank?
+    - if (!defined?(h1) || h1) && !obj.h1.blank?
       %h1= obj.h1
     - if obj.content.blank?
       - unless @seo_page.nil?
