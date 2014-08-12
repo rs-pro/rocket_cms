@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'
   spec.add_dependency 'glebtv-ckeditor'
-  spec.add_dependency 'rails_admin_settings'
+  spec.add_dependency 'rails_admin_settings', '~> 0.8.0'
   spec.add_dependency 'geocoder'
   spec.add_dependency 'mongoid-audit', '~> 1.0.0.alpha.1'
   spec.add_dependency 'mongoid_slug'
