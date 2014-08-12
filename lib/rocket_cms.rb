@@ -44,7 +44,6 @@ require 'rocket_cms/elastic_search' # FTS, optional
 require 'rocket_cms/model'
 require 'rocket_cms/rails_admin_menu'
 require 'rocket_cms/engine'
-require 'rocket_cms/railtie'
 require 'rocket_cms/controller'
 
 module RocketCMS
