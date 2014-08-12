@@ -26,7 +26,6 @@ require 'rails_admin_toggleable'
 require 'glebtv-ckeditor'
 require 'rails_admin_settings'
 require 'mongoid-audit'
-require 'history_tracker' # audit model
 
 require 'mongoid_slug'
 

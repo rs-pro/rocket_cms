@@ -5,12 +5,15 @@ module RocketCMS
       include Mongoid::Document
       include Mongoid::Timestamps::Short
       include ActiveModel::ForbiddenAttributesProtection
-      include Trackable
       include BooleanField
       include SortField
       include Mongoid::Paperclip
       include SmartExcerpt
       include SimpleCaptcha::ModelHelpers
+
+      if defined?(Trackable)
+        include Trackable
+      end
     end
   end
 end

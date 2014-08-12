@@ -19,13 +19,6 @@ module RocketCMS
       Settings.email_topic(default: 'с сайта')
     end
 
-    initializer 'rocket_cms.mongoid-audit' do
-      Mongoid::Audit.tracker_class_name = :history_tracker
-      Mongoid::Audit.current_user_method = :current_user
-      Mongoid::Audit.modifier_class_name = "User"
-      require_dependency 'history_tracker.rb' if Rails.env.development?
-    end
-
     initializer 'rocket_cms.paperclip' do
       require 'paperclip/style'
       module ::Paperclip
@@ -44,3 +37,4 @@ module RocketCMS
     end
   end
 end
+
