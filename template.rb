@@ -297,7 +297,7 @@ after_fork do |server, worker|
   # pid-ы дочерних процессов
   #{'child_pid_file = server.config[:pid].sub(".pid", ".#{worker.nr}.pid")'}
   #{'system( "echo #{Process.pid} > #{child_pid_file}" )'}
-end= ENV['RAILS_ENV'] || 'production'
+end
 TEXT
 end
 
