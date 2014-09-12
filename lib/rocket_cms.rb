@@ -9,8 +9,6 @@ require 'glebtv-simple_captcha'
 
 require 'validates_email_format_of'
 
-require 'htmlentities'
-require 'sanitize'
 require 'smart_excerpt'
 
 # uploads

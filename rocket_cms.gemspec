@@ -23,12 +23,11 @@ Gem::Specification.new do |spec|
   
   spec.add_dependency 'rails', [">= 4.1.0", "< 5.0.0"]
   spec.add_dependency 'mongoid', '~> 4.0.0'
+
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'glebtv-mongoid_nested_set'
   spec.add_dependency 'simple_form'
   spec.add_dependency 'glebtv-simple_captcha'
-  spec.add_dependency 'htmlentities'
-  spec.add_dependency 'sanitize'
   spec.add_dependency 'coffee-rails'
   spec.add_dependency 'devise'
   spec.add_dependency 'turbolinks'
@@ -43,12 +42,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mongoid-audit', '~> 1.0.0.alpha.1'
   spec.add_dependency 'mongoid_slug'
   spec.add_dependency 'simple-navigation'
-  spec.add_dependency 'unicorn'
-  spec.add_dependency 'x-real-ip'
   spec.add_dependency 'sitemap_generator'
   spec.add_dependency 'kaminari'
   spec.add_dependency 'addressable'
   spec.add_dependency 'thor'
-  spec.add_dependency 'uglifier'
+
+  spec.add_dependency 'smart_excerpt'
 end
 
