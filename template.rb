@@ -487,8 +487,8 @@ module Piudelcibo
     config.i18n.available_locales = [:ru, :en]
     config.i18n.enforce_available_locales = true
 
-    config.autoload_paths += %W(#{config.root}/extra)
-    config.eager_load_paths += %W(#{config.root}/extra)
+    #{'config.autoload_paths += %W(#{config.root}/extra)'}
+    #{'config.eager_load_paths += %W(#{config.root}/extra)'}
 
     config.time_zone = 'Europe/Moscow'
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
