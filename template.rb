@@ -164,6 +164,8 @@ Rails.application.routes.draw do
 
   resources :news, only: [:index, :show]
 
+  root to: 'home#index'
+
   get '*slug' => 'pages#show'
   resources :pages, only: [:show]
 end
