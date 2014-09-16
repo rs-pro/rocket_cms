@@ -13,6 +13,50 @@ create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
 gem 'spring', group: 'development'
+gem 'rails', '4.1.6'
+
+gem 'mongoid', '~> 4.0.0'
+gem 'sass', '~> 3.4.4'
+
+gem 'rocket_cms'
+
+gem 'sass-rails', github: 'rails/sass-rails', ref: '3a9e47db7d769221157c82229fc1bade55b580f0'
+gem 'compass-rails', '~> 2.0.0'
+gem 'compass', '~> 1.0.0'
+
+gem 'slim-rails'
+gem 'rs_russian'
+gem 'cancancan'
+
+gem 'unicorn'
+gem 'x-real-ip'
+
+gem 'sentry-raven'
+
+gem_group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-rails'
+
+  gem 'capistrano', '~> 3.2.0', require: false
+  gem 'rvm1-capistrano3', require: false
+  gem 'glebtv-capistrano-unicorn', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+
+  gem 'hipchat'
+  gem 'coffee-rails-source-maps'
+  gem 'compass-rails-source-maps'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'email_spec'
+  gem 'glebtv-mongoid-rspec'
+  gem 'ffaker'
+  gem 'factory_girl_rails'
+end
 
 TEXT
 end
@@ -66,59 +110,6 @@ create_file 'config/navigation.rb' do <<-TEXT
 TEXT
 end
 
-#gsub_file 'Gemfile', /^(.*)sass-rails(.*)$/, ''
-
-gem 'rails', '4.1.4'
-
-gem 'mongoid', '~> 4.0.0'
-gem 'sass', '~> 3.3.9'
-
-gem 'rocket_cms'
-
-gem 'sass-rails', github: 'rails/sass-rails', ref: '3a9e47db7d769221157c82229fc1bade55b580f0'
-gem 'compass-rails', '~> 2.0.0'
-gem 'compass', '~> 1.0.0.alpha.20'
-gem 'slim-rails'
-gem 'rs_russian'
-gem 'sentry-raven'
-gem 'cancancan'
-
-gem_group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'pry-rails'
-  gem 'capistrano', '~> 3.2.0', require: false
-  gem 'rvm1-capistrano3', require: false
-  gem 'glebtv-capistrano-unicorn', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-rails-console'
-  gem 'hipchat'
-  gem 'coffee-rails-source-maps'
-  gem 'compass-rails-source-maps'
-end
-
-gem_group :test do
-  #gem 'capybara'
-  #gem 'poltergeist'
-  #gem 'simplecov', require: false
-  gem 'rspec-rails'
-  gem 'database_cleaner'
-  gem 'email_spec'
-  gem 'glebtv-mongoid-rspec'
-  #gem 'rspec-collection_matchers'
-  #gem 'timecop'
-  gem 'ffaker'
-  gem 'factory_girl_rails'
-end
-
-remove_file 'config/routes.rb'
-create_file 'config/routes.rb' do <<-TEXT
-Rails.application.routes.draw do
-end
-TEXT
-end
-
 application "config.i18n.enforce_available_locales = true"
 application "config.i18n.available_locales = [:ru, :en]"
 application "config.i18n.default_locale = :ru"
@@ -169,21 +160,30 @@ generate "rocket_cms:layout"
 
 generate "rspec:install"
 
-route "root 'home#index'"
-route "get '*slug' => 'pages#show'"
-route "resources :pages, only: [:show]"
+remove_file 'config/routes.rb'
+create_file 'config/routes.rb' do <<-TEXT
+Rails.application.routes.draw do
+  devise_for :users
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount Uploader::Engine => '/uploader'
+  mount Ckeditor::Engine => '/ckeditor'
 
-route "get 'search' => 'search#index', as: :search"
+  get 'contacts' => 'contacts#index', as: :contacts
+  post 'contacts' => 'contacts#create', as: :create_contacts
+  get 'contacts/sent' => 'contacts#sent', as: :contacts_sent
 
-route "get 'contacts/sent' => 'contacts#sent', as: :contacts_sent"
-route "post 'contacts' => 'contacts#create', as: :create_contacts"
-route "get 'contacts' => 'contacts#new', as: :contacts"
+  get 'search' => 'search#index', as: :search
 
-route "resources :news, only: [:index, :show]"
+  resources :news, only: [:index, :show]
+
+  get '*slug' => 'pages#show'
+  resources :pages, only: [:show]
+end
+TEXT
+end
+
 
 gsub_file 'config/application.rb', /^(.*)config.time_zone(.*)$/, "config.time_zone = 'Europe/Moscow'"
-
-#capify!
 
 remove_file 'db/seeds.rb'
 admin_pw = (0...8).map { (65 + rand(26)).chr }.join

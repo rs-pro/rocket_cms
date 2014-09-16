@@ -27,7 +27,6 @@ require 'mongoid-audit'
 
 require 'mongoid_slug'
 
-require 'x-real-ip'
 require 'sitemap_generator'
 require 'kaminari'
 require 'addressable/uri'
