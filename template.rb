@@ -452,7 +452,7 @@ remove_file 'app/views/layouts/application.html.erb'
 
 
 remove_file 'config/application.rb'
-create_file 'congig/application.rb' do <<-TEXT
+create_file 'config/application.rb' do <<-TEXT
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
