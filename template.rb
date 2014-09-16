@@ -154,7 +154,6 @@ create_file 'config/routes.rb' do <<-TEXT
 Rails.application.routes.draw do
   devise_for :users
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  mount Uploader::Engine => '/uploader'
   mount Ckeditor::Engine => '/ckeditor'
 
   get 'contacts' => 'contacts#index', as: :contacts
@@ -468,7 +467,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module #{app_name}
+module #{app_name.camelize}
   class Application < Rails::Application
     config.generators do |g|
       g.test_framework :rspec
