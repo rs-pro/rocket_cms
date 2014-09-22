@@ -6,7 +6,6 @@ module RocketCMS
       include Enableable
       include ManualSlug
 
-
       included do
         after_save do
           Rails.cache.delete 'menus'

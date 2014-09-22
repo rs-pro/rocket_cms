@@ -12,14 +12,14 @@ module RocketCMS
         include Mongoid::Paperclip
       end
       include ManualSlug
-        
+
       included do
         field :time, type: Time
         index({enabled: 1, time: 1})
         scope :after_now, -> { where(:time.lt => Time.now) }
 
-        field :excerpt, type: String
-        field :content, type: String
+        field :excerpt, type: String, localize: RocketCMS.configuration.localize
+        field :content, type: String, localize: RocketCMS.configuration.localize
 
         unless RocketCMS.configuration.news_image_styles.nil?
           has_mongoid_attached_file :image, styles: RocketCMS.configuration.news_image_styles

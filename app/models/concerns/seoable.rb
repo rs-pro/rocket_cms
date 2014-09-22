@@ -3,15 +3,15 @@ module Seoable
   include Mongoid::Paperclip
   
   included do
-    field :name, type: String
-    field :h1, type: String
+    field :name, type: String, localize: RocketCMS.configuration.localize
+    field :h1, type: String, localize: RocketCMS.configuration.localize
 
-    field :title, type: String
-    field :keywords, type: String
-    field :description, type: String
-    field :robots, type: String
+    field :title, type: String, localize: RocketCMS.configuration.localize
+    field :keywords, type: String, localize: RocketCMS.configuration.localize
+    field :description, type: String, localize: RocketCMS.configuration.localize
+    field :robots, type: String, localize: RocketCMS.configuration.localize
 
-    field :og_title, type: String
+    field :og_title, type: String, localize: RocketCMS.configuration.localize
     has_mongoid_attached_file :og_image, styles: {thumb: "800x600>"}
   end
 

@@ -23,6 +23,8 @@ module RocketCMS
     attr_accessor :contacts_fields
     attr_accessor :contacts_message_required
 
+    attr_accessor :localize
+
     def initialize
       @news_image_styles = {
         main:  '400x200>',
@@ -41,6 +43,8 @@ module RocketCMS
       @contacts_captcha = false
       @contacts_fields = {}
       @contacts_message_required = true
+
+      @localize = false
     end
 
     def search_enabled=(val)
