@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.4.0)
+    rocket_cms (0.4.1)
       addressable
       coffee-rails
       devise
@@ -85,7 +85,7 @@ GEM
     execjs (2.2.1)
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
-    geocoder (1.2.4)
+    geocoder (1.2.5)
     glebtv-ckeditor (4.4.3.3)
       mime-types
       orm_adapter (~> 0.5.0)
@@ -95,7 +95,7 @@ GEM
       paperclip (>= 2.3.6)
     glebtv-mongoid_nested_set (0.4.3)
       mongoid (>= 3.1.0, < 4.1)
-    glebtv-simple_captcha (0.6.3)
+    glebtv-simple_captcha (0.6.5)
     glebtv_mongoid_userstamp (0.4.1)
       mongoid (~> 4.0.0.beta1)
     haml (4.0.5)
@@ -122,7 +122,7 @@ GEM
       moped (~> 2.0.0)
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
-    mongoid-audit (1.0.0.beta.1)
+    mongoid-audit (1.0.0)
       activesupport
       glebtv_mongoid_userstamp
       kaminari
@@ -193,7 +193,7 @@ GEM
     rake (10.3.2)
     remotipart (1.2.1)
     safe_yaml (1.0.3)
-    sass (3.4.3)
+    sass (3.4.5)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
@@ -205,7 +205,7 @@ GEM
       activemodel (~> 4.0)
     sitemap_generator (5.0.5)
       builder
-    smart_excerpt (0.1.0)
+    smart_excerpt (0.1.2)
       activesupport
       htmlentities
     sprockets (2.12.2)
