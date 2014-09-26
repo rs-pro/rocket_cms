@@ -1,14 +1,15 @@
 PATH
   remote: .
   specs:
-    rocket_cms_activerecord (0.5.0.pre.3)
+    rocket_cms_activerecord (0.5.0.pre.4)
       awesome_nested_set
       foreigner
       friendly_id
       paper_trail
       paperclip
-      rails (>= 4.1.0, < 5.0.0)
-      rocket_cms (= 0.5.0.pre.3)
+      rails (~> 4.1.6)
+      rocket_cms (= 0.5.0.pre.4)
+      validates_lengths_from_database
 
 GEM
   remote: https://rubygems.org/
@@ -148,7 +149,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
     remotipart (1.2.1)
-    rocket_cms (0.5.0.pre.3)
+    rocket_cms (0.5.0.pre.4)
       addressable
       coffee-rails
       devise
@@ -157,7 +158,7 @@ GEM
       glebtv-simple_captcha
       jquery-rails
       kaminari
-      rails (>= 4.1.0, < 5.0.0)
+      rails (~> 4.1.6)
       rails_admin
       rails_admin_nested_set
       rails_admin_settings (~> 0.9.0.pre.4)
@@ -205,6 +206,8 @@ GEM
       thread_safe (~> 0.1)
     validates_email_format_of (1.6.1)
       i18n
+    validates_lengths_from_database (0.2.0)
+      activerecord (>= 2.3.2)
     warden (1.2.3)
       rack (>= 1.0)
 
