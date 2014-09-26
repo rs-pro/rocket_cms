@@ -11,6 +11,11 @@ class RocketCmsCreatePages < ActiveRecord::Migration
       t.boolean :enabled, default: false
       t.string :slug
       t.attachment :image
+
+      t.string :regexp
+      t.string :redirect
+      t.string :content
+      t.string :fullpath
       RocketCMS::Migration.seo_fields(t)
       t.timestamps
     end

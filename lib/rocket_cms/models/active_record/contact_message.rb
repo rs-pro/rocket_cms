@@ -4,6 +4,7 @@ module RocketCMS
       extend ActiveSupport::Concern
       included do
         has_paper_trail
+        validates_lengths_from_database
       end
     end
   end

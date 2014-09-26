@@ -12,6 +12,8 @@ module RocketCMS
           end
           friendly_id :report_slug, use: [:slugged, :finders]
           has_paper_trail
+
+          validates_lengths_from_database, only: [:name, :title, :content, :excerpt, :h1, :keywords, :robots, :og_title]
         end
       end
     end

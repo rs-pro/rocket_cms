@@ -24,7 +24,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
   
-  spec.add_dependency 'rails', [">= 4.1.0", "< 5.0.0"]
+  spec.add_dependency 'rails', '~> 4.1.6'
+
   spec.add_dependency 'mongoid', '~> 4.0.0'
   spec.add_dependency 'rocket_cms', RocketCMS::VERSION
 

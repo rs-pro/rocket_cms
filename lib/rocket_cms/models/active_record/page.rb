@@ -8,6 +8,7 @@ module RocketCMS
         included do
           friendly_id :name, use: [:slugged, :finders]
           has_paper_trail
+          validates_lengths_from_database, only: [:name, :title, :content, :excerpt, :h1, :keywords, :robots, :og_title, :regexp, :redirect, :fullpath]
         end
       end
     end
