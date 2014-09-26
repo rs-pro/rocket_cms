@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/rs-pro/rocket_cms'
   spec.license       = 'MIT'
 
-  spec.files         = %w(LICENSE.txt README.md lib/rocket_cms_activerecord.rb)
+  spec.files         = %w(lib/rocket_cms_activerecord.rb)
   spec.executables   = []
   spec.test_files    = []
   spec.require_paths = ['lib']
