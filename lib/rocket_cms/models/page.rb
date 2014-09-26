@@ -2,35 +2,24 @@ module RocketCMS
   module Models
     module Page
       extend ActiveSupport::Concern
-
       include RocketCMS::Model
       include Enableable
       include Seoable
-      include ManualSlug
+
+      include RocketCMS.orm_specific('News')
+
       if RocketCMS.configuration.search_enabled
         include RocketCMS::ElasticSearch
       end
         
       included do
-        field :regexp, type: String
-        field :redirect, type: String
-        field :content, type: String, localize: RocketCMS.configuration.localize
-        field :fullpath, type: String
-
         scope :sorted, -> { order_by([:lft, :asc]) }
         scope :menu, ->(menu_id) { enabled.sorted.where(menu_ids: menu_id) }
-
         has_and_belongs_to_many :menus, inverse_of: :pages
-
-        acts_as_nested_set
-        
-        manual_slug :name
-
         before_validation do
           self.fullpath = "/pages/#{slug}" if self.fullpath.blank?
         end
         validates_uniqueness_of :fullpath
-
         validates_presence_of :name
       end
 

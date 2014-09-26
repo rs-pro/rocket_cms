@@ -4,14 +4,16 @@ module Mappable
   included do
     include Geocoder::Model::Mongoid
     
-    field :coordinates, type: Array
-    field :address, type: String
-    
-    field :map_address, type: String
-    field :map_hint, type: String
-    
-    field :lat, type: Float
-    field :lon, type: Float
+    if RocketCMS.mongoid?
+      field :coordinates, type: Array
+      field :address, type: String
+      
+      field :map_address, type: String
+      field :map_hint, type: String
+      
+      field :lat, type: Float
+      field :lon, type: Float
+    end
     
     geocoded_by :geo_address
     

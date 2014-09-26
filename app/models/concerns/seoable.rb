@@ -1,18 +1,26 @@
 module Seoable
   extend ActiveSupport::Concern
-  include Mongoid::Paperclip
+  if RocketCMS.mongoid?
+    include ::Mongoid::Paperclip
+  end
   
   included do
-    field :name, type: String, localize: RocketCMS.configuration.localize
-    field :h1, type: String, localize: RocketCMS.configuration.localize
+    if RocketCMS.mongoid?
+      field :name, type: String, localize: RocketCMS.configuration.localize
+      field :h1, type: String, localize: RocketCMS.configuration.localize
 
-    field :title, type: String, localize: RocketCMS.configuration.localize
-    field :keywords, type: String, localize: RocketCMS.configuration.localize
-    field :description, type: String, localize: RocketCMS.configuration.localize
-    field :robots, type: String, localize: RocketCMS.configuration.localize
+      field :title, type: String, localize: RocketCMS.configuration.localize
+      field :keywords, type: String, localize: RocketCMS.configuration.localize
+      field :description, type: String, localize: RocketCMS.configuration.localize
+      field :robots, type: String, localize: RocketCMS.configuration.localize
 
-    field :og_title, type: String, localize: RocketCMS.configuration.localize
-    has_mongoid_attached_file :og_image, styles: {thumb: "800x600>"}
+      field :og_title, type: String, localize: RocketCMS.configuration.localize
+      has_mongoid_attached_file :og_image, styles: {thumb: "800x600>"}
+    end
+
+    if RocketCMS.active_record?
+      has_attached_file :og_image, styles: {thumb: "800x600>"}
+    end
   end
 
   def page_title

@@ -3,6 +3,7 @@ module RocketCMS
     module ContactMessage
       extend ActiveSupport::Concern
       include RocketCMS::Model
+      include RocketCMS.orm_specific('ContactMessage')
 
       included do
         apply_simple_captcha

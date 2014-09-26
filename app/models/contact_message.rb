@@ -1,3 +1,8 @@
+if RocketCMS.active_record?
+  class ContactMessage < ActiveRecord::Base
+  end
+end
+
 class ContactMessage
   include RocketCMS::Models::ContactMessage
   RocketCMS.apply_patches self

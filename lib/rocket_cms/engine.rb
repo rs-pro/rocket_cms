@@ -4,19 +4,13 @@ module RocketCMS
       require File.expand_path('../tasks', __FILE__)
     end
 
-    initializer "rocket_cms.ckeditor" do
-      if Object.const_defined?("Ckeditor")
-        Ckeditor.setup do |config|
-          require "ckeditor/orm/mongoid"
-        end
-      end
-    end
-
     initializer "rocket_cms.email_defaults" do
       # Write default email settings to DB so they can be changed.
-      Settings.default_email_from(default: 'noreply@rscx.ru')
-      Settings.form_email(default: 'glebtv@ya.ru')
-      Settings.email_topic(default: 'с сайта')
+      if Settings.table_exists?
+        Settings.default_email_from(default: 'noreply@rscx.ru')
+        Settings.form_email(default: 'glebtv@ya.ru')
+        Settings.email_topic(default: 'с сайта')
+      end
     end
 
     initializer 'rocket_cms.paperclip' do

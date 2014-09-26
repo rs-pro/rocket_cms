@@ -4,8 +4,7 @@ module RocketCMS
       extend ActiveSupport::Concern
       include RocketCMS::Model
       include Enableable
-      include ManualSlug
-
+      include RocketCMS.orm_specific('News')
       included do
         after_save do
           Rails.cache.delete 'menus'
@@ -13,10 +12,9 @@ module RocketCMS
         after_destroy do
           Rails.cache.delete 'menus'
         end
-        field :name, type: String
-        manual_slug :name
         has_and_belongs_to_many :pages, inverse_of: :menus
       end
     end
   end
 end
+

@@ -1,0 +1,30 @@
+require 'cloner'
+
+class Dl < Cloner::Base
+  no_commands do
+    def rails_path
+      File.expand_path("../../../config/environment", __FILE__)
+    end
+    def ssh_host
+      '<%= domain %>.ru'
+    end
+    def ssh_user
+      '<%= app_name.downcase %>'
+    end
+    def remote_dump_path
+      '<%= tmp_path %>'
+    end
+    def remote_app_path
+      '<%= deploy_to %>'
+    end
+  end
+
+  desc "download", "clone files and DB from production"
+  def download
+    load_env
+    clone_db
+    rsync_public("ckeditor_assets")
+    rsync_public("system")
+  end
+end
+
