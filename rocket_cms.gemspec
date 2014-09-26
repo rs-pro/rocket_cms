@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'
   spec.add_dependency 'glebtv-ckeditor'
-  spec.add_dependency 'rails_admin_settings', '~> 0.9.0.pre'
+  spec.add_dependency 'rails_admin_settings', '~> 0.9.0.pre.4'
   spec.add_dependency 'geocoder'
   spec.add_dependency 'simple-navigation'
   spec.add_dependency 'sitemap_generator'
