@@ -151,6 +151,10 @@ say "Please create a PostgreSQL user #{app_name.downcase} with password #{app_na
 ask("Press <enter> when done.", true)
 end
 
+unless mongoid
+  generate 'simple_captcha'
+end
+
 generate "devise:install"
 generate "devise", "User"
 remove_file "config/locales/devise.en.yml"

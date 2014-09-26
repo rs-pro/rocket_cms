@@ -10,6 +10,7 @@ en:
     no_contact_info: "Please enter your phone or email so we could contact you."
     map: 'Map'
     edit: Edit
+    send: Send
     m:
       enabled: 'added to menu "%{menu}"'
       disabled: 'deleted from menu "%{menu}"'
