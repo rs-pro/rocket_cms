@@ -11,6 +11,7 @@ module RocketCMS
             validates_attachment_content_type :image, content_type: %w(image/gif image/jpeg image/jpg image/png), if: :image?
           end
           friendly_id :report_slug, use: [:slugged, :finders]
+
           has_paper_trail
 
           validates_lengths_from_database only: [:name, :title, :content, :excerpt, :h1, :keywords, :robots, :og_title]

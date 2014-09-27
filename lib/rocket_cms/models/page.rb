@@ -6,7 +6,7 @@ module RocketCMS
       include Enableable
       include Seoable
 
-      include RocketCMS.orm_specific('News')
+      include RocketCMS.orm_specific('Page')
 
       if RocketCMS.configuration.search_enabled
         include RocketCMS::ElasticSearch

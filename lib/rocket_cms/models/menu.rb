@@ -4,7 +4,7 @@ module RocketCMS
       extend ActiveSupport::Concern
       include RocketCMS::Model
       include Enableable
-      include RocketCMS.orm_specific('News')
+      include RocketCMS.orm_specific('Menu')
       included do
         after_save do
           Rails.cache.delete 'menus'
