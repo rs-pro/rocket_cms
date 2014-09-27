@@ -25,7 +25,11 @@ module RocketCMS
       end
 
       def report_slug
-        time.strftime('%Y-%m-%d') + '-' + name[0..20]
+        if name.blank?
+          time.strftime('%Y-%m-%d')
+        else
+          time.strftime('%Y-%m-%d') + '-' + name[0..20]
+        end
       end
       def html5_date
         time.strftime('%Y-%m-%d')
