@@ -36,7 +36,7 @@ ru:
     title: Title
     version: Version
     
-  mongoid:
+  mongoid: &mongoid
     models:
       user: Пользователь
       menu: Меню
@@ -70,6 +70,8 @@ ru:
         email: Ваш е-мейл
         phone: Ваш телефон
         content: Ваше сообщение
+  activerecord:
+    <<: *mongoid
 
   activemodel:
     errors:

@@ -30,10 +30,10 @@ module RocketCms
     desc 'RocketCMS capistrano setup generator'
     def install
       copy_file "Capfile", "Capfile"
-      copy_file "unicorn.rb", "config/unicorn/production.rb"
-      copy_file "deploy.rb", "config/deploy.rb"
-      copy_file "production.rb", "config/deploy/production.rb"
-      copy_file "dl.thor", "lib/tasks/dl.thor"
+      template "unicorn.erb", "config/unicorn/production.rb"
+      template "deploy.erb", "config/deploy.rb"
+      template "production.erb", "config/deploy/production.rb"
+      template "dl.erb", "lib/tasks/dl.thor"
     end
   end
 end

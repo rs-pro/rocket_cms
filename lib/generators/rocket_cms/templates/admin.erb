@@ -17,7 +17,7 @@ RailsAdmin.config do |config|
   ## == MongoidAudit
   config.audit_with :mongoid_audit, 'HistoryTracker'
 <% elsif RocketCMS.active_record? %>
-  config.audit_with :paper_trail
+  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 <% end %>
 
 
