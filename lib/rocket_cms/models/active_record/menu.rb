@@ -4,6 +4,7 @@ module RocketCMS
       module Menu
         extend ActiveSupport::Concern
         included do
+          extend FriendlyId
           friendly_id :report_slug, use: [:slugged, :finders]
           has_paper_trail
           validates_lengths_from_database
