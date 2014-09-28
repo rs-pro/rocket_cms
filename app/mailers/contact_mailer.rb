@@ -5,7 +5,7 @@ class ContactMailer < ActionMailer::Base
     #if message.attachment?
     #  attachments[message.attachment.identifier] = File.read(message.attachment.current_path)
     #end
-    binding.pry
+
     mail(
         from: Settings.default_email_from(default: 'noreply@rscx.ru'),
         to: Settings.form_email(default: 'glebtv@ya.ru'),
