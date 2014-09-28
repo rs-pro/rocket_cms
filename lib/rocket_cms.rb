@@ -1,4 +1,4 @@
-unless [:active_record, :mongoid].include?(RocketCMS.orm)
+unless defined?(RocketCMS) && [:active_record, :mongoid].include?(RocketCMS.orm)
   puts "please use rocket_cms_mongoid or rocket_cms_activerecord and not rocket_cms directly"
   exit 1
 end
