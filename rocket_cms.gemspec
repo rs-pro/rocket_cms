@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['glebtv']
   spec.email         = ['glebtv@gmail.com']
   spec.description   = %q{RocketCMS}
-  spec.summary       = %q{}
+  spec.summary       = %q{Please DO NOT use this gem directly, use rocket_cms_mongoid or rocket_cms_activerecord instead!}
   spec.homepage      = 'https://github.com/rs-pro/rocket_cms'
   spec.license       = 'MIT'
 
