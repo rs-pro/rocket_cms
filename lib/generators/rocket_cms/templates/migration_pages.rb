@@ -8,7 +8,12 @@ class RocketCmsCreatePages < ActiveRecord::Migration
     add_index :menus, :slug, unique: true
 
     create_table :pages do |t|
-      t.boolean :enabled, default: false
+      t.boolean :enabled, default: true, null: false
+      t.integer :parent_id
+      t.integer :lft
+      t.integer :rgt
+      t.integer :depth 
+
       t.string :slug, null: false
       t.attachment :image
 
@@ -20,6 +25,7 @@ class RocketCmsCreatePages < ActiveRecord::Migration
       t.timestamps
     end
     add_index :pages, :slug, unique: true
+    add_index :pages, [:enabled, :lft]
 
     create_join_table :menus, :pages
 
