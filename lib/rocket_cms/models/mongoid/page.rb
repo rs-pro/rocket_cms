@@ -10,7 +10,7 @@ module RocketCMS
           field :content, type: String, localize: RocketCMS.configuration.localize
           field :fullpath, type: String
           has_and_belongs_to_many :menus, inverse_of: :pages
-
+          acts_as_nested_set
           manual_slug :name
         end
       end
