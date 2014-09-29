@@ -30,7 +30,7 @@ module RsMenu
     Proc.new do |primary|
       SimpleNavigation.config.autogenerate_item_ids = false
       begin
-        items = ::Menu.find(type.to_s).pages.sorted.to_a
+        items = ::Menu.find(type.to_s).pages.enabled.sorted.to_a
         items.select { |i| i.parent_id.nil? && !i.name.blank? && i.enabled }.each do |item|
           render_with_subs(items, primary, item)
         end

@@ -13,8 +13,6 @@ module RocketCMS
       end
         
       included do
-        scope :sorted, -> { order_by([:lft, :asc]) }
-        scope :menu, ->(menu_id) { enabled.sorted.where(menu_ids: menu_id) }
         has_and_belongs_to_many :menus, inverse_of: :pages
         before_validation do
           self.fullpath = "/pages/#{slug}" if self.fullpath.blank?
