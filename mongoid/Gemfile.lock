@@ -1,14 +1,14 @@
 PATH
   remote: .
   specs:
-    rocket_cms_mongoid (0.5.0.rc.4)
+    rocket_cms_mongoid (0.5.0.rc.5)
       glebtv-mongoid-paperclip
       glebtv-mongoid_nested_set
       mongoid (~> 4.0.0)
       mongoid-audit (~> 1.0.0)
       mongoid_slug
       rails (~> 4.1.6)
-      rocket_cms (= 0.5.0.rc.4)
+      rocket_cms (= 0.5.0.rc.5)
 
 GEM
   remote: https://rubygems.org/
@@ -173,7 +173,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
     remotipart (1.2.1)
-    rocket_cms (0.5.0.rc.4)
+    rocket_cms (0.5.0.rc.5)
       addressable
       coffee-rails
       devise
@@ -195,7 +195,7 @@ GEM
       thor
       turbolinks
       validates_email_format_of
-    safe_yaml (1.0.3)
+    safe_yaml (1.0.4)
     sass (3.4.5)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
