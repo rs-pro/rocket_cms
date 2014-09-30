@@ -17,7 +17,7 @@ module RocketCMS
         end
         if @contact_message.send(meth)
           after_create
-          redirect_to :contacts_sent
+          redirect_after_done
         else
           flash.now[:alert] = @contact_message.errors.full_messages.join("\n")
           render action: "new"
@@ -28,6 +28,10 @@ module RocketCMS
       end
 
       private
+      
+      def redirect_after_done
+        redirect_to :contacts_sent
+      end
       def after_initialize
         # overrideable hook for updating message
       end
