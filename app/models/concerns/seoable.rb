@@ -16,11 +16,10 @@ module Seoable
 
       field :og_title, type: String, localize: RocketCMS.configuration.localize
       has_mongoid_attached_file :og_image, styles: {thumb: "800x600>"}
-    end
-
-    if RocketCMS.active_record?
+    elsif RocketCMS.active_record?
       has_attached_file :og_image, styles: {thumb: "800x600>"}
     end
+    validates_attachment_content_type :og_image, content_type: %w(image/gif image/jpeg image/jpg image/png), if: :image?
   end
 
   def page_title
