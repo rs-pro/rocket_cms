@@ -1,14 +1,14 @@
 PATH
   remote: .
   specs:
-    rocket_cms_activerecord (0.5.0.rc.5)
+    rocket_cms_activerecord (0.5.0)
       awesome_nested_set
       foreigner
       friendly_id
       paper_trail
       paperclip
       rails (~> 4.1.6)
-      rocket_cms (= 0.5.0.rc.5)
+      rocket_cms (= 0.5.0)
       validates_lengths_from_database
 
 GEM
@@ -149,7 +149,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
     remotipart (1.2.1)
-    rocket_cms (0.5.0.rc.5)
+    rocket_cms (0.5.0)
       addressable
       coffee-rails
       devise
