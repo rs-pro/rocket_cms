@@ -3,12 +3,12 @@ module RocketCMS
     module Contacts
       extend ActiveSupport::Concern
       def new
-        @contact_message = ContactMessage.new
+        @contact_message = model.new
         after_initialize
       end
 
       def create
-        @contact_message = ContactMessage.new(message_params)
+        @contact_message = model.new(message_params)
         after_initialize
         if RocketCMS.configuration.contacts_captcha
           meth = :save_with_captcha
@@ -33,6 +33,9 @@ module RocketCMS
       end
       def after_create
         # overrideable hook for updating message
+      end
+      def model
+        ContactMessage
       end
       def message_params
         params.require(:contact_message).permit(RocketCMS.configuration.contacts_fields.keys + [:name, :email, :phone, :content, :captcha, :captcha_key])
