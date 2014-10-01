@@ -2,7 +2,8 @@
   %h1= t('rs.news')
   - @news.each do |news|
     .rs-news-date= news.time.strftime('%Y-%m-%d')
+    a.rs-news-title href=news_path(news)
     - if !RocketCMS.configuration.news_image_styles.nil? && news.image?
-      .rs-news-image= image_tag news.image.url(:full)
+      .rs-news-image= image_tag news.image.url(:thumb)
     .rs-news-excerpt= news.excerpt
   = paginate @news
