@@ -19,7 +19,7 @@ module Seoable
     elsif RocketCMS.active_record?
       has_attached_file :og_image, styles: {thumb: "800x600>"}
     end
-    validates_attachment_content_type :og_image, content_type: %w(image/gif image/jpeg image/jpg image/png), if: :image?
+    validates_attachment_content_type :og_image, content_type: %w(image/gif image/jpeg image/jpg image/png), if: :og_image?
   end
 
   def page_title
