@@ -33,7 +33,7 @@ module RocketCMS
       private
       def render_error
         if request.xhr? && process_ajax
-          render json: @contact_message.errors, status: 422
+          render json: {errors: @contact_message.errors}, status: 422
         else
           flash.now[:alert] = @contact_message.errors.full_messages.join("\n")
           render action: "new", status: 422
