@@ -70,6 +70,12 @@ ru:
         email: Ваш е-мейл
         phone: Ваш телефон
         content: Ваше сообщение
+      errors:
+        models:
+          contact_message:
+            attributes:
+              email:
+                invalid_email_address: Неверный e-mail
   activerecord:
     <<: *mongoid
 
