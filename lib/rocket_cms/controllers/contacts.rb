@@ -17,10 +17,13 @@ module RocketCMS
         end
         if @contact_message.send(meth)
           after_create
-          redirect_after_done
+          if request.xhr? && process_ajax
+            ajax_success
+          else
+            redirect_after_done
+          end
         else
-          flash.now[:alert] = @contact_message.errors.full_messages.join("\n")
-          render action: "new"
+          render_error
         end
       end
 
@@ -28,7 +31,20 @@ module RocketCMS
       end
 
       private
-      
+      def render_error
+        if request.xhr? && process_ajax
+          render json: @contact_message.errors
+        else
+          flash.now[:alert] = @contact_message.errors.full_messages.join("\n")
+          render action: "new", status: 422
+        end
+      end
+      def process_ajax
+        true
+      end
+      def ajax_success
+        render json: {ok: true}
+      end
       def redirect_after_done
         redirect_to :contacts_sent
       end
