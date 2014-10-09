@@ -1,5 +1,5 @@
 window.ya_init = ->
-  $('.ymap').each ->
+  $('.ymap').not('.done').addClass('done').each ->
     $m = $(this)
     coord = [$m.data('lat'), $m.data('lon')]
     map = new ymaps.Map($m[0],
@@ -15,7 +15,7 @@ window.ya_init = ->
     map.geoObjects.add obj
 
 $(document).on 'page:change', ->
-  return if $('.ymap').length == 0
+  return if $('.ymap').not('.done').length == 0
   if window.ymaps
     ya_init()
   else
