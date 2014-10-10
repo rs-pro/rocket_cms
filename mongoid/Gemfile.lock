@@ -1,14 +1,14 @@
 PATH
   remote: .
   specs:
-    rocket_cms_mongoid (0.5.4)
+    rocket_cms_mongoid (0.5.5)
       glebtv-mongoid-paperclip
       glebtv-mongoid_nested_set
       mongoid (~> 4.0.0)
       mongoid-audit (~> 1.0.0)
       mongoid_slug
       rails (~> 4.1.6)
-      rocket_cms (= 0.5.4)
+      rocket_cms (= 0.5.5)
 
 GEM
   remote: https://rubygems.org/
@@ -176,7 +176,7 @@ GEM
     remotipart (1.2.1)
     responders (1.1.1)
       railties (>= 3.2, < 4.2)
-    rocket_cms (0.5.4)
+    rocket_cms (0.5.5)
       addressable
       coffee-rails
       devise
