@@ -11,7 +11,7 @@ module RsErrors
         rescue_from Mongoid::Errors::InvalidFind, with: :render_404
       end
       if RocketCMS.active_record?
-        rescue_from ActiveRecord::RecordNotFound., with: :render_404
+        rescue_from ActiveRecord::RecordNotFound, with: :render_404
       end
     end
 
