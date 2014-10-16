@@ -73,12 +73,12 @@ ru:
         contact_message:
           attributes:
             email:
-              invalid_email_address: Неверный e-mail
+              invalid_email_address: "^Неверный e-mail"
   activerecord:
     <<: *mongoid
 
   activemodel:
     errors:
       messages:
-        invalid_email_address: Неверный e-mail
+        invalid_email_address: "^Неверный e-mail"
 

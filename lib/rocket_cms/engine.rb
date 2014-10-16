@@ -25,6 +25,20 @@ module RocketCMS
       end
     end
 
+    initializer 'rocket_cms.simple_form_error_msg' do
+      #  https://github.com/rs-pro/russian/blob/master/lib/russian/active_model_ext/custom_error_message.rb
+      module SimpleForm
+        module Components
+          module Errors
+            protected
+            def errors_on_attribute
+              object.errors[attribute_name].map {|m| m.sub(/^\^/, '')}
+            end
+          end
+        end
+      end
+    end
+
     config.after_initialize do
       # trigger autoload so models are registered in Mongoid::Elasticearch
       RocketCMS.configuration.search_models.map(&:constantize)
