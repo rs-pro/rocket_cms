@@ -20,7 +20,6 @@ gem 'rails', '4.1.6'
 gem 'sass', '~> 3.4.4'
 
 #{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}, '~> 0.5.5'
-gem 'rocket_cms'
 
 gem 'sass-rails', github: 'rails/sass-rails', ref: '3a9e47db7d769221157c82229fc1bade55b580f0'
 gem 'compass-rails', '~> 2.0.0'
