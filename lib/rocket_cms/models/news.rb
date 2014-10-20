@@ -25,7 +25,9 @@ module RocketCMS
       end
 
       def report_slug
-        if name.blank?
+        if time.blank?
+          name
+        elsif name.blank?
           time.strftime('%Y-%m-%d')
         else
           time.strftime('%Y-%m-%d') + '-' + name[0..20]
