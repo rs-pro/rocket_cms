@@ -5,7 +5,10 @@ end
 
 require 'rocket_cms/version'
 require 'devise'
+
 require 'simple_form'
+require 'rocket_cms/simple_form_patch'
+
 require 'glebtv-simple_captcha'
 require 'validates_email_format_of'
 require 'smart_excerpt'

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.5.9)
+    rocket_cms (0.5.10)
       addressable
       coffee-rails
       devise
@@ -76,7 +76,7 @@ GEM
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
     geocoder (1.2.5)
-    glebtv-ckeditor (4.4.3.3)
+    glebtv-ckeditor (4.4.3.4)
       mime-types
       orm_adapter (~> 0.5.0)
       rails (~> 4.0)
@@ -97,7 +97,7 @@ GEM
       activesupport (>= 3.0.0)
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
-    mime-types (2.4.2)
+    mime-types (2.4.3)
     mini_portile (0.6.0)
     minitest (5.4.2)
     multi_json (1.10.1)
