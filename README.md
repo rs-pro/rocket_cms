@@ -1,6 +1,6 @@
 # RocketCMS
 
-rails_admin + mongoid + elasticsearch CMS
+rails_admin + mongoid/activerecord + elasticsearch CMS
 
 Very opinionated and tuned for our needs.
 
@@ -18,6 +18,8 @@ Add this line to your application's Gemfile:
 or:
 
     gem 'rocket_cms_activerecord'
+
+*Only PostgreSQL is tested or supported for AR. Others will probably work, but untested.*
 
 And then execute:
 
