@@ -32,7 +32,7 @@ module RsPages
       end
     end
     if !page.nil? && do_redirect
-      redirect_to path
+      redirect_to path, status: :moved_permanently
     end
 
     page

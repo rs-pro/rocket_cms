@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.5.10)
+    rocket_cms (0.5.11)
       addressable
       coffee-rails
       devise
@@ -55,7 +55,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
-    bcrypt (3.1.7)
+    bcrypt (3.1.9)
     builder (3.2.2)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -80,7 +80,7 @@ GEM
       mime-types
       orm_adapter (~> 0.5.0)
       rails (~> 4.0)
-    glebtv-simple_captcha (0.6.5)
+    glebtv-simple_captcha (0.6.7)
     haml (4.0.5)
       tilt
     hike (1.2.3)
