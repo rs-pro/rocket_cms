@@ -196,7 +196,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Ckeditor::Engine => '/ckeditor'
 
-  get 'contacts' => 'contacts#index', as: :contacts
+  get 'contacts' => 'contacts#new', as: :contacts
   post 'contacts' => 'contacts#create', as: :create_contacts
   get 'contacts/sent' => 'contacts#sent', as: :contacts_sent
 
