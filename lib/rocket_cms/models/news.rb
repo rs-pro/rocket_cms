@@ -6,6 +6,7 @@ module RocketCMS
       include Seoable
       include Enableable
       include RocketCMS.orm_specific('News')
+      include ManualSlug
 
       if RocketCMS.configuration.search_enabled
         include RocketCMS::ElasticSearch
@@ -21,6 +22,8 @@ module RocketCMS
           paginates_per RocketCMS.configuration.news_per_page
         end
         smart_excerpt :excerpt, :content, RocketCMS.configuration.news_excerpt
+        manual_slug :report_slug
+
         RocketCMS.apply_patches self
       end
 

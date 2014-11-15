@@ -1,4 +1,4 @@
-module ManualSlug
+module ManualSlug::Mongoid
   extend ActiveSupport::Concern
   include Mongoid::Slug
 
@@ -35,4 +35,5 @@ module ManualSlug
   end
 
 end
+
 

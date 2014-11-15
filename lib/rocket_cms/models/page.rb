@@ -5,6 +5,7 @@ module RocketCMS
       include RocketCMS::Model
       include Enableable
       include Seoable
+      include ManualSlug
 
       include RocketCMS.orm_specific('Page')
 
@@ -19,6 +20,7 @@ module RocketCMS
         end
         validates_uniqueness_of :fullpath
         validates_presence_of :name
+        manual_slug :name
       end
 
       def get_fullpath
