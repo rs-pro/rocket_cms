@@ -79,3 +79,6 @@ module RocketCMS
     autoload :Search, 'rocket_cms/controllers/search'
   end
 end
+
+require 'manual_slug'
+
