@@ -79,7 +79,7 @@ create_file '.gitignore' do <<-TEXT
 /public/ckeditor_assets
 /public/assets
 #{if mongoid then '/config/mongoid.yml' else '/config/database.yml' end}
-/config/sectets.yml
+/config/secrets.yml
 TEXT
 end
 
