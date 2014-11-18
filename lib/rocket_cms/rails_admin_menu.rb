@@ -11,10 +11,18 @@ module RailsAdmin
             obj = bindings[:object]
             ret = []
             menus = Rails.cache.fetch 'menus', expires_in: 10.minutes do
-              ::Menu.all.map { |m| {id: m.id.to_s, name: m.name } }
+              if RocketCMS.mongoid?
+                ::Menu.all.map { |m| {id: m.id.to_s, name: m.name } }
+              else
+                ::Menu.all.map { |m| {id: m.id, name: m.name } }
+              end
             end
             menus.each do |m|
-              on = obj.menu_ids.include?(BSON::ObjectId.from_string(m[:id]))
+              if RocketCMS.mongoid?
+                on = obj.menu_ids.include?(BSON::ObjectId.from_string(m[:id]))
+              else
+                on = obj.menu_ids.include?(m[:id].to_i)
+              end
               ret << bindings[:view].link_to(
                 m[:name],
                 bindings[:view].toggle_menu_path(model_name: @abstract_model, id: obj.id, menu: m[:id], on: !on),
