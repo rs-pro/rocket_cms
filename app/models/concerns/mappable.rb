@@ -23,14 +23,21 @@ module Mappable
       end
     end
     
-    
-    after_validation do
-      if geo_address.blank?
+    geocoded_by :geo_address
+    after_validation :do_geocode
+  end
+
+  def do_geocode
+    if geo_address.blank?
+      if RocketCMS.mongoid?
         self.coordinates = nil
       else
-        if new_record? || address_changed? || coordinates.nil? || map_address_changed?
-          geocode
-        end
+        self.latitude = nil
+        self.longitude = nil
+      end
+    else
+      if (lat.nil? || lon.nil?) && (new_record? || address_changed? || coordinates.nil? || map_address_changed?)
+        geocode
       end
     end
   end
@@ -61,8 +68,6 @@ module Mappable
   def has_map?
     (!lat.blank? && !lon.blank?) || !coordinates.nil?
   end
-
-  geocoded_by :geo_address
   
   def to_map
     {

@@ -24,6 +24,8 @@ module RocketCMS
       t.string :map_hint
       t.float :latitude
       t.float :longitude
+      t.float :lat
+      t.float :lon
     end
   end
 end
