@@ -17,5 +17,13 @@ module RocketCMS
         #t.column :name_translations, 'hstore'
       #end
     end
+
+    def map_fields(t)
+      t.string :address
+      t.string :map_address
+      t.string :map_hint
+      t.float :latitude
+      t.float :longitude
+    end
   end
 end

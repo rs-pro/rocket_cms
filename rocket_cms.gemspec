@@ -20,10 +20,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
   
-  spec.add_dependency 'rails', "~> 4.1.6"
+  spec.add_dependency 'rails', "~> 4.1.8"
 
   spec.add_dependency 'jquery-rails'
-  spec.add_dependency 'simple_form'
+  spec.add_dependency 'simple_form', '~> 3.0.2'
   spec.add_dependency 'glebtv-simple_captcha'
   spec.add_dependency 'coffee-rails'
   spec.add_dependency 'devise'
@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'
   spec.add_dependency 'glebtv-ckeditor'
-  spec.add_dependency 'rails_admin_settings', '~> 0.9.0.pre.4'
+  spec.add_dependency 'rails_admin_settings', '~> 0.9.0'
   spec.add_dependency 'geocoder'
   spec.add_dependency 'simple-navigation'
   spec.add_dependency 'sitemap_generator'

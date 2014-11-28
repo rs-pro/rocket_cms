@@ -2,9 +2,9 @@ module Mappable
   extend ActiveSupport::Concern
   
   included do
-    include Geocoder::Model::Mongoid
     
     if RocketCMS.mongoid?
+      include Geocoder::Model::Mongoid
       field :coordinates, type: Array
       field :address, type: String
       
@@ -13,9 +13,16 @@ module Mappable
       
       field :lat, type: Float
       field :lon, type: Float
+    else
+      def coordinates
+        if latitude.nil? || longitude.nil?
+          nil
+        else
+          [longitude, latitude]
+        end
+      end
     end
     
-    geocoded_by :geo_address
     
     after_validation do
       if geo_address.blank?
@@ -54,6 +61,8 @@ module Mappable
   def has_map?
     (!lat.blank? && !lon.blank?) || !coordinates.nil?
   end
+
+  geocoded_by :geo_address
   
   def to_map
     {
