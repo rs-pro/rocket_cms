@@ -6,7 +6,7 @@ module RocketCMS
       t.string :name, null: false
       t.string :h1
       t.string :title
-      t.string :keywords
+      t.text :keywords
       t.text :description
       t.string :robots
       t.string :og_title
@@ -19,9 +19,9 @@ module RocketCMS
     end
 
     def map_fields(t)
-      t.string :address
-      t.string :map_address
-      t.string :map_hint
+      t.text :address
+      t.text :map_address
+      t.text :map_hint
       t.float :latitude
       t.float :longitude
       t.float :lat

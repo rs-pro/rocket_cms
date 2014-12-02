@@ -19,7 +19,7 @@ class RocketCmsCreatePages < ActiveRecord::Migration
 
       t.string :regexp
       t.string :redirect
-      t.string :content
+      t.text :content
       t.string :fullpath, null: false
       RocketCMS::Migration.seo_fields(t)
       t.timestamps
