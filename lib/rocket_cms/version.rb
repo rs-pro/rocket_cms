@@ -1,3 +1,3 @@
 module RocketCMS
-  VERSION = "0.5.22"
+  VERSION = "0.5.23"
 end

@@ -14,16 +14,16 @@ module RocketCms
 
     def deploy_to
       if kind == 'data'
-        '/data/#{fetch :application}/app'
+        "/data/#{app_name.downcase}/app"
       else
-        '/home/#{fetch :user}/#{fetch :application}'
+        "/home/#{app_name.downcase}/#{app_name.downcase}"
       end
     end
     def tmp_path
       if kind == 'data'
-        '/data/#{fetch :application}/tmp_dump'
+        "/data/#{app_name.downcase}/tmp_dump"
       else
-        '/home/#{fetch :user}/tmp_dump'
+        "/home/#{app_name.downcase}/tmp_dump"
       end
     end
 
