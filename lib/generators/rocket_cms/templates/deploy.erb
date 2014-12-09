@@ -5,11 +5,11 @@ set :repo_url, 'git@github.com:rs-pro/<%= app_name.downcase %>.git'
 
 set :branch, ENV["REVISION"] || "master"
 
-set :deploy_to, "<%= deploy_to %>
+set :deploy_to, "<%= deploy_to %>"
 
 # require 'hipchat/capistrano'
 # set :hipchat_token, ""
-# set :hipchat_room_name, "#{app_name}"
+# set :hipchat_room_name, "<%= app_name %>"
 # set :hipchat_announce, false
 
 set :rvm_type, :user
