@@ -63,3 +63,4 @@ after_fork do |server, worker|
   child_pid_file = server.config[:pid].sub(".pid", ".#{worker.nr}.pid"
   system("echo #{Process.pid} > #{child_pid_file}")
 end
+
