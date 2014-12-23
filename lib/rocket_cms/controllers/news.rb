@@ -20,7 +20,7 @@ module RocketCMS
         ::News
       end
       def page_title
-        if @news.class.name == model.class.name
+        if @news.class.name == model.name
           @news.page_title
         else
           super
