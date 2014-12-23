@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.6.2)
+    rocket_cms (0.6.3)
       addressable
       coffee-rails
       devise
@@ -10,7 +10,7 @@ PATH
       glebtv-simple_captcha
       jquery-rails
       kaminari
-      rails (~> 4.2.0)
+      rails (>= 4.1.0, < 5.0)
       rails_admin
       rails_admin_nested_set
       rails_admin_settings (~> 0.9.0)
