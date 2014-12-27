@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.6.3)
+    rocket_cms (0.6.4)
       addressable
       coffee-rails
       devise
@@ -95,7 +95,7 @@ GEM
     haml (4.0.6)
       tilt
     hike (1.2.3)
-    htmlentities (4.3.2)
+    htmlentities (4.3.3)
     i18n (0.7.0)
     jquery-rails (4.0.2)
       rails-dom-testing (~> 1.0)

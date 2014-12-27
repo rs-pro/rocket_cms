@@ -1,23 +1,24 @@
 module RocketCMS
   class << self
-    def map_config
+    def map_config(is_active = true)
       Proc.new {
-        active true
+        active is_active
         label I18n.t('rs.map')
         field :address, :string
         field :map_address, :string
         field :map_hint, :string
         field :coordinates, :string do
           read_only true
+          formatted_value{ bindings[:object].coordinates.to_json }
         end
         field :lat
         field :lon
       }
     end
     
-    def seo_config
+    def seo_config(is_active = false)
       Proc.new {
-        active false
+        active is_active
         label "SEO"
         field :h1, :string
         field :title, :string

@@ -13,18 +13,20 @@ module Mappable
       
       field :lat, type: Float
       field :lon, type: Float
-    else
-      def coordinates
-        if latitude.nil? || longitude.nil?
-          nil
-        else
-          [longitude, latitude]
-        end
-      end
     end
     
     geocoded_by :geo_address
     after_validation :do_geocode
+  end
+
+  if RocketCMS.active_record?
+    def coordinates
+      if latitude.nil? || longitude.nil?
+        nil
+      else
+        [longitude, latitude]
+      end
+    end
   end
 
   def do_geocode
