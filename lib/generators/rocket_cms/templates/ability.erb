@@ -5,7 +5,8 @@ class Ability
     unless user.nil?
       can :read, :all
       can :manage, :all
-      cannot :manage, Menu
+      cannot :destroy, Menu
+      cannot :update, Menu
       admin_ui
     end
   end
