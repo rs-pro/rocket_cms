@@ -90,7 +90,7 @@ module RocketCMS
     def contact_message_config
       Proc.new {
         navigation_label I18n.t('rs.settings')
-        field :c_at do
+        field :created_at do
           read_only true
         end
         field :name
