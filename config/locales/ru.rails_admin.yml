@@ -18,7 +18,7 @@ ru:
       remove: "Убрfnm"
       add_new: "Добавить новый"
       chosen: "Выбрать %{name}"
-      chose_all: "Выборать все"
+      chose_all: "Выбрать все"
       clear_all: "Убрать выделение"
       up: "Вверх"
       down: "Вниз"
