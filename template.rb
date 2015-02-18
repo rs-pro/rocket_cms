@@ -237,6 +237,8 @@ TEXT
 end
 
 create_file 'config/initializers/rack.rb' do <<-TEXT
+Rack::Utils.multipart_part_limit = 0
+
 if Rails.env.development?
   module Rack
     class CommonLogger
