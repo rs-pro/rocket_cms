@@ -5,13 +5,13 @@
     - if obj.content.blank?
       - unless @seo_page.nil?
         = raw @seo_page.page_content
-        = render 'shared/admin_link', obj: @seo_page
     - else
       = raw obj.content
-    - if !obj.nil? && (@seo_page.nil? || obj.id != @seo_page.id || obj.class.name != @seo_page.class.name)
+    - if !obj.nil?
       = render 'shared/admin_link', obj: obj
+    - if !@seo_page.nil? && (@seo_page.id != obj.id || @seo_page.class.name != obj.class.name)
+      = render 'shared/admin_link', obj: @seo_page
 
   - content_for :meta do
     = render 'shared/meta', obj: obj
     = render 'shared/og', title: obj.get_og_title, image: obj.og_image
-
