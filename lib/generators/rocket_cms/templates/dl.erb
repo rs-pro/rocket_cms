@@ -6,7 +6,7 @@ class Dl < Cloner::Base
       File.expand_path("../../../config/environment", __FILE__)
     end
     def ssh_host
-      '<%= domain %>.ru'
+      '<%= domain %>'
     end
     def ssh_user
       '<%= app_name.downcase %>'
