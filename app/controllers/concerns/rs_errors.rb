@@ -46,7 +46,8 @@ module RsErrors
     capture_exception(exception) if defined?(Raven)
     begin
       if rails_admin_controller?
-        return render text: 'Внутренняя ошибка'
+        render text: 'Внутренняя ошибка', status: 500
+        return
       end
     rescue
     end
