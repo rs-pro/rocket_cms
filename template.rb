@@ -262,12 +262,13 @@ create_file 'app/assets/stylesheets/rails_admin/custom/theming.css.sass' do <<-T
 .input-small
   width: 150px
 
-input[type=text]
-  width: 380px !important
-input.ra-filtering-select-input[type=text]
-  width: 180px !important
-input.hasDatepicker
-  width: 180px !important
+.container-fluid
+  input[type=text]
+    width: 380px !important
+  input.ra-filtering-select-input[type=text]
+    width: 180px !important
+  input.hasDatepicker
+    width: 180px !important
 
 .sidebar-nav
   a
@@ -305,17 +306,19 @@ input.hasDatepicker
   right: 0
   left: auto
 
-.modal
+.model-dialog
   width: 800px !important
-
-.bank_row .logo_field, #edit_bank img
-  background: #ccc !important
-
-.ui-menu-item
-  border: 1px solid transparent
 
 .content > .alert
   margin-top: 20px
+
+.badge-important
+  background: red
+.badge-success
+  background: green
+
+.sidebar-nav i
+  margin-right: 5px
 TEXT
 end
 
