@@ -15,7 +15,11 @@ module RailsAdmin
         register_instance_option :controller do
           Proc.new do
             if @object.class.name == 'Page'
-              redirect_to main_app.page_url(@object)
+              if @object.fullpath.blank?
+                redirect_to main_app.page_url(@object)
+              else
+                redirect_to @object.fullpath
+              end
             elsif @object.class.name == 'News'
               redirect_to main_app.news_url(@object)
             elsif @object.class.name == 'Obj'
