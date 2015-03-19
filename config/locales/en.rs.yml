@@ -16,3 +16,5 @@ en:
       disabled: 'deleted from menu "%{menu}"'
       error: "Error: %{err}"
       no_id: "No ID"
+    access_denied: "Access denied"
+    internal_error: "Internal error"

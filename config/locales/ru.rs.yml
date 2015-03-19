@@ -16,3 +16,5 @@ ru:
       disabled: 'удалено из меню "%{menu}"'
       error: "Ошибка: %{err}"
       no_id: "Не указан ID"
+    access_denied: "Доступ запрещен"
+    internal_error: "Внутренняя ошибка"
