@@ -18,3 +18,4 @@ en:
       no_id: "No ID"
     access_denied: "Access denied"
     internal_error: "Internal error"
+    form_expired: "Token expired"

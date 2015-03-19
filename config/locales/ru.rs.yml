@@ -18,3 +18,4 @@ ru:
       no_id: "Не указан ID"
     access_denied: "Доступ запрещен"
     internal_error: "Внутренняя ошибка"
+    form_expired: "Истекло время на заполение формы"

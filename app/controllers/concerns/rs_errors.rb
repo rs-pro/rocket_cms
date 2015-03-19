@@ -27,6 +27,10 @@ module RsErrors
         end
       end
     end
+
+    rescue_from ActionController::InvalidAuthenticityToken do |exception|
+      redirect_to '/', alert: t('form_expired')
+    end
   end
 
   protected
