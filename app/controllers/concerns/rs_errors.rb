@@ -23,13 +23,13 @@ module RsErrors
           #redirect_to scope.new_user_session_path, alert: "Необходимо авторизоваться"
           authenticate_user!
         else
-          redirect_to '/', alert: t('access_denied')
+          redirect_to '/', alert: t('rs.errors.access_denied')
         end
       end
     end
 
     rescue_from ActionController::InvalidAuthenticityToken do |exception|
-      redirect_to '/', alert: t('form_expired')
+      redirect_to '/', alert: t('rs.errors.form_expired')
     end
   end
 
@@ -51,7 +51,7 @@ module RsErrors
     capture_exception(exception) if defined?(Raven)
     begin
       if rails_admin_controller?
-        render text: t('internal_error'), status: 500
+        render text: t('rs.errors.internal_error'), status: 500
         return
       end
     rescue
