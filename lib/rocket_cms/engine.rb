@@ -4,15 +4,6 @@ module RocketCMS
       require File.expand_path('../tasks', __FILE__)
     end
 
-    initializer "rocket_cms.email_defaults" do
-      # Write default email settings to DB so they can be changed.
-      if Settings.table_exists?
-        Settings.default_email_from(default: 'noreply@rscx.ru')
-        Settings.form_email(default: 'glebtv@ya.ru')
-        Settings.email_topic(default: 'с сайта')
-      end
-    end
-
     initializer 'rocket_cms.paperclip' do
       require 'paperclip/style'
       module ::Paperclip
@@ -28,6 +19,13 @@ module RocketCMS
     config.after_initialize do
       # trigger autoload so models are registered in Mongoid::Elasticearch
       RocketCMS.configuration.search_models.map(&:constantize)
+
+      # Write default email settings to DB so they can be changed.
+      if Settings.table_exists?
+        Settings.default_email_from(default: 'noreply@rscx.ru')
+        Settings.form_email(default: 'glebtv@ya.ru')
+        Settings.email_topic(default: 'с сайта')
+      end
     end
   end
 end
