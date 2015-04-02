@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.6.13)
+    rocket_cms (0.6.14)
       addressable
       coffee-rails
       devise
@@ -13,7 +13,7 @@ PATH
       rails (>= 4.1.0, < 5.0)
       rails_admin
       rails_admin_nested_set
-      rails_admin_settings (~> 0.9.0)
+      rails_admin_settings
       rails_admin_toggleable
       simple-navigation
       simple_form
@@ -162,7 +162,7 @@ GEM
       sass-rails (>= 4.0, < 6)
     rails_admin_nested_set (0.4.1)
       rails_admin (~> 0.6.6)
-    rails_admin_settings (0.9.1)
+    rails_admin_settings (1.0.0)
     rails_admin_toggleable (0.5.0)
       rails_admin (~> 0.6.6)
     railties (4.2.1)
@@ -176,13 +176,13 @@ GEM
       railties (>= 4.2.0, < 5)
     safe_yaml (1.0.4)
     sass (3.4.13)
-    sass-rails (5.0.2)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
-    simple-navigation (3.14.0)
+    simple-navigation (4.0.1)
       activesupport (>= 2.3.2)
     simple_form (3.1.0)
       actionpack (~> 4.0)
