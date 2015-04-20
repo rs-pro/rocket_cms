@@ -50,7 +50,7 @@ module RsErrors
     Rails.logger.error exception.backtrace.join("\n")
     capture_exception(exception) if defined?(Raven)
     begin
-      if rails_admin_controller?
+      if rails_admin?
         render text: t('rs.errors.internal_error'), status: 500
         return
       end
