@@ -59,6 +59,6 @@ module RsErrors
   end
 
   def rails_admin?
-    self.is_a?(RailsAdmin::ApplicationController)
+    self.is_a?(RailsAdmin::ApplicationController) || self.is_a?(RailsAdmin::MainController)
   end
 end

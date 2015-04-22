@@ -7,6 +7,7 @@ module RsPages
   private
 
   def find_page
+    return if rails_admin?
     @seo_page = find_seo_page request.path
     if !@seo_page.nil? && !@seo_page.redirect.blank?
       redirect_to @seo_page.redirect, status: :moved_permanently
@@ -38,4 +39,7 @@ module RsPages
     page
   end
 
+  def rails_admin?
+    self.is_a?(RailsAdmin::ApplicationController) || self.is_a?(RailsAdmin::MainController)
+  end
 end
