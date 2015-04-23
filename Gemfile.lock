@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.6.16)
+    rocket_cms (0.6.17)
       addressable
       coffee-rails
       devise
@@ -190,7 +190,7 @@ GEM
     smart_excerpt (0.1.5)
       activesupport
       htmlentities
-    sprockets (3.0.1)
+    sprockets (3.0.2)
       rack (~> 1.0)
     sprockets-rails (2.2.4)
       actionpack (>= 3.0)
