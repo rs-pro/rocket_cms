@@ -30,12 +30,12 @@ module RsMenu
     Proc.new do |primary|
       SimpleNavigation.config.autogenerate_item_ids = false
       begin
-        nav_extra_data_before(primary)
+        nav_extra_data_before(type, primary)
         items = ::Menu.find(type.to_s).pages.enabled.sorted.to_a
         items.select { |i| i.parent_id.nil? && !i.name.blank? && i.enabled }.each do |item|
           render_with_subs(items, primary, item)
         end
-        nav_extra_data_after(primary)
+        nav_extra_data_after(type, primary)
       rescue Exception => exception
         Rails.logger.error exception.message
         Rails.logger.error exception.backtrace.join("\n")
@@ -45,10 +45,10 @@ module RsMenu
     end
   end
 
-  def nav_extra_data_before(primary)
+  def nav_extra_data_before(type, primary)
     # override for additional config or items
   end
-  def nav_extra_data_after(primary)
+  def nav_extra_data_after(type, primary)
     # override for additional config or items
   end
 end
