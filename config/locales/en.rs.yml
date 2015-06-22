@@ -19,6 +19,6 @@ en:
     errors:
       title: "Error %{code}"
       form_expired: "Token expired"
-      internal_error: "Internal error"
+      internal_error: "Internal error: %{klass} %{message}"
       access_denied: "Access denied"
       not_found: 'The requested page was not found on this server'
