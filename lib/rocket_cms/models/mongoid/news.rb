@@ -11,7 +11,6 @@ module RocketCMS
           index({enabled: 1, time: 1})
           unless RocketCMS.config.news_image_styles.nil?
             has_mongoid_attached_file :image, styles: RocketCMS.config.news_image_styles
-            validates_attachment_content_type :image, content_type: %w(image/gif image/jpeg image/jpg image/png), if: :image?
           end
           field :name, type: String, localize: RocketCMS.config.localize
           field :excerpt, type: String, localize: RocketCMS.config.localize

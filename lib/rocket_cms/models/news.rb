@@ -13,6 +13,10 @@ module RocketCMS
       end
 
       included do
+        unless RocketCMS.config.news_image_styles.nil?
+          validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/, if: :image?
+        end
+        
         validates_presence_of :name, :content
         before_validation do
           self.time = Time.now if self.time.blank?
