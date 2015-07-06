@@ -58,6 +58,12 @@ for ActiveRecord:
 
 generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
 
+### Localization
+
+All models included in the gem support localization via either hstore_translate or built-in Mongoid localize: true option.
+
+You can get a nice admin UI for editing locales by adding [rails_admin_hstore_translate](https://github.com/glebtv/rails_admin_hstore_translate) or [rails_admin_mongoid_localize_field](https://github.com/sudosu/rails_admin_mongoid_localize_field)
+
 ### Documentation
 
 It's basically Mongoid + Rails Admin + some of our common models and controllers, capistrano config, etc.
