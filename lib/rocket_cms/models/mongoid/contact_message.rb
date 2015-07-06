@@ -8,7 +8,7 @@ module RocketCMS
           field :email, type: String
           field :phone, type: String
           field :content, type: String
-          RocketCMS.configuration.contacts_fields.each_pair do |fn, ft|
+          RocketCMS.config.contacts_fields.each_pair do |fn, ft|
             next if ft.nil?
             field fn, type: ft
           end

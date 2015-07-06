@@ -9,7 +9,7 @@ module RocketCMS
 
       include RocketCMS.orm_specific('Page')
 
-      if RocketCMS.configuration.search_enabled
+      if RocketCMS.config.search_enabled
         include RocketCMS::ElasticSearch
       end
         

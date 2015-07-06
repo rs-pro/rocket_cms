@@ -64,7 +64,7 @@ module RsErrors
   end
 
   def render_error(code = 500)
-    render template: "errors/error_#{code}", formats: [:html], handlers: [:haml, :slim], layout: RocketCMS.configuration.error_layout, status: code
+    render template: "errors/error_#{code}", formats: [:html], handlers: [:haml, :slim], layout: RocketCMS.config.error_layout, status: code
   end
 
   def rails_admin?

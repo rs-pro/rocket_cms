@@ -51,7 +51,11 @@ RailsAdmin.config do |config|
     end
     
     toggle
-    toggle_menu
+    toggle_menu do
+      visible do
+        ['Page'].include? bindings[:abstract_model].model_name
+      end
+    end
   end
 
   config.main_app_name = ['<%= Rails.application.class.name.split('::')[0] %>', 'Админка']

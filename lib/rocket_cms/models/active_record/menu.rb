@@ -6,6 +6,9 @@ module RocketCMS
         included do
           has_paper_trail
           validates_lengths_from_database
+          if RocketCMS.config.localize
+            translates :name
+          end
         end
       end
     end

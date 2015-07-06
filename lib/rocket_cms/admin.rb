@@ -16,19 +16,27 @@ module RocketCMS
       }
     end
     
-    def seo_config(is_active = false)
+    def seo_config(is_active = true)
       Proc.new {
-        active is_active
-        label "SEO"
+        if respond_to?(:active)
+          active is_active
+          label "SEO"
+        end
+        RocketCMS.seo_fields(self)
+      }
+    end
+
+    def seo_fields(s)
+      s.instance_eval do
         field :h1, :string
         field :title, :string
-        field :keywords, :string
-        field :description, :string
+        field :keywords, :text
+        field :description, :text
         field :robots, :string
 
         field :og_title, :string
-        field :og_image
-      }
+        field :og_image, :paperclip
+      end
     end
     
     def page_config
@@ -68,11 +76,20 @@ module RocketCMS
               read_only true
             end
           end
-          group :seo, &RocketCMS.seo_config
+          if Seo.table_exists?
+            group :seo do
+              active true
+              field :seo do
+                active true
+              end
+            end
+          else
+            group :seo, &RocketCMS.seo_config(true)
+          end
         end
         RocketCMS.only_patches self, [:show, :export]
         nested_set({
-          max_depth: RocketCMS.configuration.menu_max_depth
+          max_depth: RocketCMS.config.menu_max_depth
         })
       }
     end
@@ -110,7 +127,7 @@ module RocketCMS
         field :enabled, :toggle
         field :time
         field :name
-        unless RocketCMS.configuration.news_image_styles.nil?
+        unless RocketCMS.config.news_image_styles.nil?
           field :image
         end
         field :excerpt

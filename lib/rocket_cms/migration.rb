@@ -3,7 +3,7 @@ module RocketCMS
     extend self
 
     def seo_fields(t)
-      if RocketCMS.localize
+      if RocketCMS.config.localize
         t.column :h1_translations, 'hstore'
         t.column :title_translations, 'hstore'
         t.column :keywords_translations, 'hstore'

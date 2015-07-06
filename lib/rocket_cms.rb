@@ -52,12 +52,14 @@ module RocketCMS
   autoload :Migration, 'rocket_cms/migration'
 
   module Models
+    autoload :Seo,  'rocket_cms/models/seo'
     autoload :Menu, 'rocket_cms/models/menu'
     autoload :Page, 'rocket_cms/models/page'
     autoload :News, 'rocket_cms/models/news'
     autoload :ContactMessage, 'rocket_cms/models/contact_message'
 
     module Mongoid
+      autoload :Seo,  'rocket_cms/models/mongoid/seo'
       autoload :Menu, 'rocket_cms/models/mongoid/menu'
       autoload :Page, 'rocket_cms/models/mongoid/page'
       autoload :News, 'rocket_cms/models/mongoid/news'
@@ -65,6 +67,7 @@ module RocketCMS
     end
 
     module ActiveRecord
+      autoload :Seo,  'rocket_cms/models/active_record/seo'
       autoload :Menu, 'rocket_cms/models/active_record/menu'
       autoload :Page, 'rocket_cms/models/active_record/page'
       autoload :News, 'rocket_cms/models/active_record/news'

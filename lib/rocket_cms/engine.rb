@@ -18,7 +18,7 @@ module RocketCMS
 
     config.after_initialize do
       # trigger autoload so models are registered in Mongoid::Elasticearch
-      RocketCMS.configuration.search_models.map(&:constantize)
+      RocketCMS.config.search_models.map(&:constantize)
 
       # Write default email settings to DB so they can be changed.
       if Settings.table_exists?

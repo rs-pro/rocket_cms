@@ -2,7 +2,7 @@
   %h1.rs-news-title= @news.name
   .rs-news-date= l(@news.time.to_date)
   .rs-news-text= @news.excerpt
-  - if !RocketCMS.configuration.news_image_styles.nil? && @news.image?
+  - if !RocketCMS.config.news_image_styles.nil? && @news.image?
     .rs-news-image= image_tag @news.image.url(:main)
   .rs-news-content
     = render 'shared/obj', obj: @news

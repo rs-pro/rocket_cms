@@ -8,7 +8,7 @@ module RocketCMS
       included do
         apply_simple_captcha
         validates_email_format_of :email, unless: 'email.blank?'
-        if RocketCMS.configuration.contacts_message_required
+        if RocketCMS.config.contacts_message_required
           validates_presence_of :content
         end
         validate do

@@ -21,7 +21,7 @@ module RocketCMS
               }
             }},
             page: params[:page],
-            per_page: RocketCMS.configuration.search_per_page,
+            per_page: RocketCMS.config.search_per_page,
           )
         end
       end

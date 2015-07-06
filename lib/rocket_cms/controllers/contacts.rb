@@ -10,7 +10,7 @@ module RocketCMS
       def create
         @contact_message = model.new(message_params)
         after_initialize
-        if RocketCMS.configuration.contacts_captcha
+        if RocketCMS.config.contacts_captcha
           meth = :save_with_captcha
         else
           meth = :save
@@ -58,7 +58,7 @@ module RocketCMS
         ContactMessage
       end
       def message_params
-        params.require(:contact_message).permit(RocketCMS.configuration.contacts_fields.keys + [:name, :email, :phone, :content, :captcha, :captcha_key])
+        params.require(:contact_message).permit(RocketCMS.config.contacts_fields.keys + [:name, :email, :phone, :content, :captcha, :captcha_key])
       end
     end
   end

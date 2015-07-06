@@ -6,7 +6,7 @@ module RocketCMS
       def index
         @news = model.enabled.after_now.by_date
 
-        unless RocketCMS.configuration.news_per_page.nil?
+        unless RocketCMS.config.news_per_page.nil?
           @news = @news.page(params[:page])
         end
       end

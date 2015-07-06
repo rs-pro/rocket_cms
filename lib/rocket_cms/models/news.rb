@@ -8,7 +8,7 @@ module RocketCMS
       include RocketCMS.orm_specific('News')
       include ManualSlug
 
-      if RocketCMS.configuration.search_enabled
+      if RocketCMS.config.search_enabled
         include RocketCMS::ElasticSearch
       end
 
@@ -18,10 +18,10 @@ module RocketCMS
           self.time = Time.now if self.time.blank?
         end
         scope :recent, ->(count = 5) { enabled.after_now.by_date.limit(count) }
-        unless RocketCMS.configuration.news_per_page.nil?
-          paginates_per RocketCMS.configuration.news_per_page
+        unless RocketCMS.config.news_per_page.nil?
+          paginates_per RocketCMS.config.news_per_page
         end
-        smart_excerpt :excerpt, :content, RocketCMS.configuration.news_excerpt
+        smart_excerpt :excerpt, :content, RocketCMS.config.news_excerpt
         manual_slug :report_slug
 
         RocketCMS.apply_patches self
