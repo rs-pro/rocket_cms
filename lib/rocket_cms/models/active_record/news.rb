@@ -15,6 +15,10 @@ module RocketCMS
 
           scope :after_now, -> { where("time < ?", Time.now) }
           scope :by_date, -> { order(time: :desc) }
+
+          if RocketCMS.config.localize
+            translates :name, :excerpt, :content
+          end
         end
       end
     end

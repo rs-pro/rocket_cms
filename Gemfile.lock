@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.8.0.pre.1)
+    rocket_cms (0.8.0.pre.2)
       addressable
       coffee-rails
       devise
@@ -216,3 +216,6 @@ DEPENDENCIES
   bundler
   rake
   rocket_cms!
+
+BUNDLED WITH
+   1.10.5
