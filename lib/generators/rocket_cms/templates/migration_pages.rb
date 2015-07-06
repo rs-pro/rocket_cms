@@ -20,8 +20,8 @@ class RocketCmsCreatePages < ActiveRecord::Migration
       t.integer :depth 
 
       if RocketCMS.config.localize
-        t.column :name_translations, 'hstore'
-        t.column :content_translations, 'hstore'
+        t.column :name_translations, 'hstore', default: {}
+        t.column :content_translations, 'hstore', default: {}
       else
         t.string :name, null: false
         t.text :content

@@ -5,9 +5,9 @@ class RocketCmsCreateNews < ActiveRecord::Migration
       t.timestamp :time, null: false
 
       if RocketCMS.config.localize
-        t.column :name_translations, 'hstore'
-        t.column :excerpt_translations, 'hstore'
-        t.column :content_translations, 'hstore'
+        t.column :name_translations, 'hstore', default: {}
+        t.column :excerpt_translations, 'hstore', default: {}
+        t.column :content_translations, 'hstore', default: {}
       else
         t.string :name, null: false
         t.text :excerpt
