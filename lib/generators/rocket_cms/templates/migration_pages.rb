@@ -13,15 +13,13 @@ class RocketCmsCreatePages < ActiveRecord::Migration
       t.integer :lft
       t.integer :rgt
       t.integer :depth 
-
+      t.string :name, null: false
       t.string :slug, null: false
       t.attachment :image
-
       t.string :regexp
       t.string :redirect
       t.text :content
       t.string :fullpath, null: false
-      RocketCMS::Migration.seo_fields(t)
       t.timestamps
     end
     add_index :pages, :slug, unique: true

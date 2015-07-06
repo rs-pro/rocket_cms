@@ -6,11 +6,8 @@ class RocketCmsCreateNews < ActiveRecord::Migration
       t.string :name, null: false
       t.text :excerpt
       t.text :content
-
       t.string :slug, null: false
       t.attachment :image
-      RocketCMS::Migration.seo_fields(t)
-
       t.timestamps
     end
 
