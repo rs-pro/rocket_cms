@@ -1,13 +1,10 @@
 # RocketCMS
 
-rails_admin + mongoid/activerecord + elasticsearch CMS
+Rails + RailsAdmin + Mongoid/PostgreSQL + Elasticsearch CMS
 
 Very opinionated and tuned for our needs.
 
-Sorry, no documentation or examples are availiable yet. Stay tuned
-
-**Before 1.0 API and class names should be considered unstable and can change at
-any time!**
+**Before 1.0 API and class names should be considered unstable and can change at any time!**
 
 ## Installation
 
