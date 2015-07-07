@@ -301,10 +301,7 @@ create_file 'app/assets/stylesheets/rails_admin/custom/theming.css.sass' do <<-T
     font-size: 20px
 
 .remove_nested_fields
-  display: block !important
-  z-index: 5
-  right: 0
-  left: auto
+  opacity: 1 !important
 
 .model-dialog
   width: 800px !important

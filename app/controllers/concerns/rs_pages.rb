@@ -22,8 +22,12 @@ module RsPages
       path = path[0..-2]
       do_redirect = true
     end
-
     page = Page.enabled.where(fullpath: path).first
+
+    if page.nil? && !params[:slug].blank?
+      page = Page.enabled.where(fullpath: "/" + params[:slug]).first
+    end
+
     if page.nil?
       do_redirect = true
       spath = path.chomp(File.extname(path))
@@ -31,6 +35,7 @@ module RsPages
         page = Page.enabled.where(fullpath: spath).first
       end
     end
+
     if !page.nil? && do_redirect
       redirect_to path, status: :moved_permanently
     end

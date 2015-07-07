@@ -53,10 +53,14 @@ module RocketCMS
           url.match(clean_regexp)
         end
       end
-      
+
+      def regexp_prefix
+        ""
+      end
+
       def clean_regexp
         if regexp.blank?
-          /^#{Regexp.escape(fullpath)}$/
+          /^#{regexp_prefix}#{Regexp.escape(fullpath)}$/
         else
           begin
             /#{regexp}/

@@ -19,7 +19,7 @@ module RsMenu
   end
   
   def navigation_item(primary, item, block=nil)
-    url = item.redirect.blank? ? item.fullpath : item.redirect
+    url = nav_get_url(item)
     if block.nil?
       primary.item(item.slug, item.name, url, item.nav_options)
     else
@@ -46,10 +46,12 @@ module RsMenu
     end
   end
 
+  def nav_get_url(item)
+    item.redirect.blank? ? item.fullpath : item.redirect
+  end
   def nav_get_menu_items(type)
     ::Menu.find(type.to_s).pages.enabled.sorted.to_a
   end
-
   def nav_extra_data_before(type, primary)
     # override for additional config or items
   end

@@ -6,11 +6,13 @@ module Seoable
   if Seo.table_exists?
     included do
       has_one :seo, as: :seoable, autosave: true
-      after_create :create_seo
       accepts_nested_attributes_for :seo
       delegate *FIELDS, to: :seo
       delegate *(FIELDS.map {|f| "#{f}=".to_sym }), to: :seo
-
+      alias seo_without_build seo
+      def seo
+        seo_without_build || build_seo
+      end
       if RocketCMS.config.localize
         delegate *(LOCALIZED_FIELDS.map {|f| "#{f}_translations".to_sym }), to: :seo
         delegate *(LOCALIZED_FIELDS.map {|f| "#{f}_translations=".to_sym }), to: :seo
