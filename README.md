@@ -66,7 +66,7 @@ You can get a nice admin UI for editing locales by adding [rails_admin_hstore_tr
 
 Add to: ```app/models/page.rb```
 
-```
+```ruby
 class Page < ActiveRecord::Base
   include RocketCMS::Models::Page
   RocketCMS.apply_patches self
@@ -80,7 +80,7 @@ end
 
 Wrap your routes with locale scope:
 
-```
+```ruby
 scope "(:locale)", locale: /en|ru/ do
   get 'contacts' => 'contacts#new', as: :contacts
   post 'contacts' => 'contacts#create', as: :create_contacts
@@ -89,7 +89,7 @@ end
 
 Add to application_controller.rb:
 
-```
+```ruby
 class ApplicationController < ActionController::Base
   include RocketCMS::Controller
   include RsLocalizeable
@@ -98,7 +98,7 @@ end
 
 Enable localization in RocketCMS:
 
-```
+```ruby
 RocketCMS.configure do |rc|
   rc.news_image_styles = {small: '107x126#'}
   rc.contacts_captcha = true
@@ -110,13 +110,13 @@ end
 
 Add ```rails_admin_hstore_translate``` or ```hstore_translate``` gem if using PostgreSQL:
 
-```
+```ruby
 gem 'rails_admin_hstore_translate'
 ```
 
 or
 
-```
+```ruby
 gem 'hstore_translate'
 ```
 
