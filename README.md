@@ -64,6 +64,50 @@ All models included in the gem support localization via either hstore_translate 
 
 You can get a nice admin UI for editing locales by adding [rails_admin_hstore_translate](https://github.com/glebtv/rails_admin_hstore_translate) or [rails_admin_mongoid_localize_field](https://github.com/sudosu/rails_admin_mongoid_localize_field)
 
+Add to: ```app/models/page.rb```
+
+```
+class Page < ActiveRecord::Base
+  include RocketCMS::Models::Page
+  RocketCMS.apply_patches self
+  rails_admin &RocketCMS.page_config
+
+  def regexp_prefix
+    "(?:\/ru|\/en)?"
+  end
+end
+```
+
+Wrap your routes with locale scope:
+
+```
+scope "(:locale)", locale: /en|ru/ do
+  get 'contacts' => 'contacts#new', as: :contacts
+  post 'contacts' => 'contacts#create', as: :create_contacts
+end
+```
+
+Add to application_controller.rb:
+
+```
+class ApplicationController < ActionController::Base
+  include RocketCMS::Controller
+  include RsLocalizeable
+end
+```
+
+Enable localization in RocketCMS:
+
+```
+RocketCMS.configure do |rc|
+  rc.news_image_styles = {small: '107x126#'}
+  rc.contacts_captcha = true
+  rc.contacts_message_required = true
+  ...
+  rc.localize = true
+end
+```
+
 ### Documentation
 
 It's basically Mongoid + Rails Admin + some of our common models and controllers, capistrano config, etc.

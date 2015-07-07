@@ -29,6 +29,10 @@ module RsPages
     end
 
     if page.nil?
+      page = find_seo_extra(path)
+    end
+
+    if page.nil?
       do_redirect = true
       spath = path.chomp(File.extname(path))
       if spath != path
@@ -42,7 +46,10 @@ module RsPages
 
     page
   end
-
+  
+  def find_seo_extra(path)
+    nil
+  end
   def rails_admin?
     self.is_a?(RailsAdmin::ApplicationController) || self.is_a?(RailsAdmin::MainController)
   end
