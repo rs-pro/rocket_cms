@@ -60,7 +60,7 @@ generator creates a new RVM gemset, so after cd'ing to app dir, you should run `
 
 ### Localization
 
-All models included in the gem support localization via either hstore_translate or built-in Mongoid localize: true option.
+All models included in the gem support localization via either [hstore_translate](https://github.com/Leadformance/hstore_translate) or built-in Mongoid localize: true option.
 
 You can get a nice admin UI for editing locales by adding [rails_admin_hstore_translate](https://github.com/glebtv/rails_admin_hstore_translate) or [rails_admin_mongoid_localize_field](https://github.com/sudosu/rails_admin_mongoid_localize_field)
 
