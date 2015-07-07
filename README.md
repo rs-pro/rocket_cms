@@ -108,6 +108,18 @@ RocketCMS.configure do |rc|
 end
 ```
 
+Add ```rails_admin_hstore_translate``` or ```hstore_translate``` gem if using PostgreSQL:
+
+```
+gem 'rails_admin_hstore_translate'
+```
+
+or
+
+```
+gem 'hstore_translate'
+```
+
 ### Documentation
 
 It's basically Mongoid + Rails Admin + some of our common models and controllers, capistrano config, etc.
