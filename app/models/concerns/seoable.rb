@@ -16,6 +16,7 @@ module Seoable
         delegate *(LOCALIZED_FIELDS.map {|f| "#{f}_translations=".to_sym }), to: :seo
       end
     end
+    include RocketCMS::SeoHelpers
   else
     include RocketCMS::Models::Seo
   end

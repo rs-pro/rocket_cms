@@ -5,20 +5,13 @@ module RocketCMS
       include RocketCMS::Model
       include Enableable
       include RocketCMS.orm_specific('Seo')
+      include RocketCMS::SeoHelpers
 
       included do
         RocketCMS.apply_patches self
         validates_attachment_content_type :og_image, content_type: /\Aimage\/.*\Z/, if: :og_image?
       end
     end
-  end
-
-  def page_title
-    title.blank? ? name : title
-  end
-
-  def get_og_title
-    og_title.blank? ? name : og_title
   end
 end
 

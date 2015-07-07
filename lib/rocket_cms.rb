@@ -24,6 +24,7 @@ require 'addressable/uri'
 require 'turbolinks'
 require 'simple-navigation'
 
+require 'rocket_cms/seo_helpers'
 require 'rocket_cms/configuration'
 require 'rocket_cms/patch'
 require 'rocket_cms/admin'
