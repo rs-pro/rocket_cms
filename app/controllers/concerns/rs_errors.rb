@@ -33,7 +33,7 @@ module RsErrors
     end
   end
 
-  protected
+  private
   def render_404(exception = nil)
     Rails.logger.error "404: #{request.url}"
     unless exception.nil?

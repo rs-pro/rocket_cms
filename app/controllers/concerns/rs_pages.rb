@@ -5,7 +5,6 @@ module RsPages
   end
 
   private
-
   def find_page
     return if rails_admin?
     @seo_page = find_seo_page request.path

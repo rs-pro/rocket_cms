@@ -4,6 +4,7 @@ module RsMenu
     helper_method :navigation
   end
 
+  private
   def render_with_subs(items, primary, item)
     subs = items.select { |i| i.parent_id == item.id && !i.name.blank? && i.enabled }
     if subs.empty?
@@ -31,7 +32,7 @@ module RsMenu
       SimpleNavigation.config.autogenerate_item_ids = false
       begin
         nav_extra_data_before(type, primary)
-        items = ::Menu.find(type.to_s).pages.enabled.sorted.to_a
+        items = nav_get_menu_items(type)
         items.select { |i| i.parent_id.nil? && !i.name.blank? && i.enabled }.each do |item|
           render_with_subs(items, primary, item)
         end
@@ -43,6 +44,10 @@ module RsMenu
         items
       end
     end
+  end
+
+  def nav_get_menu_items(type)
+    ::Menu.find(type.to_s).pages.enabled.sorted.to_a
   end
 
   def nav_extra_data_before(type, primary)
