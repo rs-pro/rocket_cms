@@ -125,13 +125,20 @@ module RocketCMS
         navigation_label I18n.t('rs.cms')
 
         field :enabled, :toggle
-        field :time
+        field :time do
+          sort_reverse true
+        end
         field :name
         unless RocketCMS.config.news_image_styles.nil?
           field :image
         end
         field :excerpt
         RocketCMS.apply_patches self
+
+        list do
+          RocketCMS.apply_patches self
+          sort_by :time
+        end
 
         edit do
           field :content, :ck_editor
