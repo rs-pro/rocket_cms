@@ -3,6 +3,8 @@ module RsLocalizeable
   included do
     before_filter do
       I18n.locale = params[:locale] || I18n.default_locale
+      Settings.ns_default = "main_#{I18n.locale}"
+      Settings.ns_fallback = "main"
     end
   end
   private
