@@ -21,6 +21,8 @@ module RocketCMS
         if respond_to?(:active)
           active is_active
           label "SEO"
+        else
+          visible false
         end
         RocketCMS.seo_fields(self)
       }

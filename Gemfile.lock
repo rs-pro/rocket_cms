@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.8.6)
+    rocket_cms (0.8.7)
       addressable
       coffee-rails
       devise
@@ -158,7 +158,7 @@ GEM
       remotipart (~> 1.0)
       safe_yaml (~> 1.0)
       sass-rails (>= 4.0, < 6)
-    rails_admin_nested_set (0.4.2)
+    rails_admin_nested_set (0.4.3)
       rails_admin (~> 0.6.6)
     rails_admin_settings (1.0.1)
     rails_admin_toggleable (0.5.0)
