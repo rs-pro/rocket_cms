@@ -5,5 +5,3 @@
 #= require rocket_cms/map
 #= require rocket_cms/flash
 
-$(document).on 'page:change', ->
-  $('input, textarea').placeholder()
