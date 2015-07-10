@@ -3,7 +3,7 @@ module Seoable
   LOCALIZED_FIELDS = [:h1, :title, :keywords, :description, :og_title]
   FIELDS = LOCALIZED_FIELDS + [:og_image, :robots]
 
-  if Seo.table_exists?
+  if Seo.separate_table?
     included do
       has_one :seo, as: :seoable, autosave: true
       accepts_nested_attributes_for :seo

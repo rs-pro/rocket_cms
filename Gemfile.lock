@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.8.8)
+    rocket_cms (0.8.9)
       addressable
       coffee-rails
       devise

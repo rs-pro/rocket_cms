@@ -21,7 +21,7 @@ module RocketCMS
       RocketCMS.config.search_models.map(&:constantize)
 
       # Write default email settings to DB so they can be changed.
-      if Settings.table_exists?
+      if RocketCMS.mongoid? || Settings.table_exists?
         Settings.default_email_from(default: 'noreply@rscx.ru')
         Settings.form_email(default: 'glebtv@ya.ru')
         Settings.email_topic(default: 'с сайта')

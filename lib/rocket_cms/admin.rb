@@ -78,7 +78,7 @@ module RocketCMS
               read_only true
             end
           end
-          if Seo.table_exists?
+          if Seo.separate_table?
             group :seo do
               active true
               field :seo do
