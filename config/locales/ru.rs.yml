@@ -19,6 +19,7 @@ ru:
     errors:
       title: "Ошибка %{code}"
       form_expired: "Истекло время на заполение формы"
-      internal_error: "Внутренняя ошибка: %{klass} %{message}"
+      internal_error: "Внутренняя ошибка"
+      internal_error_full: "Внутренняя ошибка: %{klass} %{message}"
       access_denied: "Доступ запрещен"
       not_found: 'Запрашиваемая страница была удалена, или введён некорректный адрес'

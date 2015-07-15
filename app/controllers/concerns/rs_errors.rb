@@ -51,7 +51,7 @@ module RsErrors
     capture_exception(exception) if defined?(Raven)
     begin
       if rails_admin?
-        render text: t('rs.errors.internal_error', klass: exception.class.name, message: exception.message), status: 500
+        render text: t('rs.errors.internal_error_full', klass: exception.class.name, message: exception.message), status: 500
         return
       end
     rescue Exception => e
