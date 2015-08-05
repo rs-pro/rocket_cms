@@ -13,7 +13,11 @@ module RsLocalizeable
   end
   def nav_get_menu_items(type)
     pages = ::Menu.find(type.to_s).pages.enabled
-    pages = pages.where(["EXIST(name_translations, ?) = TRUE AND name_translations -> ? != ''", I18n.locale, I18n.locale])
+    if RocketCMS.mongoid?
+      pages = pages.where(:"name.#{I18n.locale}".exists => true)
+    elsif RocketCMS.active_record?
+      pages = pages.where(["EXIST(name_translations, ?) = TRUE AND name_translations -> ? != ''", I18n.locale, I18n.locale])
+    end
     pages.sorted.to_a
   end
   def nav_get_url(item)

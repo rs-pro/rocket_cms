@@ -33,13 +33,16 @@ module RsMenu
       begin
         nav_extra_data_before(type, primary)
         items = nav_get_menu_items(type)
-        items.select { |i| i.parent_id.nil? && !i.name.blank? && i.enabled }.each do |item|
+        items = items.select { |i| i.parent_id.nil? && !i.name.blank? && i.enabled }
+        items.each do |item|
           render_with_subs(items, primary, item)
         end
         nav_extra_data_after(type, primary)
       rescue Exception => exception
         Rails.logger.error exception.message
         Rails.logger.error exception.backtrace.join("\n")
+        puts exception.message
+        puts exception.backtrace.join("\n")
         capture_exception(exception) if respond_to?(:capture_exception)
         items
       end
