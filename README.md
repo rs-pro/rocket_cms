@@ -117,6 +117,12 @@ or
 gem 'hstore_translate'
 ```
 
+Add ```rails_admin_mongoid_localize_field``` gem if using MongoDB:
+
+```ruby
+gem 'rails_admin_mongoid_localize_field'
+```
+
 ### Documentation
 
 It's basically Mongoid + Rails Admin + some of our common models and controllers, capistrano config, etc.
