@@ -32,9 +32,9 @@ module RsMenu
       SimpleNavigation.config.autogenerate_item_ids = false
       begin
         nav_extra_data_before(type, primary)
-        items = nav_get_menu_items(type)
-        items = items.select { |i| i.parent_id.nil? && !i.name.blank? && i.enabled }
-        items.each do |item|
+        items = nav_get_menu_items(type).select { |i| !i.name.blank? && i.enabled }
+        roots = items.select { |i| i.parent_id.nil? }
+        roots.each do |item|
           render_with_subs(items, primary, item)
         end
         nav_extra_data_after(type, primary)
