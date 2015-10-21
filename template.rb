@@ -422,7 +422,7 @@ end
 FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, Pathname.new(destination_root).join('config', 'secrets.yml.example').to_s)
 
 unless mongoid
-  generate "paper_trail:install"
+  generate "paper_trail:install", "--with-associations"
   generate "friendly_id"
   rake "db:migrate"
 end
@@ -430,4 +430,3 @@ end
 git :init
 git add: "."
 git commit: %Q{ -m 'Initial commit' }
-

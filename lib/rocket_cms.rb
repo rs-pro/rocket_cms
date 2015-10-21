@@ -28,7 +28,7 @@ require 'rocket_cms/seo_helpers'
 require 'rocket_cms/configuration'
 require 'rocket_cms/patch'
 require 'rocket_cms/admin'
-require 'rocket_cms/elastic_search'
+require 'rocket_cms/search'
 require 'rocket_cms/model'
 require 'rocket_cms/rails_admin_menu'
 require 'rocket_cms/engine'
@@ -47,6 +47,24 @@ module RocketCMS
     end
     def orm_specific(name)
       "#{model_namespace}::#{name}".constantize
+    end
+
+    def custom_app_url(object)
+      redirect_to Rails.application.routes.url_helpers.url_for(object)
+    end
+
+    def app_url(object)
+      if object.class.name == 'Page'
+        if object.fullpath.blank?
+          redirect_to Rails.application.routes.url_helpers.page_url(object)
+        else
+          redirect_to object.fullpath
+        end
+      elsif object.class.name == 'News'
+        redirect_to Rails.application.routes.url_helpers.news_url(object)
+      else
+        RocketCMS.custom_app_url(object)
+      end
     end
   end
 
@@ -85,4 +103,3 @@ module RocketCMS
 end
 
 require 'manual_slug'
-

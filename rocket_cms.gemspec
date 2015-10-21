@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
-  
+
   spec.add_dependency 'rails', '>= 4.1.0', '< 5.0'
 
   spec.add_dependency 'jquery-rails'
@@ -42,5 +42,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'stringex'
   spec.add_dependency 'thor'
   spec.add_dependency 'smart_excerpt'
-end
 
+end

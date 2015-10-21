@@ -9,14 +9,14 @@ module RocketCMS
       include ManualSlug
 
       if RocketCMS.config.search_enabled
-        include RocketCMS::ElasticSearch
+        include RocketCMS::Search
       end
 
       included do
         unless RocketCMS.config.news_image_styles.nil?
           validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/, if: :image?
         end
-        
+
         validates_presence_of :name
         if RocketCMS.config.news_content_required
           validates_presence_of :content
@@ -52,4 +52,3 @@ module RocketCMS
     end
   end
 end
-

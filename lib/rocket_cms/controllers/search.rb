@@ -6,23 +6,27 @@ module RocketCMS
         if params[:query].blank?
           @results = []
         else
-          @results = Mongoid::Elasticsearch.search({
-            body: {
-              query: {
-                query_string: {
-                  query: Mongoid::Elasticsearch::Utils.clean(params[:query])
+          if RocketCMS.mongoid?
+            @results = Mongoid::Search.search({
+              body: {
+                query: {
+                  query_string: {
+                    query: Mongoid::Search::Utils.clean(params[:query])
+                  }
+                },
+                highlight: {
+                  fields: {
+                    name: {},
+                    content: {}
+                  }
                 }
-              },
-              highlight: {
-                fields: {
-                  name: {},
-                  content: {}
-                }
-              }
-            }},
-            page: params[:page],
-            per_page: RocketCMS.config.search_per_page,
-          )
+              }},
+              page: params[:page],
+              per_page: RocketCMS.config.search_per_page,
+            )
+          else
+            @results = PgSearch.multisearch(params[:q])
+          end
         end
       end
     end

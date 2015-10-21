@@ -10,9 +10,9 @@ module RocketCMS
       include RocketCMS.orm_specific('Page')
 
       if RocketCMS.config.search_enabled
-        include RocketCMS::ElasticSearch
+        include RocketCMS::Search
       end
-        
+
       included do
         has_and_belongs_to_many :menus, inverse_of: :pages
         validates_uniqueness_of :fullpath
@@ -70,7 +70,7 @@ module RocketCMS
           end
         end
       end
-      
+
       def nav_options
         {highlights_on: clean_regexp}
       end
