@@ -6,10 +6,11 @@ module RocketCMS::Controller
     include RsMenu
     protect_from_forgery with: :exception
     helper_method :page_title
+    helper_method :app_url
   end
 
   protected
-  
+
     def page_title
       if @seo_page.nil?
         Settings.default_title
@@ -20,5 +21,9 @@ module RocketCMS::Controller
 
     def ckeditor_authenticate
       redirect_to '/' unless user_signed_in? && current_user.has_role?('admin')
+    end
+
+    def app_url(object)
+      RocketCMS.app_url(object)
     end
 end
