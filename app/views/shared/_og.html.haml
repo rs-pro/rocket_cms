@@ -2,3 +2,5 @@
   %meta{property: 'og:title', content: title}
 - if defined?(image) && !image.blank?
   %meta{property: 'og:image', content: "http://#{request.host_with_port}#{image}"}
+- if defined?(desc) && !desc.blank?
+  %meta{property: 'og:description', content: desc}
