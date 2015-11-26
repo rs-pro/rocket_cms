@@ -142,6 +142,7 @@ development:
   encoding: unicode
   database: #{app_name.downcase}_development
   pool: 5
+  host: 'localhost'
   username: #{app_name.downcase}
   password: #{app_name.downcase}
   template: template0
