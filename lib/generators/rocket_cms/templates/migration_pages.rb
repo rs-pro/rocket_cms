@@ -38,8 +38,8 @@ class RocketCmsCreatePages < ActiveRecord::Migration
 
     create_join_table :menus, :pages
 
-    add_foreign_key(:menus_pages, :menus, dependent: :delete)
-    add_foreign_key(:menus_pages, :pages, dependent: :delete)
+    add_foreign_key(:menus_pages, :menus, on_delete: :cascade)
+    add_foreign_key(:menus_pages, :pages, on_delete: :cascade)
   end
 end
 
