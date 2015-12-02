@@ -14,7 +14,7 @@ module RailsAdmin
 
         register_instance_option :controller do
           Proc.new do
-            RocketCMS.app_url(@object)
+            redirect_to RocketCMS.app_url(@object)
           end
         end
 
