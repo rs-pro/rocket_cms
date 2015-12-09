@@ -2,7 +2,7 @@
   .text_content
     - if (!defined?(h1) || h1) && !obj.h1.blank?
       %h1= obj.h1
-    - if obj.content.blank?
+    - if !obj.respond_to?(:content) || obj.content.blank?
       - unless @seo_page.nil?
         = raw @seo_page.page_content
     - else
