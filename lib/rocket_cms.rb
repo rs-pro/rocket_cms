@@ -50,18 +50,18 @@ module RocketCMS
     end
 
     def custom_app_url(object)
-      Rails.application.routes.url_helpers.url_for(object)
+      Rails.application.routes.url_helpers.url_for(object, only_path: true)
     end
 
     def app_url(object)
       if object.class.name == 'Page'
         if object.fullpath.blank?
-          Rails.application.routes.url_helpers.page_url(object)
+          Rails.application.routes.url_helpers.page_path(object)
         else
           object.fullpath
         end
       elsif object.class.name == 'News'
-        Rails.application.routes.url_helpers.news_url(object)
+        Rails.application.routes.url_helpers.news_path(object)
       else
         RocketCMS.custom_app_url(object)
       end
