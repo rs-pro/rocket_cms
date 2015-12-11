@@ -6,7 +6,6 @@ module RsErrors
       rescue_from ActionController::RoutingError, with: :render_404
       rescue_from ActionController::UnknownController, with: :render_404
       rescue_from ActionController::MissingFile, with: :render_404
-      rescue_from AbstractController::ActionNotFound, with: :render_404
       if RocketCMS.mongoid?
         rescue_from Mongoid::Errors::DocumentNotFound, with: :render_404
         rescue_from Mongoid::Errors::InvalidFind, with: :render_404
@@ -34,6 +33,14 @@ module RsErrors
   end
 
   private
+
+  # http://stackoverflow.com/questions/13432987/rescue-from-abstractcontrolleractionnotfound-not-working
+  def process(action, *args)
+    super
+  rescue AbstractController::ActionNotFound => e
+    render_404( e )
+  end
+
   def render_404(exception = nil)
     Rails.logger.error "404: #{request.url}"
     unless exception.nil?
