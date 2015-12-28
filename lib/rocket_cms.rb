@@ -49,14 +49,18 @@ module RocketCMS
       "#{model_namespace}::#{name}".constantize
     end
 
+    def url_helper
+      @@url_helper ||= RocketCMS::UrlHelper.new
+    end
+
     def custom_app_url(object)
-      Rails.application.routes.url_helpers.polymorphic_url(object, routing_type: :path)
+      url_helper.polymorphic_url(object, routing_type: :path)
     end
 
     def app_url(object)
       if object.class.name == 'Page'
         if object.fullpath.blank?
-          Rails.application.routes.url_helpers.page_path(object)
+          url_helper.page_path(object)
         else
           object.fullpath
         end
@@ -67,6 +71,7 @@ module RocketCMS
   end
 
   autoload :Migration, 'rocket_cms/migration'
+  autoload :UrlHelper, 'rocket_cms/url_helper'
 
   module Models
     autoload :Seo,  'rocket_cms/models/seo'
