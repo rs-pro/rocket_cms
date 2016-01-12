@@ -32,14 +32,14 @@ module RsErrors
     end
   end
 
-  private
-
   # http://stackoverflow.com/questions/13432987/rescue-from-abstractcontrolleractionnotfound-not-working
   def process(action, *args)
     super
   rescue AbstractController::ActionNotFound => e
-    render_404( e )
+    render_404(e)
   end
+
+  private
 
   def render_404(exception = nil)
     Rails.logger.error "404: #{request.url}"
