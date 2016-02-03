@@ -25,7 +25,7 @@ module RocketCMS
               per_page: RocketCMS.config.search_per_page,
             )
           else
-            @results = PgSearch.multisearch(params[:q])
+            @results = PgSearch.multisearch(params[:query])
           end
         end
       end
