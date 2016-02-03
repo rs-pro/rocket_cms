@@ -9,24 +9,33 @@
       - any = true
       %li
         -if RocketCMS.mongoid?
-          .title= link_to (r._highlight.nil? || r._highlight['name'].nil?) ? r.name : r._highlight['name'].join(' ... ').html_safe, url_for(r)
+          - u = app_url(r)
+          - next if u.nil?
+          - next if u.respond_to?(:enabled) && !u.searchable.enabled
+          - any = true
+          .title
+            %a{href: u}
+              %strong= raw (r._highlight.nil? || r._highlight['name'].nil?) ? r.name : r._highlight['name'].join(' ... ')
+              (#{r.class.model_name.human})
           .text
             = raw (r._highlight.nil? || r._highlight['content'].nil?) ? (r.content.blank? ? '' : SmartExcerpt.truncate(r.content)) : r._highlight['content'].join(' ... ')
             %span.more= link_to '', url_for(r)
         - else
-          - u = app_url(result.searchable)
+          - u = app_url(r.searchable)
           - next if u.nil?
-          - next if result.searchable.respond_to?(:enabled) && !result.searchable.enabled
+          - next if r.searchable.respond_to?(:enabled) && !r.searchable.enabled
           - any = true
-          %a{href: u}
-            %span
-              %strong= highlight(result.searchable.name, params[:query], highlighter: '<em>\1</em>')
-              |  (#{result.searchable.class.model_name.human})
-            - ex = excerpt(strip_tags(result.searchable.content), params[:query], radius: 150)
+          .title
+            %a{href: u}
+              %strong= raw highlight(r.searchable.name, params[:query], highlighter: '<em>\1</em>')
+              (#{r.searchable.class.model_name.human})
+          .text
+            - ex = excerpt(strip_tags(r.searchable.content), params[:query], radius: 150)
             - if ex.nil?
-              == strip_tags(SmartExcerpt.h.smart_truncate(result.searchable.content, words: 20))
+              = raw strip_tags(SmartExcerpt.h.smart_truncate(r.searchable.content, words: 20))
             - else
-              == highlight(ex, params[:query], highlighter: '<em>\1</em>')
+              = raw highlight(ex, params[:query], highlighter: '<em>\1</em>')
+            %span.more= link_to '', u
   - unless any
     .rs-search-no-results К сожалению, ничего не найдено
 
