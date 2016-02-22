@@ -16,6 +16,11 @@ or:
 
     gem 'rocket_cms_activerecord'
 
+Or, if you don't need CKeditor, GeoCoder, mongoid-audit\paper_trail:
+
+    gem 'rocket_cms_mongoid_light'
+    gem 'rocket_cms_activerecord_light'
+
 *Only PostgreSQL is tested or supported for AR. Others will probably work, but untested.*
 
 And then execute:
@@ -44,7 +49,7 @@ If not, uninstall rails and install again
 
     gem uninstall rails
     gem install rocket_cms
-    
+
 Then, for mongoid:
 
     rails new my_app -T -O -m https://raw.githubusercontent.com/rs-pro/rocket_cms/master/template.rb
@@ -136,4 +141,3 @@ See their documentation for more info
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-

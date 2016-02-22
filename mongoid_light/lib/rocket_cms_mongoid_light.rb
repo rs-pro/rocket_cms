@@ -1,11 +1,7 @@
 require 'mongoid'
 require 'glebtv-mongoid-paperclip'
 require 'glebtv-mongoid_nested_set'
-require 'mongoid-audit'
 require 'mongoid_slug'
-
-require 'glebtv-ckeditor'
-require 'geocoder'
 
 module RocketCMS
   def self.orm

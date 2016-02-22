@@ -17,7 +17,7 @@ require 'rails_admin'
 require 'rails_admin_nested_set'
 require 'rails_admin_toggleable'
 require 'rails_admin_settings'
-require 'glebtv-ckeditor'
+
 require 'sitemap_generator'
 require 'kaminari'
 require 'addressable/uri'
