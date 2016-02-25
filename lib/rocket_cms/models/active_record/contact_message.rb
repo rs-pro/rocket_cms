@@ -4,7 +4,7 @@ module RocketCMS
       module ContactMessage
         extend ActiveSupport::Concern
         included do
-          has_paper_trail
+          has_paper_trail if resond_to?(:has_paper_trail)
           validates_lengths_from_database
         end
       end

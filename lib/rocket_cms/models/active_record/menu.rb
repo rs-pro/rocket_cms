@@ -4,7 +4,7 @@ module RocketCMS
       module Menu
         extend ActiveSupport::Concern
         included do
-          has_paper_trail
+          has_paper_trail if respond_to?(:has_paper_trail)
           validates_lengths_from_database
           if RocketCMS.config.localize
             translates :name
