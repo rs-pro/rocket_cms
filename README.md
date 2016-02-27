@@ -1,8 +1,6 @@
 # RocketCMS
 
-Rails + RailsAdmin + Mongoid/PostgreSQL + Elasticsearch CMS
-
-Very opinionated and tuned for our needs.
+Rails + RailsAdmin + Mongoid/PostgreSQL + Elasticsearch/pg_search (optional)
 
 **Before 1.0 API and class names should be considered unstable and can change at any time!**
 
@@ -41,7 +39,7 @@ For activerecord, generate migrations and run them
 
 ### Using app generator
 
-Make sure you have rails 4.1 installed
+Make sure you have rails 4.1/4.2/5.0 installed
 
     rails -v
 
@@ -120,6 +118,12 @@ or
 
 ```ruby
 gem 'hstore_translate'
+```
+
+or 
+
+```ruby
+gem 'jsonb_translate' # requires postgresql 9.4
 ```
 
 Add ```rails_admin_mongoid_localize_field``` gem if using MongoDB:
