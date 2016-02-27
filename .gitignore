@@ -16,3 +16,5 @@ test/version_tmp
 tmp
 mongoid/Gemfile.lock
 activerecord/Gemfile.lock
+mongoid_light/Gemfile.lock
+activerecord_light/Gemfile.lock
