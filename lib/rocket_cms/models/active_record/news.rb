@@ -8,7 +8,7 @@ module RocketCMS
             has_attached_file :image, styles: RocketCMS.config.news_image_styles
           end
 
-          has_paper_trail
+          has_paper_trail if respond_to?(:has_paper_trail)
 
           validates_lengths_from_database only: [:name, :title, :content, :excerpt, :h1, :keywords, :robots, :og_title]
 
