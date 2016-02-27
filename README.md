@@ -132,9 +132,15 @@ Add ```rails_admin_mongoid_localize_field``` gem if using MongoDB:
 gem 'rails_admin_mongoid_localize_field'
 ```
 
+### Capistrano generator
+
+    rails g rocket_cms:capify data/home unicorn_port domain_name
+    
+designed to be used together with our ansible app setup script.
+
 ### Documentation
 
-It's basically Mongoid + Rails Admin + some of our common models and controllers, capistrano config, etc.
+It's basically Rails Admin + some of our common models and controllers, capistrano config, etc.
 
 See their documentation for more info
 
