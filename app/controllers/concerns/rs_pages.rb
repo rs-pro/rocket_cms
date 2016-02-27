@@ -1,7 +1,7 @@
 module RsPages
   extend ActiveSupport::Concern
   included do
-    before_filter :find_page
+    before_action :find_page
   end
 
   private
@@ -46,7 +46,7 @@ module RsPages
 
     page
   end
-  
+
   def find_seo_extra(path)
     nil
   end
