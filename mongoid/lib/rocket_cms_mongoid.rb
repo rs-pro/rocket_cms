@@ -4,7 +4,6 @@ require 'glebtv-mongoid_nested_set'
 require 'mongoid-audit'
 require 'mongoid_slug'
 
-require 'glebtv-ckeditor'
 require 'geocoder'
 
 module RocketCMS
@@ -14,3 +13,5 @@ module RocketCMS
 end
 
 require 'rocket_cms'
+require 'glebtv-ckeditor'
+
