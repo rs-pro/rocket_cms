@@ -19,8 +19,8 @@ module RocketCMS::Search
         }
       },
       index_mapings: {
-        name: {type: 'string', boost: 10, analyzer: 'my_analyzer'},
-        content: {type: 'string', boost: 1, analyzer: 'my_analyzer'},
+        name: {type: 'string', analyzer: 'my_analyzer'},
+        content: {type: 'string', analyzer: 'my_analyzer'},
       }
       })
     else

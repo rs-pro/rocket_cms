@@ -7,17 +7,24 @@ module RocketCMS
           @results = []
         else
           if RocketCMS.mongoid?
-            @results = Mongoid::Search.search({
+            @results = Mongoid::Elasticsearch.search({
               body: {
                 query: {
                   query_string: {
-                    query: Mongoid::Search::Utils.clean(params[:query])
+                    query: Mongoid::Elasticsearch::Utils.clean(params[:query])
                   }
                 },
                 highlight: {
+                  require_field_match: false,
                   fields: {
-                    name: {},
-                    content: {}
+                    name: {
+                      number_of_fragments: 1,
+                      size_of_fragments: 120
+                    },
+                    content: {
+                      number_of_fragments: 1,
+                      size_of_fragments: 220
+                    }
                   }
                 }
               }},
