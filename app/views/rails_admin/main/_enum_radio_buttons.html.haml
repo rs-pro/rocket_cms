@@ -1,2 +1,2 @@
-- values = form.object.class.send(field.method_name).values.map { |v| [t("enumerize.#{form.object.class.name.downcase}.#{field.method_name}.#{v}", default: t("enumerize.defaults.#{field.method_name}.#{v}")), v] }
+- values = form.object.class.send(field.method_name).values.map { |v| [t("enumerize.#{form.object.class.name.underscore}.#{field.method_name}.#{v}", default: t("enumerize.defaults.#{field.method_name}.#{v}")), v] }
 = form.collection_radio_buttons field.method_name, values, :last, :first, {}, {} { |i| i.label(class: 'radio') { i.radio_button + i.text } }
