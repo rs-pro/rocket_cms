@@ -16,7 +16,12 @@ module RsLocalizeable
     if RocketCMS.mongoid?
       pages = pages.where(:"name.#{I18n.locale}".exists => true)
     elsif RocketCMS.active_record?
-      pages = pages.where(["EXIST(name_translations, ?) = TRUE AND name_translations -> ? != ''", I18n.locale, I18n.locale])
+      if defined?(JsonbTranslate)
+        
+        pages = pages.where(["(name_translations -> ?)::text != ''", I18n.locale])
+      elsif defined?(HstoreTranslate)
+        pages = pages.where(["EXIST(name_translations, ?) = TRUE AND name_translations -> ? != ''", I18n.locale, I18n.locale])
+      end
     end
     pages.sorted.to_a
   end
