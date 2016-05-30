@@ -38,7 +38,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_settings'
   spec.add_dependency 'simple-navigation'
   spec.add_dependency 'sitemap_generator'
-  spec.add_dependency 'kaminari'
   
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'

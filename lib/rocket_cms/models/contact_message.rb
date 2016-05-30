@@ -6,7 +6,7 @@ module RocketCMS
       include RocketCMS.orm_specific('ContactMessage')
 
       included do
-        apply_simple_captcha
+        apply_simple_captcha if respond_to?(:apply_simple_captcha)
         validates_email_format_of :email, unless: 'email.blank?'
         if RocketCMS.config.contacts_message_required
           validates_presence_of :content

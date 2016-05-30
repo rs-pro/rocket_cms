@@ -6,6 +6,8 @@ end
 class ContactMessage
   include RocketCMS::Models::ContactMessage
   RocketCMS.apply_patches self
-  rails_admin &RocketCMS.contact_message_config
+  if respond_to?(:rails_admin)
+    rails_admin &RocketCMS.contact_message_config
+  end
 end
 

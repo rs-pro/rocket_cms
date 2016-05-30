@@ -10,6 +10,9 @@ module RocketCMS
   def self.orm
     :mongoid
   end
+  def self.light?
+    false
+  end
 end
 
 require 'devise'

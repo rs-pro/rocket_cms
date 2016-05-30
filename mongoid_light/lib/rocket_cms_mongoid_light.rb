@@ -7,6 +7,9 @@ module RocketCMS
   def self.orm
     :mongoid
   end
+  def self.light?
+    true
+  end
 end
 
 require 'rocket_cms'

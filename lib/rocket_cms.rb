@@ -18,7 +18,9 @@ require 'rocket_cms/patch'
 require 'rocket_cms/admin'
 require 'rocket_cms/search'
 require 'rocket_cms/model'
-require 'rocket_cms/rails_admin_menu'
+if defined?(RailsAdmin)
+  require 'rocket_cms/rails_admin_menu'
+end
 require 'rocket_cms/engine'
 require 'rocket_cms/controller'
 
@@ -26,6 +28,9 @@ module RocketCMS
   class << self
     def mongoid?
       RocketCMS.orm == :mongoid
+    end
+    def full?
+      !RocketCMS.light?
     end
     def active_record?
       RocketCMS.orm == :active_record

@@ -15,7 +15,9 @@ module RocketCMS
       end
 
       include SmartExcerpt
-      include SimpleCaptcha::ModelHelpers
+      if defined?(SimpleCaptcha)
+        include SimpleCaptcha::ModelHelpers
+      end
 
       if RocketCMS.mongoid? && defined?(Trackable)
         include Trackable

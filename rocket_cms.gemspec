@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'validates_email_format_of'
   spec.add_dependency 'addressable'
   spec.add_dependency 'stringex'
+  spec.add_dependency 'kaminari'
   spec.add_dependency 'thor'
   spec.add_dependency 'smart_excerpt'
 

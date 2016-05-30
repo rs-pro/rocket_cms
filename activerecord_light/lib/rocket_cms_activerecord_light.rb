@@ -8,6 +8,9 @@ module RocketCMS
   def self.orm
     :active_record
   end
+  def self.light?
+    true
+  end
 end
 
 require 'rocket_cms'

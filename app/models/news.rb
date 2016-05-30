@@ -6,5 +6,8 @@ end
 class News
   include RocketCMS::Models::News
   RocketCMS.apply_patches self
-  rails_admin &RocketCMS.news_config
+
+  if respond_to?(:rails_admin)
+    rails_admin &RocketCMS.news_config
+  end
 end

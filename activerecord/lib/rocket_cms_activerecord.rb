@@ -10,6 +10,9 @@ module RocketCMS
   def self.orm
     :active_record
   end
+  def self.light?
+    false
+  end
 end
 
 require 'devise'
