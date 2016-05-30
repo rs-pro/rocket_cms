@@ -4,25 +4,13 @@ unless defined?(RocketCMS) && RocketCMS.respond_to?(:orm) && [:active_record, :m
 end
 
 require 'rocket_cms/version'
-require 'devise'
-
-require 'simple_form'
-require 'rocket_cms/simple_form_patch'
-
-require 'glebtv-simple_captcha'
 require 'validates_email_format_of'
 require 'smart_excerpt'
 require 'filename_to_slug'
-require 'rails_admin'
-require 'rails_admin_nested_set'
-require 'rails_admin_toggleable'
-require 'rails_admin_settings'
 
-require 'sitemap_generator'
 require 'kaminari'
 require 'addressable/uri'
 require 'turbolinks'
-require 'simple-navigation'
 
 require 'rocket_cms/seo_helpers'
 require 'rocket_cms/configuration'

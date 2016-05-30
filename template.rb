@@ -19,10 +19,10 @@ gem 'rails', '4.2.6'
 
 gem 'sass'
 
-#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}, '~> 0.11.0'
+#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}
 
 gem 'sass-rails'
-gem 'glebtv-compass-rails'
+gem 'compass-rails'
 
 gem 'slim-rails'
 gem 'rs_russian'
@@ -31,7 +31,6 @@ gem 'cancancan'
 gem 'cloner'
 gem 'unicorn'
 gem 'x-real-ip'
-
 gem 'sentry-raven'
 
 group :development do
@@ -40,7 +39,7 @@ group :development do
   gem 'pry-rails'
   gem 'spring'
 
-  gem 'capistrano', '~> 3.4.0', require: false
+  gem 'capistrano', require: false
   gem 'glebtv-capistrano-unicorn', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
