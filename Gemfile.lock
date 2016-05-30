@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.12.1)
+    rocket_cms (0.12.2)
       addressable
       coffee-rails
       jquery-rails
