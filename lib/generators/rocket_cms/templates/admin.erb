@@ -15,9 +15,9 @@ RailsAdmin.config do |config|
   config.authorize_with :cancan
 <% if RocketCMS.mongoid? %>
   ## == MongoidAudit
-  config.audit_with :mongoid_audit, 'HistoryTracker'
+  # config.audit_with :mongoid_audit, 'HistoryTracker'
 <% elsif RocketCMS.active_record? %>
-  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
+  # config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 <% end %>
 
 

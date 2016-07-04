@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'glebtv-mongoid_nested_set'
   spec.add_dependency 'glebtv-mongoid-paperclip'
-  spec.add_dependency 'mongoid-audit', '~> 1.1.0'
+  spec.add_dependency 'mongoid-audit', '~> 1.2.0'
   spec.add_dependency 'mongoid-slug'
   spec.add_dependency 'glebtv-ckeditor'
   spec.add_dependency 'geocoder'
