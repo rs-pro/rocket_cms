@@ -3,7 +3,7 @@ require 'glebtv-mongoid-paperclip'
 require 'glebtv-mongoid_nested_set'
 require 'mongoid-audit'
 require 'mongoid-slug'
-require 'kaminari-mongoid'
+require 'kaminari_mongoid'
 require 'geocoder'
 
 module RocketCMS
