@@ -2,7 +2,7 @@ require 'mongoid'
 require 'glebtv-mongoid-paperclip'
 require 'glebtv-mongoid_nested_set'
 require 'mongoid-audit'
-require 'mongoid-slug'
+require 'mongoid_slug'
 require 'kaminari_mongoid'
 require 'geocoder'
 
