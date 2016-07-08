@@ -2,7 +2,7 @@ require 'mongoid'
 require 'glebtv-mongoid-paperclip'
 require 'glebtv-mongoid_nested_set'
 require 'mongoid_slug'
-require 'kaminari-mongoid'
+require 'kaminari/mongoid'
 
 module RocketCMS
   def self.orm
