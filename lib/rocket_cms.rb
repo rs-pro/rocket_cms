@@ -63,6 +63,7 @@ module RocketCMS
     end
   end
 
+  autoload :Menu, 'rocket_cms/menu'
   autoload :Migration, 'rocket_cms/migration'
   autoload :UrlHelper, 'rocket_cms/url_helper'
 
@@ -95,6 +96,19 @@ module RocketCMS
     autoload :News, 'rocket_cms/controllers/news'
     autoload :Pages, 'rocket_cms/controllers/pages'
     autoload :Search, 'rocket_cms/controllers/search'
+  end
+end
+
+require 'rails_admin_nested_set/helper'
+
+module RailsAdminNestedSet::Helper
+  def extra_fields(node)
+    if node.class.name == 'Page'
+      ret = RocketCMS::Menu.build_toggles(self, node.class, node, 'xs', '')
+      ('<div style="white-space: normal; display: inline-block; margin-left: 10px;">' + ret.join(' ') + '</div>').html_safe
+    else
+      "".html_safe
+    end
   end
 end
 

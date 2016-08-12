@@ -9,30 +9,7 @@ module RailsAdmin
 
           register_instance_option :pretty_value do
             obj = bindings[:object]
-            ret = []
-            menus = Rails.cache.fetch 'menus', expires_in: 10.minutes do
-              if RocketCMS.mongoid?
-                ::Menu.all.map { |m| {id: m.id.to_s, name: m.name } }
-              else
-                ::Menu.all.map { |m| {id: m.id, name: m.name } }
-              end
-            end
-            menus.each do |m|
-              if RocketCMS.mongoid?
-                on = obj.menu_ids.include?(BSON::ObjectId.from_string(m[:id]))
-              else
-                on = obj.menu_ids.include?(m[:id].to_i)
-              end
-              ret << bindings[:view].link_to(
-                m[:name],
-                bindings[:view].toggle_menu_path(model_name: @abstract_model, id: obj.id, menu: m[:id], on: !on),
-                #method: :post,
-                title: m[:name],
-                class: "btn btn-mini #{on ? "btn-success" : "btn-danger"}",
-                style: 'margin-bottom: 5px;',
-                onclick: 'var $t = $(this); $.ajax({type: "POST", url: $t.attr("href"), data: {ajax:true}, success: function(r) { $t.attr("href", r.href); $t.attr("class", r.class); }, error: function(e) { alert(e.responseText); }}); return false;'
-              )
-            end
+            ret = RocketCMS::Menu.build_toggles(bindings[:view], @abstract_model, obj, 'sm', 'margin-bottom: 5px;')
             ('<div style="white-space: normal;">' + ret.join(' ') + '</div>').html_safe
           end
 
@@ -78,7 +55,7 @@ module RailsAdmin
             ajax_link = Proc.new do |am, obj, menu, on|
               render json: {
                 href: toggle_menu_path(model_name: am, id: obj.id, menu: menu.id, on: !on),
-                class: "btn btn-mini #{on ? "btn-success" : "btn-danger"}",
+                class: on ? "btn-success" : "btn-danger",
               }
             end
             if params['id'].present?
