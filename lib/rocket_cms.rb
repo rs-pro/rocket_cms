@@ -18,7 +18,7 @@ require 'rocket_cms/patch'
 require 'rocket_cms/admin'
 require 'rocket_cms/search'
 require 'rocket_cms/model'
-if defined?(RailsAdmin)
+if defined?(RailsAdmin) && !RocketCMS.light?
   require 'rocket_cms/rails_admin_menu'
 end
 require 'rocket_cms/engine'
@@ -99,17 +99,9 @@ module RocketCMS
   end
 end
 
-require 'rails_admin_nested_set/helper'
+require 'manual_slug'
 
-module RailsAdminNestedSet::Helper
-  def extra_fields(node)
-    if node.class.name == 'Page'
-      ret = RocketCMS::Menu.build_toggles(self, node.class, node, 'xs', '')
-      ('<div style="white-space: normal; display: inline-block; margin-left: 10px;">' + ret.join(' ') + '</div>').html_safe
-    else
-      "".html_safe
-    end
-  end
+if defined?(RailsAdmin) && !RocketCMS.light?
+  require 'rocket_cms/nested_set'
 end
 
-require 'manual_slug'
