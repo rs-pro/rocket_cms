@@ -23,7 +23,9 @@ module ManualSlug::Mongoid
       skip_callback :create, :before, :build_slug
 
       before_validation do
-        self._slugs = self._slugs.map{ |s| s.strip }.select {|s| !s.blank? }
+        unless self._slugs.nil?
+          self._slugs = self._slugs.map{ |s| s.strip }.select {|s| !s.blank? }
+        end
 
         if self._slugs.empty?
           self.build_slug
