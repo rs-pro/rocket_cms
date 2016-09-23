@@ -9,8 +9,12 @@ module ManualSlug::Mongoid
     if slug.blank?
       self._slugs = []
     else
-      self._slugs.delete(slug)
-      self._slugs << slug
+      if self._slugs.blank?
+        self._slugs = [slug]
+      else
+        self._slugs.delete(slug)
+        self._slugs << slug
+      end
     end
   end
 
