@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.15.4)
+    rocket_cms (0.15.5)
       addressable
       coffee-rails
       jquery-rails
@@ -86,7 +86,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
-    minitest (5.9.0)
+    minitest (5.9.1)
     nio4r (1.2.1)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
