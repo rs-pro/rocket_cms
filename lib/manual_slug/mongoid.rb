@@ -3,7 +3,7 @@ module ManualSlug::Mongoid
   include ::Mongoid::Slug
 
   def text_slug
-    self._slugs.empty? ? '' : self._slugs.last
+    self._slugs.blank? ? '' : self._slugs.last
   end
   def text_slug=(slug)
     if slug.blank?
