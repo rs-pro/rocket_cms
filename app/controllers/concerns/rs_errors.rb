@@ -46,7 +46,7 @@ module RsErrors
     unless exception.nil?
       Rails.logger.error exception.message
       Rails.logger.error exception.backtrace.join("\n")
-      capture_exception(exception) if defined?(Raven)
+      capture_error(exception)
     end
     render_error(404)
   end
@@ -55,7 +55,7 @@ module RsErrors
     Rails.logger.error "500: #{request.url}"
     Rails.logger.error exception.message
     Rails.logger.error exception.backtrace.join("\n")
-    capture_exception(exception) if defined?(Raven)
+    capture_error(exception)
     begin
       if rails_admin?
         render text: t('rs.errors.internal_error_full', klass: exception.class.name, message: SmartExcerpt.h.strip_tags(exception.message)), status: 500
@@ -68,6 +68,12 @@ module RsErrors
       puts e.backtrace.join("\n")
     end
     render_error(500)
+  end
+
+  def capture_error(exception)
+    return unless defined?(Raven)
+    # Raven's capture_exception helper method is not defined in rails_admin
+    Raven.capture_exception(exception)
   end
 
   def render_error(code = 500)
