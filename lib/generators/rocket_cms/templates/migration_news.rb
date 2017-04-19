@@ -1,4 +1,4 @@
-class RocketCmsCreateNews < ActiveRecord::Migration
+class RocketCmsCreateNews < ActiveRecord::Migration[5.0]
   def change
     create_table :news do |t|
       t.boolean :enabled, default: true, null: false

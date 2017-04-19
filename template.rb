@@ -10,6 +10,8 @@ if Gem::Version.new(version) < Gem::Version.new('4.2.1')
   exit 1
 end
 
+git :init
+
 remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
@@ -352,19 +354,21 @@ else
   #{'pidfile "#{shared_dir}/tmp/puma/pid"'}
   #{'state_path "#{shared_dir}/tmp/puma/state"'}
   activate_control_app
-TEXT
 end
 
 on_restart do
   puts 'Refreshing Gemfile'
-  ENV["BUNDLE_GEMFILE"] = "#{current_dir}/Gemfile" unless rails_env == 'development'
+  #{'ENV["BUNDLE_GEMFILE"] = "#{current_dir}/Gemfile" unless rails_env == \'development\''}
 end
 
-# mongoid reconnects by itself
-on_worker_boot do
-  require "active_record"
+#{"#mongoid reconnects by itself" if mongoid}
+#{'on_worker_boot do
+  require \"active_record\"
   ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
-  ActiveRecord::Base.establish_connection(YAML.load_file("#{current_dir}/config/database.yml")[rails_env])
+  ActiveRecord::Base.establish_connection(YAML.load_file("#{app_dir}/config/database.yml")[rails_env])
+end' if !mongoid}
+
+TEXT
 end
 
 remove_file 'app/views/layouts/application.html.erb'

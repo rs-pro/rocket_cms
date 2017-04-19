@@ -1,4 +1,4 @@
-class RocketCmsCreatePages < ActiveRecord::Migration
+class RocketCmsCreatePages < ActiveRecord::Migration[5.0]
   def change
     create_table :menus do |t|
 
@@ -17,7 +17,7 @@ class RocketCmsCreatePages < ActiveRecord::Migration
       t.integer :parent_id
       t.integer :lft
       t.integer :rgt
-      t.integer :depth 
+      t.integer :depth
 
       if RocketCMS.config.localize
         t.column :name_translations, 'hstore', default: {}

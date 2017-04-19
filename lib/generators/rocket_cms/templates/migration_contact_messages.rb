@@ -1,4 +1,4 @@
-class RocketCmsCreateContactMessages < ActiveRecord::Migration
+class RocketCmsCreateContactMessages < ActiveRecord::Migration[5.0]
   def change
     create_table :contact_messages do |t|
       t.string :name

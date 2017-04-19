@@ -1,4 +1,4 @@
-class RocketCmsCreateSeos < ActiveRecord::Migration
+class RocketCmsCreateSeos < ActiveRecord::Migration[5.0]
   def change
     create_table :seos do |t|
       t.boolean :enabled, default: true, null: false
