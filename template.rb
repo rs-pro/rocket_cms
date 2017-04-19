@@ -24,8 +24,6 @@ gem 'sass'
 #{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}
 
 gem 'sass-rails'
-gem 'compass-rails'
-
 gem 'slim-rails'
 
 gem 'devise'
@@ -422,7 +420,6 @@ end
 
 remove_file 'app/assets/stylesheets/application.css'
 create_file 'app/assets/stylesheets/application.css.sass' do <<-TEXT
-@import 'compass'
 @import 'rocket_cms'
 
 #wrapper
@@ -435,8 +432,6 @@ create_file 'app/assets/stylesheets/application.css.sass' do <<-TEXT
     float: right
     width: 750px
 
-@import "compass/layout/sticky-footer"
-+sticky-footer(50px)
 TEXT
 end
 
