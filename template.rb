@@ -354,19 +354,17 @@ else
   #{'pidfile "#{shared_dir}/tmp/puma/pid"'}
   #{'state_path "#{shared_dir}/tmp/puma/state"'}
   activate_control_app
+  on_restart do
+    puts 'Refreshing Gemfile'
+    #{'ENV["BUNDLE_GEMFILE"] = "#{current_dir}/Gemfile" unless rails_env == \'development\''}
+  end
+  #{"#mongoid reconnects by itself" if mongoid}
+  #{'on_worker_boot do
+    require "active_record"
+    ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
+    ActiveRecord::Base.establish_connection(YAML.load_file("#{base_dir}/current/config/database.yml")[rails_env])
+  end' if !mongoid}
 end
-
-on_restart do
-  puts 'Refreshing Gemfile'
-  #{'ENV["BUNDLE_GEMFILE"] = "#{current_dir}/Gemfile" unless rails_env == \'development\''}
-end
-
-#{"#mongoid reconnects by itself" if mongoid}
-#{'on_worker_boot do
-  require \"active_record\"
-  ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
-  ActiveRecord::Base.establish_connection(YAML.load_file("#{app_dir}/config/database.yml")[rails_env])
-end' if !mongoid}
 
 TEXT
 end
