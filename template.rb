@@ -367,9 +367,6 @@ on_worker_boot do
   ActiveRecord::Base.establish_connection(YAML.load_file("#{current_dir}/config/database.yml")[rails_env])
 end
 
-end
-
-
 remove_file 'app/views/layouts/application.html.erb'
 
 
