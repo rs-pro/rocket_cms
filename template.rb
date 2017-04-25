@@ -2,7 +2,7 @@ rails_spec = (Gem.loaded_specs["railties"] || Gem.loaded_specs["rails"])
 version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
-yarn = options[:yarn]
+yarn = !options[:skip_yarn]
 
 if Gem::Version.new(version) < Gem::Version.new('5.0.0')
   puts "You are using an old version of Rails (#{version})"
