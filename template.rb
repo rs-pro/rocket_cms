@@ -3,6 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 yarn = !options[:skip_yarn]
+spring = !options[:skip_spring]
 
 if Gem::Version.new(version) < Gem::Version.new('5.0.0')
   puts "You are using an old version of Rails (#{version})"
@@ -51,6 +52,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'listen'
+  #{"gem 'spring'" if spring}
 
   gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
