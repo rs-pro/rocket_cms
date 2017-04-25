@@ -1,10 +1,23 @@
 # RocketCMS
 
-Rails + RailsAdmin + Mongoid/PostgreSQL + Elasticsearch/pg_search (optional)
+What's in the box when you generate a new app:
 
-**Before 1.0 API and class names should be considered unstable and can change at any time!**
+- Rails 5.1
+- ActiveRecord + PostgreSQL or Mongoid 6
+- Elasticsearch (optional)
+- RailsAdmin
+- Webpack via webpack-rails with fully customizeable webpack.config.js
+- JS packages via package.json
+- Capistrano deploy (including puma and webpack)
+- Puma in production and in development
+- Windows support
+- Basic CMS models and controllers (Pages + SEO, News, Contact form with mailer, menu)
+- Menu via SimpleNavigation
+- Ckeditor with image upload support
+- L10n and i18n support
 
-## Installation
+
+## Installation (existing app)
 
 Add this line to your application's Gemfile:
 
@@ -35,9 +48,8 @@ For activerecord, generate migrations and run them
     rails g rocket_cms:migration
     rake db:migrate
 
-## Usage
 
-### Using app generator
+### Generating a new app
 
 Make sure you have rails 4.1/4.2/5.0 installed
 
@@ -50,11 +62,11 @@ If not, uninstall rails and install again
 
 Then, for mongoid:
 
-    rails new my_app -T -O -m https://raw.githubusercontent.com/rs-pro/rocket_cms/master/template.rb
+    rails new my_app -T -O -m https://raw.githubusercontent.com/rs-pro/rocket_cms/master/template.rb --yarn
 
 for ActiveRecord:
 
-    rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/rs-pro/rocket_cms/master/template.rb
+    rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/rs-pro/rocket_cms/master/template.rb --yarn
 
 generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
 

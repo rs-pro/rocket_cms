@@ -7,16 +7,22 @@ html lang="ru"
     = yield :meta
     = csrf_meta_tags
     = favicon_link_tag '/favicon.ico'
-    = stylesheet_link_tag "application", media: "all"
-    = javascript_include_tag "application"
-  body
-    #root
-      = render 'shared/messages'
-      #sidebar
-        = render_navigation &navigation(:main)
-      #content
-        = yield
-      #root_footer
+    = stylesheet_link_tag *webpack_asset_paths('vendor', extension: 'css')
+    = stylesheet_link_tag *webpack_asset_paths('application', extension: 'css')
+    = javascript_include_tag *webpack_asset_paths('vendor', extension: 'js')
+    = javascript_include_tag *webpack_asset_paths('application', extension: 'js')
+
+  body.no-js
+    = render 'blocks/header'
+    script.no-js-script
+      | document.body.classList.remove('no-js');
+    .no-js-error.alert.alert-error
+      | К сожалению, в вашем браузере отключен JavaScript
+      span Включите его, чтобы зайти на сайт
+      a class="btn-transparent" target="_blank" href="https://yandex.ru/support/common/browsers-settings/browsers-java-js-settings.xml" Включить JavaScript
+
+    .container
+      = yield
     #footer
       = render 'blocks/footer'
 

@@ -1,0 +1,49 @@
+.errors
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background: #b70f25 no-repeat 100% 100% / cover
+  color: #fff
+  z-index: 2000
+  .logo-ta
+    top: 55px
+
+.errors-inner
+  display: table-cell
+  text-align: center
+  vertical-align: middle
+  width: 100vw
+  height: 100vh
+  a
+    color: #fff
+  h3
+    max-width: 720px
+    margin: 0 auto 20px
+    font-size: 44px
+    font-weight: 700
+    span
+      display: block
+      font-size: 34px
+      font-weight: 400
+      margin-bottom: 45px
+      margin-top: 20px
+
+  .btn-transparent
+    height: 66px
+    padding: 22px 25px
+    text-transform: uppercase
+    font-size: 17px
+    text-transform: none
+    &:hover
+      border-color: #fff
+      background: #fff
+      color: #ff0026
+
+.no-js-error
+  display: none
+
+body.no-js
+  .no-js-error
+    display: block
