@@ -4,6 +4,7 @@ git add --all .
 git commit -am "${*:1}"
 git push
 rake release
+sleep 3
 cd mongoid
 bundle update && rake release
 cd ..
