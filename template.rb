@@ -487,7 +487,8 @@ end
 FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, Pathname.new(destination_root).join('config', 'secrets.yml.example').to_s)
 
 unless mongoid
-  generate "paper_trail:install", "--with-associations"
+  #generate "paper_trail:install", "--with-associations"
+  generate "paper_trail:install"
   generate "friendly_id"
   rake "db:migrate"
 end
