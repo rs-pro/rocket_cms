@@ -62,11 +62,11 @@ If not, uninstall rails and install again
 
 Then, for mongoid:
 
-    rails new my_app -T -O -m https://raw.githubusercontent.com/rs-pro/rocket_cms/master/template.rb --yarn
+    rails new my_app -T -O -m https://raw.githubusercontent.com/rs-pro/rocket_cms/master/template.rb --yarn --skip-spring
 
 for ActiveRecord:
 
-    rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/rs-pro/rocket_cms/master/template.rb --yarn
+    rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/rs-pro/rocket_cms/master/template.rb --yarn --skip-spring
 
 generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
 
@@ -146,8 +146,12 @@ gem 'rails_admin_mongoid_localize_field'
 
 ### Capistrano generator
 
-    rails g rocket_cms:capify data/home unicorn_port domain_name
-    
+    rails g rocket_cms:capify data unicorn_port domain_name
+    # (path /data/:user/app/ - rocket science default)
+
+    rails g rocket_cms:capify home unicorn_port domain_name
+    # (path /home/:user/:app_name/)
+
 designed to be used together with our ansible app setup script.
 
 ### Documentation

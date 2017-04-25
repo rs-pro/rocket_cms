@@ -51,7 +51,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'listen'
-  gem 'spring'
 
   gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
@@ -201,6 +200,7 @@ end
 generate "rocket_cms:admin"
 generate "rocket_cms:ability"
 generate "rocket_cms:layout"
+generate "rocket_cms:webpack"
 
 unless mongoid
   rake "db:migrate"
