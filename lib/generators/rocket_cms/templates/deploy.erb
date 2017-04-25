@@ -1,6 +1,5 @@
 set :user, "<%= app_name.downcase %>"
 set :application, '<%= app_name.downcase %>'
-set :scm, :git
 set :repo_url, 'git@rscz.ru:rocket-science/<%= app_name.downcase %>.git'
 
 set :branch, ENV["REVISION"] || "master"
@@ -12,14 +11,42 @@ set :deploy_to, "<%= deploy_to %>"
 # set :hipchat_room_name, "<%= app_name %>"
 # set :hipchat_announce, false
 
-set :rvm_type, :user
-set :rvm_ruby_version, "2.2.0@#{fetch :application}"
+#set :rvm_type, :user
+#set :rvm_ruby_version, "2.4.1@#{fetch :application}"
 set :use_sudo, false
 
 set :keep_releases, 20
 
+<% if RocketCMS.mongoid? %>
 set :linked_files, %w{config/mongoid.yml config/secrets.yml}
+<% else %>
+set :linked_files, %w{config/database.yml config/secrets.yml}
+<% end %>
 set :linked_dirs, %w{log tmp vendor/bundle public/assets public/system public/uploads public/ckeditor_assets public/sitemap}
+
+Rake::Task["puma:check"].clear
+Rake::Task["puma:config"].clear
+namespace :puma do
+  task :check do
+  end
+  task :config do
+  end
+end
+
+namespace :deploy do
+  desc "webpack"
+  task :webpack do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "webpack:compile"
+        end
+      end
+    end
+  end
+end
+
+after "deploy:updated", "deploy:webpack"
 
 namespace :db do
   desc "Create the indexes defined on your mongoid models"
@@ -30,18 +57,3 @@ namespace :db do
   end
 end
 
-namespace :deploy do
-  task :restart do
-  end
-  desc "Update the crontab"
-  task :update_crontab do
-    on roles(:app) do
-      execute "cd #{release_path}; #{fetch(:tmp_dir)}/#{fetch :application}/rvm-auto.sh . bundle exec whenever --update-crontab #{fetch :user} --set \'environment=#{fetch :stage}&current_path=#{release_path}\'; true"
-    end
-  end
-end
-
-after 'deploy:publishing', 'deploy:restart'
-after 'deploy:restart', 'unicorn:duplicate' 
-#before "deploy:update_crontab", 'rvm1:hook'
-#after "deploy:restart", "deploy:update_crontab"
