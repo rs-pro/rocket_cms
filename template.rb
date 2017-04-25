@@ -173,6 +173,7 @@ unless mongoid
   generate 'simple_captcha'
 end
 
+generate "simple_form:install"
 generate "devise:install"
 generate "devise", "User"
 remove_file "config/locales/devise.en.yml"
