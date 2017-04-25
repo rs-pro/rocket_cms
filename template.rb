@@ -28,6 +28,8 @@ gem 'rails_admin', github: 'crowdtask/rails_admin'
 
 gem 'slim', github: 'slim-template/slim'
 gem 'haml', github: 'haml/haml'
+#{"gem 'friendly_id', github: 'glebtv/friendly_id'" if !mongoid}
+
 gem 'sass-rails'
 gem 'webpack-rails'
 
