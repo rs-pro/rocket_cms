@@ -142,12 +142,18 @@ development:
       database: #{app_name.downcase}_development
       hosts:
           - localhost:27017
+  options:
+    belongs_to_required_by_default: false
+
 test:
   clients:
     default:
       database: #{app_name.downcase}_test
       hosts:
           - localhost:27017
+  options:
+    belongs_to_required_by_default: false
+
 TEXT
 end
 else
@@ -252,6 +258,17 @@ create_file 'db/seeds.rb' do <<-TEXT
 admin_pw = "#{admin_pw}"
 User.destroy_all
 User.create!(email: 'admin@#{app_name.dasherize.downcase}.ru', password: admin_pw, password_confirmation: admin_pw)
+
+Page.destroy_all
+Menu.destroy_all
+h = Menu.create(name: 'Главное', text_slug: 'main').id
+p = Page.create!(name: 'Проекты', content: 'проекты', fullpath: '/projects', menu_ids: [h])
+Page.create!(name: 'Прайс лист', fullpath: '/price', menu_ids: [h])
+Page.create!(name: 'Галерея', fullpath: '/galleries', menu_ids: [h])
+c = Page.create!(name: 'О компании', fullpath: '/company', menu_ids: [h], content: 'О Компании')
+Page.create!(name: 'Новости', fullpath: '/news', menu_ids: [h])
+Page.create!(name: 'Контакты', fullpath: '/contacts', menu_ids: [h], content: 'Текст стр контакты')
+
 TEXT
 end
 
