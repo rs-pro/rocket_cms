@@ -44,7 +44,7 @@ gem 'sentry-raven'
 gem 'uglifier'
 
 # windows
-gem 'tzinfo-data'
+gem 'tzinfo-data' if Gem.win_platform?
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 group :development do
@@ -382,7 +382,7 @@ rails_env = ENV['RACK_ENV'] || ENV['RAILS_ENV'] || "development"
 environment rails_env
 
 if rails_env == 'development'
-  workers 1
+  Puma.windows? { workers 1 }
   bind 'tcp://0.0.0.0:#{port}'
 else
   # https://github.com/seuros/capistrano-puma/blob/642d141ee502546bd5a43a76cd9f6766dc0fcc7a/lib/capistrano/templates/puma.rb.erb#L25

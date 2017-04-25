@@ -10,7 +10,7 @@ What's in the box when you generate a new app:
 - JS packages via package.json
 - Capistrano deploy (including puma and webpack)
 - Puma in production and in development
-- Windows support
+- Basic windows support (development env only)
 - Basic CMS models and controllers (Pages + SEO, News, Contact form with mailer, menu)
 - Menu via SimpleNavigation
 - Ckeditor with image upload support
