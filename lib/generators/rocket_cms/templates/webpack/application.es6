@@ -8,9 +8,9 @@ window.A = {}
 A.errors = new Errors()
 A.errors.checkCookie();
 
-import Turbolinks from "turbolinks";
-Turbolinks.start()
+//import Turbolinks from "turbolinks";
+//Turbolinks.start()
 
-document.addEventListener("turbolinks:load", function() {
-})
+//document.addEventListener("turbolinks:load", function() {
+//})
 

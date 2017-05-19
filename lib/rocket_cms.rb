@@ -10,7 +10,7 @@ require 'filename_to_slug'
 
 require 'kaminari'
 require 'addressable/uri'
-require 'turbolinks'
+#require 'turbolinks'
 
 require 'rocket_cms/seo_helpers'
 require 'rocket_cms/configuration'

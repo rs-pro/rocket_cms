@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'coffee-rails'
-  spec.add_dependency 'turbolinks'
+  #spec.add_dependency 'turbolinks'
   spec.add_dependency 'validates_email_format_of'
   spec.add_dependency 'addressable'
   spec.add_dependency 'stringex'
