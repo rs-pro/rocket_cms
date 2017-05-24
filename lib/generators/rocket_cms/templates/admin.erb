@@ -3,6 +3,8 @@ require 'rails_admin/custom_show_in_app'
 RailsAdminSettings.track_history!
 
 RailsAdmin.config do |config|
+  config.parent_controller = '::ApplicationController'
+
   ## == Devise ==
   # this is required if not using cancan
   #config.authenticate_with do
