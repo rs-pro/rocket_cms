@@ -18,7 +18,7 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.0.rc2'
+gem 'rails', '5.1.1'
 #{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg'" end}
 
 gem 'sass'
@@ -26,9 +26,8 @@ gem 'sass'
 #{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}
 gem 'rails_admin', github: 'crowdtask/rails_admin'
 
-gem 'slim', github: 'slim-template/slim'
-gem 'haml', github: 'haml/haml'
-#{"gem 'friendly_id', github: 'glebtv/friendly_id'" if !mongoid}
+gem 'slim'
+gem 'haml'
 
 gem 'sass-rails'
 gem 'webpack-rails'
@@ -50,8 +49,8 @@ gem 'tzinfo-data' if Gem.win_platform?
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 group :development do
-  gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'better_errors', github: 'charliesome/better_errors'
   gem 'pry-rails'
   gem 'listen'
   #{"gem 'spring'" if spring}
