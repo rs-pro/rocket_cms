@@ -11,6 +11,10 @@ module RocketCMS
           has_and_belongs_to_many :menus, inverse_of: :pages
           acts_as_nested_set
           scope :sorted, -> { asc(:lft) }
+
+          before_save do
+            self.qregexp = read_attribute(:regexp) unless has_attribute?(:qregexp) || new_record?
+          end
         end
 
         def regexp=(value)
@@ -18,7 +22,7 @@ module RocketCMS
         end
 
         def regexp
-          self.qregexp || read_attribute(:regexp)
+          has_attribute?(:qregexp) ? qregexp : read_attribute(:regexp)
         end
       end
     end
