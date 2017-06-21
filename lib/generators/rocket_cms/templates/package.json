@@ -35,7 +35,7 @@
     "style-loader": "^0.18.2",
     "turbolinks": "^5.0.0",
     "url-loader": "^0.5.7",
-    "webpack": "^2.2.1",
+    "webpack": "^3.0.0",
     "webpack-dev-server": "^2.3.0",
     "webpack-hot-middleware": "^2.7.1"
   }
