@@ -5,6 +5,8 @@
     - if !obj.respond_to?(:content) || obj.content.blank?
       - unless @seo_page.nil?
         = raw @seo_page.page_content
+        - if (@seo_page.id == obj.id && @seo_page.class.name == obj.class.name)
+          = render 'shared/admin_link', obj: @seo_page
     - else
       = raw obj.content
       = render 'shared/admin_link', obj: obj
