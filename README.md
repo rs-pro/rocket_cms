@@ -1,5 +1,7 @@
 # RocketCMS
 
+## RocketScience's Ruby On Rails app template / starter kit
+
 What's in the box when you generate a new app:
 
 - Rails 5.1
@@ -12,6 +14,8 @@ What's in the box when you generate a new app:
 - Puma in production and in development
 - Basic windows support (development env only)
 - Basic CMS models and controllers (Pages + SEO, News, Contact form with mailer, menu)
+- Basic SEO optimization functionality, including editing meta and OG tags
+- Optimized admin interface, including editing pages and menu
 - Menu via SimpleNavigation
 - Ckeditor with image upload support
 - L10n and i18n support
@@ -51,7 +55,7 @@ For activerecord, generate migrations and run them
 
 ### Generating a new app
 
-Make sure you have rails 4.1/4.2/5.0 installed
+Make sure you have rails 5.1 installed
 
     rails -v
 
