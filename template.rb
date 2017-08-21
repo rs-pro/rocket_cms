@@ -35,6 +35,7 @@ gem 'webpack-rails'
 gem 'devise'
 gem 'devise-i18n'
 gem 'cancancan'
+#{if mongoid then "gem 'cancancan'" end}
 
 gem 'cloner'
 gem 'puma'
