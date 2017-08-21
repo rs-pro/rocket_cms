@@ -10,11 +10,11 @@ RailsAdmin.config do |config|
   #config.authenticate_with do
     #warden.authenticate! scope: :user
   #end
-  
+
   config.current_user_method(&:current_user)
-  
+
   ## == Cancan ==
-  config.authorize_with :cancan
+  config.authorize_with :cancancan2
 <% if RocketCMS.mongoid? %>
   ## == MongoidAudit
   # config.audit_with :mongoid_audit, 'HistoryTracker'
@@ -45,13 +45,13 @@ RailsAdmin.config do |config|
         ['Page', 'Slide', 'Partner'].include? bindings[:abstract_model].model_name
       end
     end
-    
+
     custom_show_in_app do
       visible do
         ['Page', 'News'].include? bindings[:abstract_model].model_name
       end
     end
-    
+
     toggle
     toggle_menu do
       visible do
