@@ -1,5 +1,5 @@
 - unless obj.nil?
-  .text_content
+  - content = capture do
     - if (!defined?(h1) || h1) && !obj.h1.blank?
       %h1= obj.h1
     - if !obj.respond_to?(:content) || obj.content.blank?
@@ -12,6 +12,9 @@
       = render 'shared/admin_link', obj: obj
     - if !@seo_page.nil? && (@seo_page.id != obj.id || @seo_page.class.name != obj.class.name)
       = render 'shared/admin_link', obj: @seo_page
+  - unless content.blank?
+    .text_content
+      = content
 
   - content_for :meta do
     = render 'shared/meta', obj: obj
