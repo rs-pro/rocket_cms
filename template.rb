@@ -393,6 +393,8 @@ else
   #{'shared_dir = "#{base_dir}/shared"'}
   # Set up socket location
   #bind 'tcp://0.0.0.0:4000'
+  #{'socket_dir = "#{shared_dir}/tmp/puma/"'}
+  #{'Dir.mkdir socket_dir unless File.directory? socket_dir'}
   #{'bind "unix://#{shared_dir}/tmp/puma/socket"'}
   # Logging
   #{'stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true'}
