@@ -7,10 +7,14 @@ html lang="ru"
     = yield :meta
     = csrf_meta_tags
     = favicon_link_tag '/favicon.ico'
-    = stylesheet_link_tag *webpack_asset_paths('vendor', extension: 'css')
-    = stylesheet_link_tag *webpack_asset_paths('application', extension: 'css')
-    = javascript_include_tag *webpack_asset_paths('vendor', extension: 'js')
-    = javascript_include_tag *webpack_asset_paths('application', extension: 'js')
+    - if !ENV["WEBPACK_HOST"].blank? && Rails.env.development?
+      script src="http://#{ENV["WEBPACK_HOST"]}/webpack/vendor.js"
+      script src="http://#{ENV["WEBPACK_HOST"]}/webpack/application.js"
+    - else
+      = stylesheet_link_tag *webpack_asset_paths('vendor', extension: 'css')
+      = stylesheet_link_tag *webpack_asset_paths('application', extension: 'css')
+      = javascript_include_tag *webpack_asset_paths('vendor', extension: 'js')
+      = javascript_include_tag *webpack_asset_paths('application', extension: 'js')
 
   body.no-js
     = render 'blocks/header'
@@ -22,6 +26,7 @@ html lang="ru"
       a class="btn-transparent" target="_blank" href="https://yandex.ru/support/common/browsers-settings/browsers-java-js-settings.xml" Включить JavaScript
 
     .container
+      = render 'shared/messages'
       = yield
     #footer
       = render 'blocks/footer'
