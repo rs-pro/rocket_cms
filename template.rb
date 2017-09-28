@@ -45,6 +45,8 @@ gem 'sentry-raven'
 
 gem 'uglifier'
 
+gem 'rs_russian'
+
 # windows
 gem 'tzinfo-data' if Gem.win_platform?
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
@@ -84,6 +86,7 @@ create_file '.gitignore' do <<-TEXT
 
 /.bundle
 /log/*.log
+*.swp
 /tmp
 /public/system
 /public/ckeditor_assets
@@ -129,6 +132,34 @@ To run (nix/mac):
 ./node_modules/.bin/webpack-dev-server --config config/webpack.config.js --hot --inline
 puma
 ```
+
+## ngrok
+В одном терминале запускаем ngrok на `webpack`
+```
+ngrok http -host-header=rewrite 0.0.0.0:3808
+```
+В ответе ищем строку, похожую на 
+```
+Forwarding                    http://7c68e072.ngrok.io -> 0.0.0.0:3808
+```
+Достаём из неё хост. В данном примере это ``7c68e072.ngrok.io``
+
+Запускаем webpack
+```
+HOST=0.0.0.0 ./node_modules/.bin/webpack-dev-server --config config/webpack.config.js --hot --inline
+```
+
+Запускаем пуму (меняем ``7c68e072.ngrok.io`` на тот хост, который дал `ngrok`)
+```
+WEBPACK_HOST=7c68e072.ngrok.io puma
+```
+
+И запускаем `ngrok` второй раз уже для `puma`
+```
+ngrok http 2760
+```
+
+Сайт будет доступен по хосту из последнего запущенного `ngrok`
 "
 
 #create_file '.ruby-version', "2.4.0\n"
