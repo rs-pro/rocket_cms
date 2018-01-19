@@ -25,6 +25,7 @@ gem 'sass'
 
 #{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}
 gem 'rails_admin', github: 'crowdtask/rails_admin'
+#{"gem 'friendly_id', github: 'norman/friendly_id'" unless mongoid}
 
 gem 'slim'
 gem 'haml'
