@@ -18,8 +18,8 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.1'
-#{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg'" end}
+gem 'rails', '5.1.4'
+#{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg', '~> 0.21.0" end}
 
 gem 'sass'
 
