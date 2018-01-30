@@ -31,5 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'kaminari'
   spec.add_dependency 'thor'
   spec.add_dependency 'smart_excerpt'
+  spec.add_dependency 'manual_slug'
 
 end

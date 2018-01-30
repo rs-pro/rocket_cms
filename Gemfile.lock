@@ -1,11 +1,12 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.21.1)
+    rocket_cms (0.22.0)
       addressable
       coffee-rails
       jquery-rails
       kaminari
+      manual_slug
       rails (>= 4.1.0, < 6.0)
       smart_excerpt
       stringex
@@ -93,12 +94,14 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
+    manual_slug (0.1.0)
+      activesupport
     method_source (0.9.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
-    minitest (5.11.1)
+    minitest (5.11.3)
     nio4r (2.2.0)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     public_suffix (3.0.1)
     rack (2.0.3)
