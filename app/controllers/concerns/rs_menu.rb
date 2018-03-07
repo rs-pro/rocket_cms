@@ -17,7 +17,7 @@ module RsMenu
     cr = item.clean_regexp
     navigation_item(primary, item, block)
   end
-  
+
   def navigation_item(primary, item, block=nil)
     url = nav_get_url(item)
     if block.nil?
