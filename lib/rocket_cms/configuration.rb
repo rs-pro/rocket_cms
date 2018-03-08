@@ -31,8 +31,6 @@ module RocketCMS
 
     attr_accessor :localize
 
-    attr_accessor :navigation
-
     def initialize
       @news_image_styles = {
         main:  '400x200>',
@@ -56,8 +54,6 @@ module RocketCMS
       @localize = false
 
       @separate_seo_table = false
-
-      @navigation = :rocket
     end
 
     def search_enabled=(val)

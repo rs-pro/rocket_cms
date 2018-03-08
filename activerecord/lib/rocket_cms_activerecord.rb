@@ -24,7 +24,7 @@ require 'rails_admin_nested_set'
 require 'rails_admin_toggleable'
 require 'rails_admin_settings'
 require 'sitemap_generator'
-require 'simple-navigation'
+require 'rocket_navigation'
 
 require 'rocket_cms'
 require 'glebtv-ckeditor'

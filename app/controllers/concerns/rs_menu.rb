@@ -29,9 +29,10 @@ module RsMenu
 
   def navigation(type)
     Proc.new do |primary|
-      if simple_navigation?
+      if defined?(SimpleNavigation)
         SimpleNavigation.config.autogenerate_item_ids = false
       end
+
       begin
         nav_extra_data_before(type, primary)
         items = nav_get_menu_items(type).select { |i| !i.name.blank? && i.enabled }
@@ -62,16 +63,6 @@ module RsMenu
   end
   def nav_extra_data_after(type, primary)
     # override for additional config or items
-  end
-
-  def nav_type
-    RocketCMS.config.navigation
-  end
-  def simple_navigation?
-    nav_type == :simple
-  end
-  def rocket_navigation?
-    nav_type == :rocket
   end
 end
 
