@@ -41,7 +41,6 @@ gem 'cancancan'
 gem 'cloner'
 gem 'puma'
 
-gem 'x-real-ip'
 gem 'sentry-raven'
 
 gem 'uglifier'
