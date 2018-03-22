@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'
   spec.add_dependency 'rails_admin_settings'
-  spec.add_dependency 'simple-navigation'
+  spec.add_dependency 'rocket_navigation'
   spec.add_dependency 'sitemap_generator'
   spec.add_dependency 'kaminari-mongoid'
 end

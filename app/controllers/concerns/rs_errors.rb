@@ -4,7 +4,7 @@ module RsErrors
     if Rails.env.production? || Rails.env.staging?
       rescue_from Exception, with: :render_500
       rescue_from ActionController::RoutingError, with: :render_404
-      rescue_from ActionController::UnknownController, with: :render_404
+      #rescue_from ActionController::UnknownController, with: :render_404
       rescue_from ActionController::MissingFile, with: :render_404
       if RocketCMS.mongoid?
         rescue_from Mongoid::Errors::DocumentNotFound, with: :render_404

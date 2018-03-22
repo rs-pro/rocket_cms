@@ -17,7 +17,7 @@ module RsMenu
     cr = item.clean_regexp
     navigation_item(primary, item, block)
   end
-  
+
   def navigation_item(primary, item, block=nil)
     url = nav_get_url(item)
     if block.nil?
@@ -29,7 +29,10 @@ module RsMenu
 
   def navigation(type)
     Proc.new do |primary|
-      SimpleNavigation.config.autogenerate_item_ids = false
+      if defined?(SimpleNavigation)
+        SimpleNavigation.config.autogenerate_item_ids = false
+      end
+
       begin
         nav_extra_data_before(type, primary)
         items = nav_get_menu_items(type).select { |i| !i.name.blank? && i.enabled }
