@@ -1,2 +1,2 @@
 - values = form.object.class.send(field.method_name).values.map { |v| [t("enumerize.#{form.object.class.name.underscore}.#{field.method_name}.#{v}", default: t("enumerize.defaults.#{field.method_name}.#{v}")), v] }
-= form.collection_check_boxes field.method_name, values, :last, :first, {}, {} { |i| i.label( class: 'checkbox' ) { i.check_box + i.text } }
+= form.collection_check_boxes(field.method_name, values, :last, :first, {}, {}) { |i| i.label( class: 'checkbox' ) { i.check_box + i.text } }
