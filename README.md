@@ -136,7 +136,7 @@ or
 gem 'hstore_translate'
 ```
 
-or 
+or
 
 ```ruby
 gem 'jsonb_translate' # requires postgresql 9.4
@@ -150,11 +150,8 @@ gem 'rails_admin_mongoid_localize_field'
 
 ### Capistrano generator
 
-    rails g rocket_cms:capify data unicorn_port domain_name
+    rails g rocket_cms:capify domain_name
     # (path /data/:user/app/ - rocket science default)
-
-    rails g rocket_cms:capify home unicorn_port domain_name
-    # (path /home/:user/:app_name/)
 
 designed to be used together with our ansible app setup script.
 
