@@ -3,6 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 yarn = !options[:skip_yarn]
+is_dev = !options[:is_dev]
 spring = !options[:skip_spring]
 
 if Gem::Version.new(version) < Gem::Version.new('5.0.0')
@@ -17,21 +18,30 @@ git :init
 remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
-
+#{'
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+'}
 gem 'rails', '5.2.0.rc2'
 #{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg', '~> 0.21.0'" end}
 
 gem 'sass'
 
-#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}
+#{
+"#{if mongoid then "gem 'rocket_cms_mongoid', path: '/data/rocket_cms'" else "gem 'rocket_cms_activerecord', path: '/data/rocket_cms'" end}
+gem 'rocket_cms', path: '/data/rocket_cms'" if is_dev}
+#{"#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}" unless is_dev}
+
 gem 'rails_admin', github: 'rs-pro/rails_admin'
-#{"gem 'friendly_id'" unless mongoid}
+#{"gem 'friendly_id', github: 'norman/friendly_id'" unless mongoid}
 
 gem 'slim'
 gem 'haml'
 
 gem 'sass-rails'
-gem 'rs-webpack-rails'
+gem 'rs-webpack-rails', '~> 0.11.1'
 
 gem 'devise'
 gem 'devise-i18n'
@@ -46,17 +56,22 @@ gem 'sentry-raven'
 gem 'uglifier'
 
 gem 'rs_russian'
+#gem 'enumerize'
+#gem 'active_model_serializers'
 
 # windows
 gem 'tzinfo-data' if Gem.win_platform?
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
+gem 'bootsnap', require: false
+
 group :development do
-  gem 'binding_of_caller'
-  gem 'better_errors', github: 'charliesome/better_errors'
-  gem 'pry-rails'
+  #gem 'binding_of_caller'
+  #gem 'better_errors', github: 'charliesome/better_errors'
+  #gem 'pry-rails'
   gem 'listen'
-  #{"gem 'spring'" if spring}
+  gem 'annotate'
+#{"  gem 'spring'" if spring}
 
   gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
@@ -68,9 +83,9 @@ group :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'email_spec'
-  #{if mongoid then "gem 'mongoid-rspec'" else "" end}
+#{if mongoid then "  gem 'mongoid-rspec'" else "" end}
   gem 'ffaker'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
 end
 
 TEXT
@@ -124,47 +139,20 @@ ORM: #{if mongoid then 'Mongoid' else 'ActiveRecord' end}
 
 To run (windows):
 ```
-.\node_modules\.bin\webpack-dev-server.cmd --config config\webpack.config.js --hot --inline
+npm start
 bundle exec rails s webrick
 ```
 
 
 To run (nix/mac):
 ```
-./node_modules/.bin/webpack-dev-server --config config/webpack.config.js --hot --inline
+npm start
 puma
 ```
 
-## ngrok
-В одном терминале запускаем ngrok на `webpack`
-```
-ngrok http -host-header=rewrite 0.0.0.0:3808
-```
-В ответе ищем строку, похожую на 
-```
-Forwarding                    http://7c68e072.ngrok.io -> 0.0.0.0:3808
-```
-Достаём из неё хост. В данном примере это ``7c68e072.ngrok.io``
-
-Запускаем webpack
-```
-HOST=0.0.0.0 ./node_modules/.bin/webpack-dev-server --config config/webpack.config.js --hot --inline
-```
-
-Запускаем пуму (меняем ``7c68e072.ngrok.io`` на тот хост, который дал `ngrok`)
-```
-WEBPACK_HOST=7c68e072.ngrok.io puma
-```
-
-И запускаем `ngrok` второй раз уже для `puma`
-```
-ngrok http #{port}
-```
-
-Сайт будет доступен по хосту из последнего запущенного `ngrok`
 "
 
-#create_file '.ruby-version', "2.4.0\n"
+#create_file '.ruby-version', "2.5.0\n"
 #create_file '.ruby-gemset', "#{app_name}\n"
 
 run 'bundle install --without production'
@@ -177,8 +165,6 @@ development:
       database: #{app_name.downcase}_development
       hosts:
           - localhost:27017
-  options:
-    belongs_to_required_by_default: false
 
 test:
   clients:
@@ -186,8 +172,6 @@ test:
       database: #{app_name.downcase}_test
       hosts:
           - localhost:27017
-  options:
-    belongs_to_required_by_default: false
 
 TEXT
 end
@@ -241,7 +225,7 @@ end
 generate "rocket_cms:admin"
 generate "rocket_cms:ability"
 generate "rocket_cms:layout"
-generate "rocket_cms:webpack"
+generate "rocket_cms:webpack", port+1
 
 unless mongoid
   rake "db:migrate"
@@ -337,6 +321,19 @@ Disallow: /
 TEXT
 end
 
+remove_file 'app/helpers/application_helper.rb'
+create_file 'app/helpers/application_helper.rb' do <<-TEXT
+module ApplicationHelper
+  def body_class
+    r = []
+    #{'r.push "b-#{params[:controller].gsub("/", "_")}"'}
+    #{'r.push "b-#{params[:controller].gsub("/", "_")}-#{params[:action]}"'}
+    r.join(" ")
+  end
+end
+TEXT
+end
+
 
 
 remove_file 'config/puma.rb'
@@ -346,7 +343,6 @@ threads 1, 3
 
 current_dir = File.expand_path("../..", __FILE__)
 base_dir = File.expand_path("../../..", __FILE__)
-
 
 # rackup DefaultRackup
 
@@ -404,6 +400,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
+require "active_storage/engine"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
@@ -422,20 +419,26 @@ module #{app_name.camelize}
       g.stylesheets false
       g.javascripts false
       g.helper false
-      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+      g.fixture_replacement :factory_bot, :dir => 'spec/factories'
     end
 
     config.i18n.locale = :ru
     config.i18n.default_locale = :ru
     config.i18n.available_locales = [:ru, :en]
+
     config.i18n.enforce_available_locales = true
-    #{'config.active_record.schema_format = :sql' unless mongoid}
+    # #{'config.active_record.schema_format = :sql' unless mongoid}
 
     #{'config.autoload_paths += %W(#{config.root}/extra)'}
     #{'config.eager_load_paths += %W(#{config.root}/extra)'}
 
     config.time_zone = 'Europe/Moscow'
-    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    config.webpack.dev_server.manifest_port = #{port+1}
+    #config.webpack.dev_server.manifest_host = "192.168.1.1"
+    config.webpack.dev_server.host = proc { request.host }
+    config.webpack.dev_server.port = #{port+1}
+    config.webpack.manifest_type = "manifest"
   end
 end
 
@@ -459,6 +462,18 @@ else
   FileUtils.cp(Pathname.new(destination_root).join('config', 'database.yml').to_s, Pathname.new(destination_root).join('config', 'database.yml.example').to_s)
 end
 
+remove_file 'config/secrets.yml'
+key = SecureRandom.hex(64)
+create_file 'config/secrets.yml' do <<-TEXT
+development:
+  secret_key_base: #{key}
+production:
+  secret_key_base: #{key}
+TEXT
+end
+remove_file 'config/credentials.yml.enc'
+remove_file 'config/master.key'
+
 FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, Pathname.new(destination_root).join('config', 'secrets.yml.example').to_s)
 
 unless mongoid
@@ -474,6 +489,5 @@ else
   run 'npm install'
 end
 
-git :init
 git add: "."
 git commit: %Q{ -m 'Initial commit' }

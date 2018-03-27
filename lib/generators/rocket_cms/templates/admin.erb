@@ -1,6 +1,6 @@
 require 'rails_admin/custom_show_in_app'
 
-RailsAdminSettings.track_history!
+# RailsAdminSettings.track_history!
 
 RailsAdmin.config do |config|
   config.parent_controller = '::ApplicationController'
@@ -14,7 +14,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   ## == Cancan ==
-  config.authorize_with :cancancan2
+  config.authorize_with :cancan
 <% if RocketCMS.mongoid? %>
   ## == MongoidAudit
   # config.audit_with :mongoid_audit, 'HistoryTracker'
@@ -37,8 +37,8 @@ RailsAdmin.config do |config|
     edit
     delete
 
-    history_index
-    history_show
+    # history_index
+    # history_show
 
     nested_set do
       visible do

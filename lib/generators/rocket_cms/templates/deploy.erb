@@ -7,7 +7,7 @@ set :branch, ENV["REVISION"] || "master"
 set :deploy_to, "<%= deploy_to %>"
 
 #set :rvm_type, :user
-#set :rvm_ruby_version, "2.4.1@#{fetch :application}"
+#set :rvm_ruby_version, "2.5.0@#{fetch :application}"
 set :use_sudo, false
 
 set :keep_releases, 20
@@ -17,38 +17,5 @@ set :linked_files, %w{config/mongoid.yml config/secrets.yml}
 <% else %>
 set :linked_files, %w{config/database.yml config/secrets.yml}
 <% end %>
-set :linked_dirs, %w{log tmp vendor/bundle public/assets public/system public/uploads public/ckeditor_assets public/sitemap}
-
-Rake::Task["puma:check"].clear
-Rake::Task["puma:config"].clear
-namespace :puma do
-  task :check do
-  end
-  task :config do
-  end
-end
-
-namespace :deploy do
-  desc "webpack"
-  task :webpack do
-    on roles(:app) do
-      within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, "webpack:compile"
-        end
-      end
-    end
-  end
-end
-
-after "deploy:updated", "deploy:webpack"
-
-namespace :db do
-  desc "Create the indexes defined on your mongoid models"
-  task :create_mongoid_indexes do
-    on roles(:app) do
-      execute :rake, "db:mongoid:create_indexes"
-    end
-  end
-end
+set :linked_dirs, %w{log tmp vendor/bundle public/system public/uploads public/ckeditor_assets public/sitemap}
 

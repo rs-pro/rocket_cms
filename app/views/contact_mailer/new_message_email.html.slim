@@ -1,16 +1,16 @@
 
 - excluded_column_names = %w[id c_at u_at created_at updated_at _id _type enabled attachment c_at u_at captcha captcha_key version creator_id creator updater_id updater modifier modifier_id]
 
-%h3 Сообщение из формы связи:
+h3 Сообщение из формы связи:
 
-%table
-  %tr
-    %th(style='padding: 2px 3px') Поле
-    %th(style='padding: 2px 3px') Значение
+table
+  tr
+    th style='padding: 2px 3px' Поле
+    th style='padding: 2px 3px' Значение
   - fields = (RocketCMS.mongoid? ? ContactMessage.fields.keys : ContactMessage.columns.map(&:name))
   - fields.reject{|c| excluded_column_names.include?(c) }.each do |c|
-    %tr
-      %td(style='padding: 2px 3px')
+    tr
+      td style='padding: 2px 3px'
         = ContactMessage.human_attribute_name(c)
-      %td(style='padding: 2px 3px')
+      td style='padding: 2px 3px'
         = @message.send(c.to_sym)

@@ -1,6 +1,6 @@
 import './index.sass';
 import Cookies from 'js-cookie';
-import template from './errors.handlebars';
+import template from './errors.pug';
 
 const COOKIE_ERROR = {
   title: 'В вашем броузере отключены Cookies',

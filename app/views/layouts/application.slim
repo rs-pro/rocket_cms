@@ -1,0 +1,39 @@
+doctype html
+html lang="ru"
+  head
+    meta charset="UTF-8"
+    meta name="viewport" content="width=device-width, maximum-scale=1, minimal-ui"
+    -# meta property="fb:app_id" content=Rails.application.secrets.fb_app_id
+    -# meta property="vk:app_id" content=Rails.application.secrets.vk_app_id
+    meta name="turbolinks-cache-control" content="no-cache"
+
+    title= page_title
+    = yield :meta
+    = csrf_meta_tags
+    = favicon_link_tag '/favicon.ico'
+
+    = stylesheet_link_tag *webpack_asset_paths('vendor', extension: 'css', ignore_missing: true)
+    = stylesheet_link_tag *webpack_asset_paths('application', extension: 'css')
+    = javascript_include_tag *webpack_asset_paths('vendor', extension: 'js', ignore_missing: true)
+    = javascript_include_tag *webpack_asset_paths('application', extension: 'js')
+
+  body.no-js class=body_class
+    = render 'blocks/header'
+    script.no-js-script
+      | document.body.classList.remove('no-js');
+
+    main.main
+      = render 'shared/messages'
+      = yield
+
+    = render 'blocks/footer'
+
+    .no-js-error.alert.alert-error
+      | К сожалению, в вашем браузере отключен JavaScript
+      span Включите его, чтобы зайти на сайт
+      a class="btn-transparent" target="_blank" href="https://yandex.ru/support/common/browsers-settings/browsers-java-js-settings.xml" Включить JavaScript
+
+    #fb-root data-turbolinks-permanent=""
+    #vk_api_transport data-turbolinks-permanent=""
+
+    = render 'blocks/counters'

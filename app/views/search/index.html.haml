@@ -1,21 +1,21 @@
 .rs-search-results
-  %h1 Результаты поиска
+  h1 Результаты поиска
   = form_tag search_path, method: :get, class: 'nav_search' do
     = text_field_tag 'query', params[:query], placeholder: "Поиск"
     = submit_tag 'Найти'
-  %ol
+  ol
     - any = false
     - @results.each do |r|
       - any = true
-      %li
+      li
         -if RocketCMS.mongoid?
           - u = app_url(r)
           - next if u.nil?
           - next if u.respond_to?(:enabled) && !u.searchable.enabled
           - any = true
           .title
-            %a{href: u}
-              %strong= raw (r._highlight.nil? || r._highlight['name'].nil?) ? r.name : r._highlight['name'].join(' ... ')
+            a href=u
+              strong= raw (r._highlight.nil? || r._highlight['name'].nil?) ? r.name : r._highlight['name'].join(' ... ')
               (#{r.class.model_name.human})
           .text
             = raw (r._highlight.nil? || r._highlight['content'].nil?) ? (r.content.blank? ? '' : SmartExcerpt.truncate(r.content)) : r._highlight['content'].join(' ... ')
@@ -26,8 +26,8 @@
           - next if r.searchable.respond_to?(:enabled) && !r.searchable.enabled
           - any = true
           .title
-            %a{href: u}
-              %strong= raw highlight(r.searchable.name, params[:query], highlighter: '<em>\1</em>')
+            a href=u
+              strong= raw highlight(r.searchable.name, params[:query], highlighter: '<em>\1</em>')
               (#{r.searchable.class.model_name.human})
           .text
             - ex = excerpt(strip_tags(r.searchable.content), params[:query], radius: 150)
@@ -35,7 +35,7 @@
               = raw strip_tags(SmartExcerpt.h.smart_truncate(r.searchable.content, words: 20))
             - else
               = raw highlight(ex, params[:query], highlighter: '<em>\1</em>')
-            %span.more= link_to '', u
+            span.more= link_to '', u
   - unless any
     .rs-search-no-results К сожалению, ничего не найдено
 
