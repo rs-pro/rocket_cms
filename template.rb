@@ -18,20 +18,20 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.4'
+gem 'rails', '5.2.0.rc2'
 #{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg', '~> 0.21.0'" end}
 
 gem 'sass'
 
 #{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}
-gem 'rails_admin', github: 'crowdtask/rails_admin'
-#{"gem 'friendly_id', github: 'norman/friendly_id'" unless mongoid}
+gem 'rails_admin', github: 'rs-pro/rails_admin'
+#{"gem 'friendly_id'" unless mongoid}
 
 gem 'slim'
 gem 'haml'
 
 gem 'sass-rails'
-gem 'webpack-rails'
+gem 'rs-webpack-rails'
 
 gem 'devise'
 gem 'devise-i18n'
@@ -327,66 +327,6 @@ TEXT
 end
 
 create_file 'app/assets/stylesheets/rails_admin/custom/theming.css.sass' do <<-TEXT
-.navbar-brand
-  margin-left: 0 !important
-
-.input-small
-  width: 150px
-
-.container-fluid
-  input[type=text]
-    width: 380px !important
-  input.ra-filtering-select-input[type=text]
-    width: 180px !important
-  input.hasDatepicker
-    width: 180px !important
-
-.sidebar-nav
-  a
-    padding: 6px 10px !important
-  .dropdown-header
-    padding: 10px 0px 3px 9px
-
-.label-important
-  background-color: #d9534f
-.alert-notice
-  color: #5bc0de
-
-.page-header
-  display: none
-.breadcrumb
-  margin-top: 20px
-
-.control-group
-  clear: both
-
-.container-fluid
-  padding-left: 0
-  > .row
-    margin: 0
-
-.last.links
-  a
-    display: inline-block
-    padding: 3px
-    font-size: 20px
-
-.remove_nested_fields
-  opacity: 1 !important
-
-.model-dialog
-  width: 800px !important
-
-.content > .alert
-  margin-top: 20px
-
-.badge-important
-  background: red
-.badge-success
-  background: green
-
-.sidebar-nav i
-  margin-right: 5px
 TEXT
 end
 
