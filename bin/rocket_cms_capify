@@ -45,14 +45,12 @@ module RocketCMS
         end
       end
       copy_file "Capfile", "Capfile"
-      p port
       unless port.nil?
         template "unicorn.erb", "config/unicorn/production.rb"
       end
       template "deploy.erb", "config/deploy.rb"
       template "production.erb", "config/deploy/production.rb"
       template "dl.erb", "lib/tasks/dl.thor"
-      puts "all ok"
     end
   end
 end
