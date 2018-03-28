@@ -155,6 +155,10 @@ gem 'rails_admin_mongoid_localize_field'
 
 designed to be used together with our ansible app setup script.
 
+### Alternative capistrano task (can be used with non-configured app)
+
+   bundle exec rocket_cms capify PmiGames pg.pmi.ru
+
 ### Documentation
 
 It's basically Rails Admin + some of our common models and controllers, capistrano config, etc.
