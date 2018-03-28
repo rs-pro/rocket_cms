@@ -104,5 +104,3 @@ require 'manual_slug'
 if defined?(RailsAdmin) && !RocketCMS.light?
   require 'rocket_cms/nested_set'
 end
-
-Thor::Util.load_thorfile(File.expand_path("../tasks/rocket.thor", __FILE__).to_s)
