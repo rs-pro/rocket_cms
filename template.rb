@@ -25,7 +25,7 @@ git_source(:github) do |repo_name|
 end
 '}
 gem 'rails', '5.2.0.rc2'
-#{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg', '~> 0.21.0'" end}
+#{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg', '>= 0.18', '< 2.0'" end}
 
 gem 'sass'
 
