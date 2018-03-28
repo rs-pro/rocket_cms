@@ -157,7 +157,7 @@ designed to be used together with our ansible app setup script.
 
 ### Alternative capistrano task (can be used with non-configured app)
 
-   bundle exec rocket_cms capify PmiGames pg.pmi.ru
+   bundle exec rocket_cms_capify PmiGames pg.pmi.ru
 
 ### Documentation
 
