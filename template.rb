@@ -26,6 +26,7 @@ end
 '}
 gem 'rails', '5.2.0.rc2'
 #{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg', '>= 0.18', '< 2.0'" end}
+gem 'turbolinks' #required for redirects even if using via webpack
 
 gem 'sass'
 
