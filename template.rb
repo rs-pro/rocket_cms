@@ -110,6 +110,7 @@ create_file '.gitignore' do <<-TEXT
 /public/webpack
 #{if mongoid then '/config/mongoid.yml' else '/config/database.yml' end}
 /config/secrets.yml
+yarn-error.log
 TEXT
 end
 
