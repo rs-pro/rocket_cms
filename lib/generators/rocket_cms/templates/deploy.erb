@@ -10,6 +10,17 @@ set :deploy_to, "<%= deploy_to %>"
 #set :rvm_ruby_version, "2.5.0@#{fetch :application}"
 set :use_sudo, false
 
+Rake::Task["puma:check"].clear
+Rake::Task["puma:config"].clear
+namespace :puma do
+  task :check do
+    puts 'override'
+  end
+  task :config do
+  end
+end
+
+
 set :keep_releases, 20
 
 <% if RocketCMS.mongoid? %>
