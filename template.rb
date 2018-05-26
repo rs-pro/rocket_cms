@@ -24,7 +24,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 '}
-gem 'rails', '5.2.0.rc2'
+gem 'rails', '5.2.0'
 #{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg', '>= 0.18', '< 2.0'" end}
 gem 'turbolinks' #required for redirects even if using via webpack
 
@@ -35,7 +35,7 @@ gem 'sass'
 gem 'rocket_cms', path: '/data/rocket_cms'" if is_dev}
 #{"#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}" unless is_dev}
 
-gem 'rails_admin', github: 'rs-pro/rails_admin'
+gem 'rails_admin', github: 'sferik/rails_admin'
 #{"gem 'friendly_id', github: 'norman/friendly_id'" unless mongoid}
 
 gem 'slim'
@@ -475,6 +475,12 @@ TEXT
 end
 remove_file 'config/credentials.yml.enc'
 remove_file 'config/master.key'
+
+create_file 'Procfile' do <<-TEXT
+web: bundle exec puma
+webpack: npm start
+TEXT
+end
 
 FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, Pathname.new(destination_root).join('config', 'secrets.yml.example').to_s)
 
