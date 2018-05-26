@@ -10,6 +10,10 @@ set :deploy_to, "<%= deploy_to %>"
 #set :rvm_ruby_version, "2.5.0@#{fetch :application}"
 set :use_sudo, false
 
+set :puma_state, -> { File.join(shared_path, 'tmp', 'puma', 'state') }
+set :puma_pid, -> { File.join(shared_path, 'tmp', 'puma', 'pid') }
+set :puma_conf, -> { File.join(current_path, 'config', 'puma.rb') }
+
 Rake::Task["puma:check"].clear
 Rake::Task["puma:config"].clear
 namespace :puma do
