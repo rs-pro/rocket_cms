@@ -1,4 +1,5 @@
 #!/bin/bash
+git pull --rebase
 bundle update
 git add --all .
 git commit -am "${*:1}"
