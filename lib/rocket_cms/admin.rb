@@ -15,7 +15,7 @@ module RocketCMS
         field :lon
       }
     end
-    
+
     def seo_config(is_active = true)
       Proc.new {
         if respond_to?(:active)
@@ -40,7 +40,7 @@ module RocketCMS
         field :og_image, :paperclip
       end
     end
-    
+
     def page_config
       Proc.new {
         RocketCMS.apply_patches self
@@ -80,13 +80,13 @@ module RocketCMS
           end
           if Seo.separate_table?
             group :seo do
-              active true
+              active RocketCMS.config.seo_active_by_default
               field :seo do
-                active true
+                active RocketCMS.config.seo_active_by_default
               end
             end
           else
-            group :seo, &RocketCMS.seo_config(true)
+            group :seo, &RocketCMS.seo_config(RocketCMS.config.seo_active_by_default)
           end
         end
         RocketCMS.only_patches self, [:show, :export]
@@ -95,7 +95,7 @@ module RocketCMS
         })
       }
     end
-    
+
     def menu_config
       Proc.new {
           navigation_label 'CMS'
@@ -105,7 +105,7 @@ module RocketCMS
           RocketCMS.only_patches self, [:show, :list, :edit, :export]
       }
     end
-    
+
     def contact_message_config
       Proc.new {
         navigation_label I18n.t('rs.settings')
@@ -121,7 +121,7 @@ module RocketCMS
         RocketCMS.only_patches self, [:show, :list, :edit, :export]
       }
     end
-    
+
     def news_config
       Proc.new {
         navigation_label I18n.t('rs.cms')

@@ -27,6 +27,8 @@ module RocketCMS
     attr_accessor :contacts_fields
     attr_accessor :contacts_message_required
 
+    attr_accessor :seo_active_by_default
+
     attr_accessor :separate_seo_table
 
     attr_accessor :localize
@@ -54,6 +56,7 @@ module RocketCMS
       @localize = false
 
       @separate_seo_table = false
+      @seo_active_by_default = true
     end
 
     def search_enabled=(val)
