@@ -3,7 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 yarn = !options[:skip_yarn]
-is_dev = !options[:is_dev]
+no_dev = !options[:is_dev]
 spring = !options[:skip_spring]
 
 if Gem::Version.new(version) < Gem::Version.new('5.0.0')
@@ -32,8 +32,8 @@ gem 'sass'
 
 #{
 "#{if mongoid then "gem 'rocket_cms_mongoid', path: '/data/rocket_cms'" else "gem 'rocket_cms_activerecord', path: '/data/rocket_cms'" end}
-gem 'rocket_cms', path: '/data/rocket_cms'" if is_dev}
-#{"#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}" unless is_dev}
+gem 'rocket_cms', path: '/data/rocket_cms'" unless no_dev}
+#{"#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}" if no_dev}
 
 gem 'rails_admin', github: 'sferik/rails_admin'
 #{"gem 'friendly_id', github: 'norman/friendly_id'" unless mongoid}
