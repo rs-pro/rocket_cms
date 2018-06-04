@@ -1,5 +1,9 @@
 # RocketCMS
 
+Master repository has moved to gitlab, all new code will be there:
+
+https://gitlab.com/rocket-science/rocket_cms
+
 ## RocketScience's Ruby On Rails app template / starter kit
 
 What's in the box when you generate a new app:
