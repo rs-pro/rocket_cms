@@ -128,28 +128,22 @@ RocketCMS.configure do |rc|
 end
 ```
 
-Add ```rails_admin_hstore_translate``` or ```hstore_translate``` gem if using PostgreSQL:
+Add ```rails_admin_translate```:
 
 ```ruby
-gem 'rails_admin_hstore_translate'
+gem 'rails_admin_translate'
+```
+
+And, for ActiveRecord a translation gem you wish to use (mongoid should work with built-in localization):
+
+```ruby
+gem 'json_translate'
 ```
 
 or
 
 ```ruby
-gem 'hstore_translate'
-```
-
-or
-
-```ruby
-gem 'jsonb_translate' # requires postgresql 9.4
-```
-
-Add ```rails_admin_mongoid_localize_field``` gem if using MongoDB:
-
-```ruby
-gem 'rails_admin_mongoid_localize_field'
+gem 'globalize'
 ```
 
 ### Capistrano generator
@@ -159,7 +153,7 @@ gem 'rails_admin_mongoid_localize_field'
 
 designed to be used together with our ansible app setup script.
 
-### Alternative capistrano task (can be used with non-configured app)
+### Alternative capistrano task (can be used with non-configured app \ without db)
 
     bundle exec rocket_cms_capify Games games.ru
 
