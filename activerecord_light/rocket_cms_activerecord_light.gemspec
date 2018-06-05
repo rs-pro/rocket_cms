@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['glebtv@gmail.com']
   spec.description   = %q{RocketCMS - ActiveRecord light metapackage}
   spec.summary       = %q{}
-  spec.homepage      = 'https://github.com/rs-pro/rocket_cms'
+  spec.homepage      = 'https://gitlab.com/rocket-science/rocket_cms'
   spec.license       = 'MIT'
 
   spec.files         = %w(lib/rocket_cms_activerecord_light.rb)

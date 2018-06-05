@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['glebtv@gmail.com']
   spec.description   = %q{RocketCMS}
   spec.summary       = %q{Please DO NOT use this gem directly, use rocket_cms_mongoid or rocket_cms_activerecord instead!}
-  spec.homepage      = 'https://github.com/rs-pro/rocket_cms'
+  spec.homepage      = 'https://gitlab.com/rocket-science/rocket_cms'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/).reject {|f| f.start_with?('mongoid') || f.start_with?('activerecord') }
