@@ -146,6 +146,89 @@ or
 gem 'globalize'
 ```
 
+Create your models, or, if adding localization to existing app, migrate your locale data.
+
+Example for globalize (needs adjustment):
+
+```
+class AddTranslations < ActiveRecord::Migration
+  def change
+    reversible do |dir|
+      dir.up do
+        I18n.with_locale(:ru) do
+          Page.create_translation_table!({
+            name: :string,
+            content: :text,
+          }, {
+            migrate_data: true,
+            #remove_source_columns: true,
+          })
+
+          News.create_translation_table!({
+            name: :string,
+            excerpt: :string,
+            content: :text,
+          }, {
+            migrate_data: true,
+            #remove_source_columns: true,
+          })
+
+          Seos.create_translation_table!({
+            h1: :string,
+            title: :string,
+            keywords: :text,
+            description: :text,
+            og_title: :string,
+          }, {
+            migrate_data: true,
+            #remove_source_columns: true,
+          })
+        end
+      end
+
+      dir.down do
+        I18n.with_locale(:ru) do
+          [Page, News, Menu, Seo].drop_translation_table!(migrate_data: true)
+        end
+      end
+    end
+```
+
+Example for json_translate (needs adjustment):
+
+```
+class AddLocales < ActiveRecord::Migration[5.1]
+  def change
+    add_column :pages, :name_translations, :jsonb, default: {}
+    add_column :pages, :content_translations, :jsonb, default: {}
+
+    add_column :news, :name_translations, :jsonb, default: {}
+    add_column :news, :excerpt_translations, :jsonb, default: {}
+    add_column :news, :content_translations, :jsonb, default: {}
+
+    add_column :menus, :name_translations, :jsonb, default: {}
+    add_column :seos, :h1_translations, :jsonb, default: {}
+    add_column :seos, :title_translations, :jsonb, default: {}
+    add_column :seos, :keywords_translations, :jsonb, default: {}
+    add_column :seos, :description_translations, :jsonb, default: {}
+    add_column :seos, :og_title_translations, :jsonb, default: {}
+
+    reversible do |dir|
+      dir.up do
+        execute "UPDATE pages SET name_translations = json_build_object('ru', \"name\")"
+        execute "UPDATE pages SET content_translations = json_build_object('ru', \"content\")"
+        execute "UPDATE news SET name_translations = json_build_object('ru', \"name\")"
+        execute "UPDATE news SET content_translations = json_build_object('ru', \"content\")"
+        # etc
+      end
+      dir.down do
+        raise 'irreversible'
+      end
+    end
+  end
+end
+```
+
 ### Capistrano generator
 
     rails g rocket_cms:capify domain_name
