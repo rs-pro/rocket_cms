@@ -228,6 +228,29 @@ class AddLocales < ActiveRecord::Migration[5.1]
   end
 end
 ```
+### BACKUP YOUR DB
+
+then drop old fields, or you will have errors with required fields being null
+
+```
+class DropLocale < ActiveRecord::Migration[5.2]
+  def change
+    remove_column :pages, :name
+    remove_column :pages, :content
+
+    remove_column :news, :name
+    remove_column :news, :excerpt
+    remove_column :news, :content
+
+    remove_column :menus, :name
+    remove_column :seos, :h1
+    remove_column :seos, :title
+    remove_column :seos, :keywords
+    remove_column :seos, :description
+    remove_column :seos, :og_title
+  end
+end
+```
 
 ### Capistrano generator
 
