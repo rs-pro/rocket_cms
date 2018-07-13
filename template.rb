@@ -87,6 +87,11 @@ group :test do
 #{if mongoid then "  gem 'mongoid-rspec'" else "" end}
   gem 'ffaker'
   gem 'factory_bot_rails'
+
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
+  gem 'childprocess'
 end
 
 TEXT
@@ -112,6 +117,7 @@ create_file '.gitignore' do <<-TEXT
 #{if mongoid then '/config/mongoid.yml' else '/config/database.yml' end}
 /config/secrets.yml
 yarn-error.log
+spec/examples.txt
 TEXT
 end
 
@@ -121,6 +127,10 @@ remove_file 'app/controllers/application_controller.rb'
 create_file 'app/controllers/application_controller.rb' do <<-TEXT
 class ApplicationController < ActionController::Base
   include RocketCMS::Controller
+
+  def page_title #default page title
+    "#{app_name}"
+  end
 end
 TEXT
 end
@@ -184,6 +194,15 @@ development:
   adapter: postgresql
   encoding: unicode
   database: #{app_name.downcase}_development
+  pool: 5
+  host: 'localhost'
+  username: #{app_name.downcase}
+  password: #{app_name.downcase}
+  template: template0
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: #{app_name.downcase}_test
   pool: 5
   host: 'localhost'
   username: #{app_name.downcase}
@@ -312,7 +331,7 @@ end
 TEXT
 end
 
-create_file 'app/assets/stylesheets/rails_admin/custom/theming.css.sass' do <<-TEXT
+create_file 'app/assets/stylesheets/rails_admin/custom/theming.sass' do <<-TEXT
 TEXT
 end
 
@@ -441,6 +460,7 @@ module #{app_name.camelize}
     config.webpack.dev_server.host = proc { request.host }
     config.webpack.dev_server.port = #{port+1}
     config.webpack.manifest_type = "manifest"
+    config.webpack.dev_server.enabled = Rails.env.development?
   end
 end
 
@@ -471,6 +491,8 @@ development:
   secret_key_base: #{key}
 production:
   secret_key_base: #{key}
+test:
+  secret_key_base: #{key}
 TEXT
 end
 remove_file 'config/credentials.yml.enc'
@@ -478,9 +500,233 @@ remove_file 'config/master.key'
 
 create_file 'Procfile' do <<-TEXT
 web: bundle exec puma
-webpack: npm start
+webpack: yarn start
 TEXT
 end
+
+unless mongoid
+  create_file 'Dockerfile' do <<-TEXT
+# docker build -t #{app_name.downcase} /root/#{app_name.downcase}/
+FROM ruby:2.5.1-stretch
+
+RUN apt-get update -qq >/dev/null
+
+RUN apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake libpq5 >/dev/null
+RUN apt-get install -y -qq locales apt-utils apt-transport-https  >/dev/null
+RUN apt-get install -y -qq qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x >/dev/null
+RUN apt-get install -y -qq xvfb > /dev/null
+
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update -qq >/dev/null
+RUN apt-get install -y -qq yarn >/dev/null
+
+RUN echo "en_US UTF-8" > /etc/locale.gen
+RUN locale-gen en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.1/install.sh | bash
+RUN /bin/bash -c "source /root/.bashrc && nvm install node && nvm use node"
+
+ENV TZ=Europe/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+TEXT
+end
+
+create_file '.gitlab-ci.yml' do <<-TEXT
+image: #{app_name.downcase}:latest
+
+services:
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: #{app_name.downcase}_test
+  POSTGRES_USER: #{app_name.downcase}
+  POSTGRES_PASSWORD: "#{app_name.downcase}"
+
+cache:
+  untracked: true
+  key: "$CI_PROJECT_ID"
+  paths:
+    - node_modules/
+    - .bundled/
+    - .yarn
+    - tmp/cache
+
+rspec:
+  before_script:
+    - source /root/.bashrc
+    - nvm use node
+    - cp -f config/database.yml.ci config/database.yml
+    - cp -f config/secrets.yml.sample config/secrets.yml
+    - cat config/database.yml
+    - cat config/secrets.yml
+    - ruby -v
+    - which ruby
+    - export RAILS_ENV=test
+    - export CI=YES
+    - gem install bundler --no-ri --no-rdoc
+    - bundle install --jobs $(nproc) --path=/cache/bundler
+    - yarn --version
+    - yarn config set cache-folder .yarn
+    - yarn install
+    - bundle exec rake webpack:compile
+    - date
+    - RAILS_ENV=test bundle exec rake db:create db:schema:load
+  script:
+    - RAILS_ENV=test xvfb-run -a bundle exec rspec
+    - bundle exec pronto run -c=origin/master --exit-code
+
+dependency_scanning:
+  image: docker:stable
+  variables:
+    DOCKER_DRIVER: overlay2
+  allow_failure: true
+  services:
+    - docker:stable-dind
+  script:
+    - export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\\([0-9]*\\)\\.\\([0-9]*\\).*/\\1-\\2-stable/')
+    - docker run
+        --env DEP_SCAN_DISABLE_REMOTE_CHECKS="${DEP_SCAN_DISABLE_REMOTE_CHECKS:-false}"
+        --volume "$PWD:/code"
+        --volume /var/run/docker.sock:/var/run/docker.sock
+        "registry.gitlab.com/gitlab-org/security-products/dependency-scanning:$SP_VERSION" /code
+  artifacts:
+    paths: [gl-dependency-scanning-report.json]
+TEXT
+end
+
+create_file "config/database.yml.ci" do <<-TEXT
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: #{app_name.downcase}_test
+  pool: 5
+  host: postgres
+  username: #{app_name.downcase}
+  password: #{app_name.downcase}
+  template: template0
+TEXT
+end
+
+create_file "config/secrets.yml.sample" do <<-TEXT
+test:
+  secret_key_base: #{key}
+TEXT
+end
+
+create_file "spec/features/home_page_spec.rb" do <<-TEXT
+require 'rails_helper'
+
+RSpec.feature 'main page', :js do
+  scenario "visit" do
+    visit root_path
+    expect(page.status_code).to eq(200).or eq(304)
+  end
+end
+TEXT
+end
+
+create_file "spec/support/capybara.rb" do <<-TEXT
+require 'capybara/rspec'
+require 'capybara/webkit'
+
+# https://github.com/teamcapybara/capybara/blob/master/lib/capybara.rb#L35
+Capybara.configure do |config|
+  config.default_driver = :webkit
+  config.javascript_driver = :webkit
+
+  # use the custom server
+  config.server = :puma
+  config.run_server = true
+end
+TEXT
+end
+
+create_file "spec/support/database_cleaner.rb" do <<-TEXT
+RSpec.configure do |config|
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+end
+TEXT
+end
+
+remove_file "spec/rails_helper.rb"
+create_file "spec/rails_helper.rb" do <<-TEXT
+# This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'spec_helper'
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../../config/environment', __FILE__)
+# Prevent database truncation if the environment is production
+abort("The Rails environment is running in production mode!") if Rails.env.production?
+require 'rspec/rails'
+# Add additional requires below this line. Rails is not loaded until this point!
+
+# Requires supporting ruby files with custom matchers and macros, etc, in
+# spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
+# run as spec files by default. This means that files in spec/support that end
+# in _spec.rb will both be required and run as specs, causing the specs to be
+# run twice. It is recommended that you do not name files matching this glob to
+# end with _spec.rb. You can configure this pattern with the --pattern
+# option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
+#
+# The following line is provided for convenience purposes. It has the downside
+# of increasing the boot-up time by auto-requiring all files in the support
+# directory. Alternatively, in the individual `*_spec.rb` files, manually
+# require only the support files necessary.
+#
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
+# Checks for pending migrations and applies them before tests are run.
+# If you are not using ActiveRecord, you can remove this line.
+ActiveRecord::Migration.maintain_test_schema!
+
+require 'capybara/rails'
+
+RSpec.configure do |config|
+  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  config.fixture_path = "#\{::Rails.root}/spec/fixtures"
+
+  # If you're not using ActiveRecord, or you'd prefer not to run each of your
+  # examples within a transaction, remove the following line or assign false
+  # instead of true.
+  config.use_transactional_fixtures = true
+
+  # RSpec Rails can automatically mix in different behaviours to your tests
+  # based on their file location, for example enabling you to call `get` and
+  # `post` in specs under `spec/controllers`.
+  #
+  # You can disable this behaviour by removing the line below, and instead
+  # explicitly tag your specs with their type, e.g.:
+  #
+  #     RSpec.describe UsersController, :type => :controller do
+  #       # ...
+  #     end
+  #
+  # The different available types are documented in the features, such as in
+  # https://relishapp.com/rspec/rspec-rails/docs
+  config.infer_spec_type_from_file_location!
+
+  # Filter lines from Rails gems in backtraces.
+  config.filter_rails_from_backtrace!
+  # arbitrary gems may also be filtered via:
+  # config.filter_gems_from_backtrace("gem name")
+end
+TEXT
+end
+
+
+end # end if unless mongoid
 
 FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, Pathname.new(destination_root).join('config', 'secrets.yml.example').to_s)
 
