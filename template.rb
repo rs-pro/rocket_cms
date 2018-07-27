@@ -82,7 +82,6 @@ end
 
 group :test do
   gem 'rspec-rails'
-  gem 'database_cleaner'
   gem 'email_spec'
 #{if mongoid then "  gem 'mongoid-rspec'" else "" end}
   gem 'ffaker'
