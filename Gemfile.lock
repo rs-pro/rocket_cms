@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_cms (0.27.5)
+    rocket_cms (0.27.6)
       addressable
       coffee-rails
       jquery-rails
@@ -108,11 +108,11 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     nio4r (2.3.1)
-    nokogiri (1.8.2)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     public_suffix (3.0.2)
     rack (2.0.5)
-    rack-test (1.0.0)
+    rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.0)
       actioncable (= 5.2.0)
@@ -142,7 +142,7 @@ GEM
     smart_excerpt (0.1.5)
       activesupport
       htmlentities
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -169,4 +169,4 @@ DEPENDENCIES
   rocket_cms!
 
 BUNDLED WITH
-   1.16.1
+   1.16.3
