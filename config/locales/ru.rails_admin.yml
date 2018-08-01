@@ -72,7 +72,7 @@ ru:
         title: "Новый %{model_label}"
         menu: "Создание"
         breadcrumb: "новый"
-        link: "Добавить новый %{model_label}"
+        link: "Добавить %{model_label}"
         done: "создано"
       edit:
         title: "Редактировение %{model_label} '%{object_label}'"
