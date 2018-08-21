@@ -225,6 +225,7 @@ remove_file "config/locales/en.yml"
 
 gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable', '# :confirmable, :registerable, :timeoutable and :omniauthable'
 gsub_file 'app/models/user.rb', ':registerable,', ' :lockable,'
+gsub_file Dir.glob("db/migrate/*_devise_create_users.rb").first, '# t.datetime :locked_at', 't.datetime :locked_at'
 if mongoid
 gsub_file 'app/models/user.rb', '# field :failed_attempts', 'field :failed_attempts'
 gsub_file 'app/models/user.rb', '# field :unlock_token', 'field :unlock_token'
