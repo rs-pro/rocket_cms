@@ -24,4 +24,4 @@
       controller.list_entries(config, :index, field.associated_collection_scope, false).map { |o| [o.send(field.associated_object_label_method), o.send(field.associated_primary_key)] }.sort_by {|a| [selected_ids.index(a[1]) || selected_ids.size, i+=1] }
     end
 
-  = form.collection_check_boxes field.method_name, collection, :last, :first, {}, {} { |i| i.label( class: 'checkbox' ) { i.check_box + i.text } }
+  = form.collection_check_boxes(field.method_name, collection, :last, :first, {}, {}) { |i| i.label( class: 'checkbox' ) { i.check_box + i.text } }
