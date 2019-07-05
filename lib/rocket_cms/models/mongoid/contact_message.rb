@@ -12,6 +12,8 @@ module RocketCMS
             next if ft.nil?
             field fn, type: ft
           end
+
+          after_create :send_notification!
         end
       end
     end
