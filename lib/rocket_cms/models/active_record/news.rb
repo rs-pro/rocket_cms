@@ -4,7 +4,7 @@ module RocketCMS
       module News
         extend ActiveSupport::Concern
         included do
-          unless RocketCMS.config.news_image_styles.nil?
+          if RocketCMS.paperclip? && RocketCMS.config.news_image_styles.nil?
             has_attached_file :image, styles: RocketCMS.config.news_image_styles
           end
 

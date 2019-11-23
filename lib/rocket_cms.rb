@@ -42,6 +42,13 @@ module RocketCMS
       "#{model_namespace}::#{name}".constantize
     end
 
+    def shrine?
+      defined?(::Shrine)
+    end
+    def paperclip?
+      !shrine? && defined(::Paperclip)
+    end
+
     def url_helper
       @@url_helper ||= RocketCMS::UrlHelper.new
     end

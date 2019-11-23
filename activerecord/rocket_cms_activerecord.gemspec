@@ -22,7 +22,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rocket_cms', RocketCMS::VERSION
   spec.add_dependency 'awesome_nested_set'
-  spec.add_dependency 'paperclip'
   spec.add_dependency 'paper_trail'
   spec.add_dependency 'friendly_id'
   spec.add_dependency "validates_lengths_from_database"

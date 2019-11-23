@@ -1,5 +1,4 @@
 require 'mongoid'
-require 'mongoid-paperclip'
 require 'glebtv-mongoid_nested_set'
 require 'mongoid_slug'
 require 'kaminari/mongoid'

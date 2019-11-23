@@ -3,13 +3,17 @@ module RocketCMS
     module Mongoid
       module News
         extend ActiveSupport::Concern
-        unless RocketCMS.config.news_image_styles.nil?
-          include ::Mongoid::Paperclip
+        if !RocketCMS.config.news_image_styles.nil?
+          if RocketCMS.shrine?
+            include ImageUploader::Attachment(:image)
+          elsif RocketCMS.paperclip?
+            include ::Mongoid::Paperclip
+          end
         end
         included do
           field :time, type: Time
           index({enabled: 1, time: 1})
-          unless RocketCMS.config.news_image_styles.nil?
+          if RocketCMS.paperclip? && RocketCMS.config.news_image_styles.nil?
             has_mongoid_attached_file :image, styles: RocketCMS.config.news_image_styles
           end
           field :name, type: String, localize: RocketCMS.config.localize

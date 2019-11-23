@@ -37,7 +37,11 @@ module RocketCMS
         field :robots, :string
 
         field :og_title, :string
-        field :og_image, :paperclip
+        if RocketCMS.shrine?
+          field :og_image, :paperclip
+        elsif RocketCMS.paperclip?
+          field :og_image, :paperclip
+        end
       end
     end
 

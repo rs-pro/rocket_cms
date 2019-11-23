@@ -53,6 +53,8 @@ gem 'puma'
 
 gem 'sentry-raven'
 
+gem 'shrine'
+
 #gem 'uglifier'
 
 #gem 'rs_russian'
@@ -232,9 +234,9 @@ gsub_file 'app/models/user.rb', '# field :locked_at', 'field :locked_at'
 end
 
 if mongoid
-  generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip"
+  generate "ckeditor:install", "--orm=mongoid", "--backend=shrine"
 else
-  generate "ckeditor:install", "--orm-active_record", "--backend=paperclip"
+  generate "ckeditor:install", "--orm-active_record", "--backend=shrine"
 end
 
 unless mongoid
@@ -300,6 +302,21 @@ c = Page.create!(name: 'О компании', fullpath: '/company', menu_ids: [h
 Page.create!(name: 'Новости', fullpath: '/news', menu_ids: [h])
 Page.create!(name: 'Контакты', fullpath: '/contacts', menu_ids: [h], content: 'Текст стр контакты')
 
+TEXT
+end
+
+create_file 'config/initializers/shrine.rb' do <<-TEXT
+require "shrine"
+require "shrine/storage/file_system"
+
+Shrine.storages = {
+  cache: Shrine::Storage::FileSystem.new("public", prefix: "uploads/cache"), # temporary
+  store: Shrine::Storage::FileSystem.new("public", prefix: "uploads"),       # permanent
+}
+
+Shrine.plugin :activerecord           # loads Active Record integration
+Shrine.plugin :cached_attachment_data # enables retaining cached file across form redisplays
+Shrine.plugin :restore_cached_data    # extracts metadata for assigned cached files
 TEXT
 end
 

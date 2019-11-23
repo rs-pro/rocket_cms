@@ -28,7 +28,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rocket_cms', RocketCMS::VERSION
 
   spec.add_dependency 'glebtv-mongoid_nested_set'
-  spec.add_dependency 'mongoid-paperclip'
   spec.add_dependency 'mongoid-slug'
   spec.add_dependency 'kaminari-mongoid'
 end

@@ -3,7 +3,11 @@ module RocketCMS
     module Mongoid
       module Seo
         extend ActiveSupport::Concern
-        include ::Mongoid::Paperclip
+        if RocketCMS.shrine?
+          include ImageUploader::Attachment(:og_image)
+        elsif RocketCMS.paperclip?
+          include ::Mongoid::Paperclip
+        end
         included do
           field :name, type: String, localize: RocketCMS.config.localize
           field :h1, type: String, localize: RocketCMS.config.localize
@@ -14,7 +18,10 @@ module RocketCMS
           field :robots, type: String, localize: RocketCMS.config.localize
 
           field :og_title, type: String, localize: RocketCMS.config.localize
-          has_mongoid_attached_file :og_image, styles: {thumb: "800x600>"}
+
+          if RocketCMS.paperclip?
+            has_mongoid_attached_file :og_image, styles: {thumb: "800x600>"}
+          end
         end
       end
     end
