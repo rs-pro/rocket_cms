@@ -13,7 +13,8 @@ module RocketCMS
       end
 
       included do
-        unless RocketCMS.config.news_image_styles.nil?
+
+        if RocketCMS.paperclip? && !RocketCMS.config.news_image_styles.nil?
           validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/, if: :image?
         end
 

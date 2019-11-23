@@ -12,14 +12,12 @@ module RocketCms
     desc 'RocketCMS webpack generator'
     def install
       copy_file ".babelrc", ".babelrc"
+      copy_file ".browserlistrc", ".browserlistrc"
+      copy_file "postcss.config.js", "postcss.config.js"
 
       copy_file "webpack/common/mixins.sass", "webpack/common/mixins.sass"
       copy_file "webpack/common/variables.sass", "webpack/common/variables.sass"
       copy_file "webpack/common/index.sass", "webpack/common/index.sass"
-
-      copy_file "webpack/errors/errors.pug", "webpack/errors/errors.pug"
-      copy_file "webpack/errors/index.es6", "webpack/errors/index.es6"
-      copy_file "webpack/errors/index.sass", "webpack/errors/index.sass"
 
       copy_file "webpack/flash/index.es6", "webpack/flash/index.es6"
       copy_file "webpack/flash/index.sass", "webpack/flash/index.sass"
@@ -32,9 +30,9 @@ module RocketCms
       copy_file "webpack/layout/main.sass", "webpack/layout/main.sass"
       copy_file "webpack/layout/typography.sass", "webpack/layout/typography.sass"
 
-      copy_file "webpack/blocks/index.es6", "webpack/blocks/index.es6"
-      copy_file "webpack/blocks/header/index.sass", "webpack/blocks/header/index.sass"
-      copy_file "webpack/blocks/footer/index.sass", "webpack/blocks/footer/index.sass"
+      copy_file "webpack/components/index.es6", "webpack/components/index.es6"
+      copy_file "webpack/components/header/index.sass", "webpack/components/header/index.sass"
+      copy_file "webpack/components/footer/index.sass", "webpack/components/footer/index.sass"
 
       copy_file "webpack/pages/index.es6", "webpack/pages/index.es6"
       copy_file "webpack/pages/home/index.es6", "webpack/pages/home/index.es6"

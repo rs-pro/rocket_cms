@@ -3,7 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 yarn = !options[:skip_yarn]
-no_dev = !options[:is_dev]
+is_dev = options[:template].index("http").nil?
 spring = !options[:skip_spring]
 
 if Gem::Version.new(version) < Gem::Version.new('6.0.0')
@@ -25,17 +25,20 @@ git_source(:github) do |repo_name|
 end
 '}
 gem 'rails', '6.0.1'
+gem 'rails-i18n'
 #{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg', '>= 0.18', '< 2.0'" end}
 gem 'turbolinks' #required for redirects even if using via webpack
 
 
 #{
 "#{if mongoid then "gem 'rocket_cms_mongoid', path: '/data/rocket_cms'" else "gem 'rocket_cms_activerecord', path: '/data/rocket_cms'" end}
-gem 'rocket_cms', path: '/data/rocket_cms'" unless no_dev}
-#{"#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}" if no_dev}
+gem 'rocket_cms', path: '/data/rocket_cms'" if is_dev}
+#{"#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}" if !is_dev}
 
-gem 'rails_admin'
-#{"gem 'friendly_id'" unless mongoid}
+gem 'glebtv-ckeditor'
+
+# wait for https://github.com/sferik/rails_admin/pull/3207
+gem 'rails_admin', github: "sferik/rails_admin"
 
 gem 'slim'
 
@@ -54,6 +57,8 @@ gem 'puma'
 gem 'sentry-raven'
 
 gem 'shrine'
+#{"gem 'shrine-mongoid'" if mongoid}
+gem 'image_processing'
 
 #gem 'uglifier'
 
@@ -66,6 +71,7 @@ gem 'tzinfo-data' if Gem.win_platform?
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 gem 'bootsnap', require: false
+gem 'irb'
 
 group :development do
   #gem 'binding_of_caller'
@@ -238,6 +244,7 @@ if mongoid
 else
   generate "ckeditor:install", "--orm-active_record", "--backend=shrine"
 end
+remove_file 'config/initializers/ckeditor_shrine.rb'
 
 unless mongoid
   generate "rocket_cms:migration"
@@ -294,13 +301,114 @@ User.create!(email: 'admin@#{app_name.dasherize.downcase}.ru', password: admin_p
 
 Page.destroy_all
 Menu.destroy_all
+News.destroy_all
+
 h = Menu.create(name: 'Главное', text_slug: 'main').id
-p = Page.create!(name: 'Проекты', content: 'проекты', fullpath: '/projects', menu_ids: [h])
-Page.create!(name: 'Прайс лист', fullpath: '/price', menu_ids: [h])
-Page.create!(name: 'Галерея', fullpath: '/galleries', menu_ids: [h])
-c = Page.create!(name: 'О компании', fullpath: '/company', menu_ids: [h], content: 'О Компании')
+Page.create!(name: 'О компании', fullpath: '/company', menu_ids: [h], content: 'О Компании')
 Page.create!(name: 'Новости', fullpath: '/news', menu_ids: [h])
 Page.create!(name: 'Контакты', fullpath: '/contacts', menu_ids: [h], content: 'Текст стр контакты')
+
+3.times do |i|
+  News.create!(name: "test " + i.to_s, content: "test", time: i.days.ago)
+end
+
+TEXT
+end
+
+create_file 'app/uploaders/news_uploader.rb' do <<-TEXT
+class NewsUploader < Shrine
+  plugin :determine_mime_type
+  plugin :validation_helpers
+  plugin :derivatives
+
+  Attacher.validate do
+    validate_mime_type_inclusion %w[image/jpeg image/gif image/png]
+    validate_max_size 2.megabytes
+  end
+
+  Attacher.derivatives do |original|
+    magick = ImageProcessing::MiniMagick.source(original)
+
+    {
+      main:  magick.resize_to_limit!(800, 800),
+      thumb:  magick.resize_to_limit!(300, 300)
+    }
+  end
+end
+TEXT
+end
+
+create_file 'app/uploaders/og_image_uploader.rb' do <<-TEXT
+class OgImageUploader < Shrine
+  plugin :determine_mime_type
+  plugin :validation_helpers
+
+  Attacher.validate do
+    validate_mime_type_inclusion %w[image/jpeg image/gif image/png]
+    validate_max_size 2.megabytes
+  end
+end
+TEXT
+end
+
+create_file 'extra/shrine/plugins/custom_pretty_location.rb' do <<-TEXT
+require 'shrine/plugins/pretty_location'
+class Shrine
+  module Plugins
+    module CustomPrettyLocation
+      include Shrine::Plugins::PrettyLocation
+
+      module InstanceMethods
+        include Shrine::Plugins::PrettyLocation::InstanceMethods
+
+        def record_identifier(record)
+          id = record.public_send(opts[:custom_pretty_location][:identifier])
+          case id
+          when Integer
+            str_id = "%09d".freeze % id
+            str_id.scan(/\d{3}/).join("/".freeze)
+          when String
+            id.scan(/.{3}/).first(3).join("/".freeze)
+          else
+            # NOTE: 'raise' cannot be used.  It fails on save.
+            nil
+          end
+        end
+      end
+
+    end
+    register_plugin(:custom_pretty_location, CustomPrettyLocation)
+  end
+end
+TEXT
+end
+
+remove_file 'app/assets/config/manifest.js'
+create_file 'app/assets/config/manifest.js' do <<-TEXT
+//= link_tree ../images
+//= link_directory ../stylesheets .css
+//= link ckcontent.css
+//= link ckeditor/application.css
+//= link ckeditor/application.js
+TEXT
+end
+
+remove_file 'config/initializers/assets.rb'
+create_file 'config/initializers/assets.rb' do <<-TEXT
+# Be sure to restart your server when you modify this file.
+
+# Version of your assets, change this if you want to expire all your assets.
+Rails.application.config.assets.version = '1.0'
+
+# Add additional assets to the asset load path.
+# Rails.application.config.assets.paths << Emoji.images_path
+# Add Yarn node_modules folder to the asset load path.
+#Rails.application.config.assets.paths << Rails.root.join('node_modules')
+
+# Precompile additional assets.
+# application.js, application.css, and all non-JS/CSS in the app/assets
+# folder are already added.
+# Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
 TEXT
 end
@@ -309,16 +417,44 @@ create_file 'config/initializers/shrine.rb' do <<-TEXT
 require "shrine"
 require "shrine/storage/file_system"
 
+Shrine.logger = Rails.logger
+
+# Choose your favorite image processor
+require 'image_processing/mini_magick'
+SHRINE_PICTURE_PROCESSOR = ImageProcessing::MiniMagick
+
 Shrine.storages = {
-  cache: Shrine::Storage::FileSystem.new("public", prefix: "uploads/cache"), # temporary
-  store: Shrine::Storage::FileSystem.new("public", prefix: "uploads"),       # permanent
+  # temporary
+  cache: Shrine::Storage::FileSystem.new(
+    "public",
+    prefix: "uploads/cache"
+  ),
+  # permanent
+  store: Shrine::Storage::FileSystem.new(
+    "public",
+    prefix: "uploads"
+  ),
 }
+
+Shrine.plugin :upload_options, cache: { move: true }, store: { move: true }
+
+Shrine.plugin :custom_pretty_location, class_underscore: :true
+
+Shrine.plugin :determine_mime_type
+#{"Shrine.plugin :mongoid" if mongoid}
+Shrine.plugin :instrumentation
 
 Shrine.plugin :activerecord           # loads Active Record integration
 Shrine.plugin :cached_attachment_data # enables retaining cached file across form redisplays
 Shrine.plugin :restore_cached_data    # extracts metadata for assigned cached files
+
+Shrine.plugin :validation_helpers
+Shrine.plugin :derivatives
+
+require 'ckeditor/backend/shrine'
 TEXT
 end
+
 
 create_file 'config/initializers/rack.rb' do <<-TEXT
 Rack::Utils.multipart_part_limit = 0
@@ -425,6 +561,9 @@ Bundler.require(*Rails.groups)
 
 module #{app_name.camelize}
   class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 6.0
+
     config.generators do |g|
       g.test_framework :rspec
       g.view_specs false
@@ -466,11 +605,17 @@ create_file 'app/assets/javascripts/application.js' do <<-TEXT
 TEXT
 end
 
-remove_file 'app/assets/javascripts/application.css'
-create_file 'app/assets/javascripts/application.css' do <<-TEXT
+remove_file 'app/assets/stylesheets/application.css'
+create_file 'app/assets/stylesheets/application.css' do <<-TEXT
 TEXT
 end
 
+create_file 'app/assets/stylesheets/ckcontent.css' do <<-TEXT
+div.red {
+  color: red;
+}
+TEXT
+end
 
 if mongoid
   FileUtils.cp(Pathname.new(destination_root).join('config', 'mongoid.yml').to_s, Pathname.new(destination_root).join('config', 'mongoid.yml.example').to_s)
@@ -739,3 +884,9 @@ end
 
 git add: "."
 git commit: %Q{ -m 'Initial commit' }
+
+unless mongoid
+  rake "db:migrate"
+end
+
+rake 'db:seed'

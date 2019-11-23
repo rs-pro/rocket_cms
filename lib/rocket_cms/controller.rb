@@ -4,7 +4,7 @@ module RocketCMS::Controller
     include RsErrors
     include RsPages
     include RsMenu
-    include RsCookies
+    #include RsCookies
     protect_from_forgery with: :exception
     helper_method :page_title
     helper_method :app_url

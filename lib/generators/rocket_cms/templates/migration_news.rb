@@ -15,7 +15,11 @@ class RocketCmsCreateNews < ActiveRecord::Migration[5.0]
       end
 
       t.string :slug, null: false
-      t.attachment :image
+      if RocketCMS.shrine?
+        t.jsonb :image_data
+      elsif RocketCMS.paperclip?
+        t.attachment :image
+      end
       t.timestamps
     end
 

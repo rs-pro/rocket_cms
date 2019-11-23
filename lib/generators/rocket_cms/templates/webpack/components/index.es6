@@ -1,4 +1,4 @@
-// import your blocks here
+// import your components here
 import "./header";
 import "./footer";
 

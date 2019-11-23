@@ -17,7 +17,12 @@ module RocketCMS
         t.string :og_title
       end
       t.string :robots
-      t.attachment :og_image
+
+      if RocketCMS.shrine?
+        t.jsonb :og_image_data
+      elsif RocketCMS.paperclip?
+        t.attachment :og_image
+      end
     end
 
     def map_fields(t)

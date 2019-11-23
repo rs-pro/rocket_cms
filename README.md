@@ -70,13 +70,18 @@ If not, uninstall rails and install again
 
 Then, for mongoid:
 
-    rails new my_app -T -O -m https://gitlab.com/rocket-science/rocket_cms/raw/master/template.rb --skip-spring
+    rails new my_app -T -O -m https://gitlab.com/rocket-science/rocket_cms/raw/master/template.rb --skip-spring --skip-javascript
 
 for ActiveRecord:
 
-    rails new my_app -T --database=postgresql -m https://gitlab.com/rocket-science/rocket_cms/raw/master/template.rb --skip-spring
+    rails new my_app -T --database=postgresql -m https://gitlab.com/rocket-science/rocket_cms/raw/master/template.rb --skip-spring --skip-javascript
 
 generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
+
+Development mode template:
+
+    rails new my_app -T --database=postgresql -m /data/rocket_cms/template.rb --skip-spring --skip-javascript
+
 
 ### Localization
 

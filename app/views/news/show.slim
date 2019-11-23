@@ -4,8 +4,10 @@
     = l(@news.time.to_date)
   .rs-news-text
     = @news.excerpt
-  - if !RocketCMS.config.news_image_styles.nil? && @news.image?
-    .rs-news-image
-      = image_tag @news.image.url(:main)
+  - if !RocketCMS.config.news_image_styles.nil?
+    - if RocketCMS.paperclip? && @news.image?
+      .rs-news-image= image_tag @news.image.url(:main)
+    - elsif RocketCMS.shrine? && !news.image.nil?
+      .rs-news-image= image_tag @news.image(:main).url
   .rs-news-content
     = render 'shared/obj', obj: @news

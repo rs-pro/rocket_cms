@@ -1,1 +1,1 @@
-// import page-specific blocks here
+// import page-specific components here

@@ -5,6 +5,9 @@
   "private": true,
   "repository": "git@rscz.ru:rocket-science/<%= app_name.downcase %>.git",
   "dependencies": {
+    "@rails/actioncable": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "turbolinks": "^5.2.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-function-bind": "^7.0.0",

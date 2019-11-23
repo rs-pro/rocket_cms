@@ -4,7 +4,10 @@
     .rs-news-date= l(news.time.to_date)
     a.rs-news-title href=news_path(news)
       = news.name
-    - if !RocketCMS.config.news_image_styles.nil? && news.image?
-      .rs-news-image= image_tag news.image.url(:thumb)
+    - if !RocketCMS.config.news_image_styles.nil?
+      - if RocketCMS.paperclip? && news.image?
+        .rs-news-image= image_tag news.image.url(:thumb)
+      - elsif RocketCMS.shrine? && !news.image.nil?
+        .rs-news-image= image_tag news.image(:thumb).url
     .rs-news-excerpt= news.excerpt
   = paginate @news

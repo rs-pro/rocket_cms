@@ -9,7 +9,9 @@ module RocketCMS
 
       included do
         RocketCMS.apply_patches self
-        validates_attachment_content_type :og_image, content_type: /\Aimage\/.*\Z/, if: :og_image?
+        if RocketCMS.paperclip?
+          validates_attachment_content_type :og_image, content_type: /\Aimage\/.*\Z/, if: :og_image?
+        end
       end
     end
   end

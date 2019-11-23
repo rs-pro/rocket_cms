@@ -6,7 +6,6 @@ end
 require 'rocket_cms/version'
 require 'validates_email_format_of'
 require 'smart_excerpt'
-require 'filename_to_slug'
 
 require 'kaminari'
 require 'addressable/uri'

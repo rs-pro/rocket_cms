@@ -8,10 +8,16 @@ ru:
       truncate: "&hellip;"
   helpers:
     page_entries_info:
+      entry:
+        one: "запись"
+        few: "записи"
+        many: "записей"
+        other: "записей"
       one_page:
         display_entries:
-          zero: "%{entry_name} не найдены"
-          one: "Показано <b>1</b> %{entry_name}"
+          one: "Показана <b>1</b> %{entry_name}"
+          few: "Показано <b>1</b> %{entry_name}"
+          many: "Показаны <b>все %{count}</b> %{entry_name}"
           other: "Показаны <b>все %{count}</b> %{entry_name}"
       more_pages:
         display_entries: "Показаны %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> из <b>%{total}</b>"

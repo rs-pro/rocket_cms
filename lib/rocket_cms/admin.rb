@@ -64,7 +64,7 @@ module RocketCMS
         end
         edit do
           field :name
-          field :content, :ck_editor
+          field :content, :ckeditor
           RocketCMS.apply_patches self
           group :menu do
             label I18n.t('rs.menu')
@@ -147,7 +147,7 @@ module RocketCMS
         end
 
         edit do
-          field :content, :ck_editor
+          field :content, :ckeditor
           RocketCMS.apply_patches self
           group :seo, &RocketCMS.seo_config
         end

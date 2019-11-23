@@ -5,7 +5,6 @@ html lang="ru"
     meta name="viewport" content="width=device-width, maximum-scale=1, minimal-ui"
     -# meta property="fb:app_id" content=Rails.application.secrets.fb_app_id
     -# meta property="vk:app_id" content=Rails.application.secrets.vk_app_id
-    meta name="turbolinks-cache-control" content="no-cache"
 
     title= page_title
     = yield :meta
@@ -18,7 +17,7 @@ html lang="ru"
     = javascript_include_tag *webpack_asset_paths('application', extension: 'js')
 
   body.no-js class=body_class
-    = render 'blocks/header'
+    = render 'components/header'
     script.no-js-script
       | document.body.classList.remove('no-js');
 
@@ -26,14 +25,9 @@ html lang="ru"
       = render 'shared/messages'
       = yield
 
-    = render 'blocks/footer'
-
-    .no-js-error.alert.alert-error
-      | К сожалению, в вашем браузере отключен JavaScript
-      span Включите его, чтобы зайти на сайт
-      a class="btn-transparent" target="_blank" href="https://yandex.ru/support/common/browsers-settings/browsers-java-js-settings.xml" Включить JavaScript
+    = render 'components/footer'
 
     #fb-root data-turbolinks-permanent=""
     #vk_api_transport data-turbolinks-permanent=""
 
-    = render 'blocks/counters'
+    = render 'components/counters'
