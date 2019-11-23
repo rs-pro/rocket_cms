@@ -1,8 +1,19 @@
 {
-  "presets": [["env", {
-   "targets": {
-    "browsers": ["last 2 versions", "ie >= 11"]
-    },
-    "useBuiltIns": true
-  }], "stage-0"]
+  "presets": [
+    ["@babel/env", {
+      "targets": {
+        "browsers": ["last 2 versions", "ie >= 11"]
+      },
+      "corejs": 3,
+      "useBuiltIns": "entry"
+    }]
+    //, "@babel/react"
+  ],
+ "plugins": [
+    //["@babel/plugin-transform-react-jsx", { "pragma":"h" }],
+    "@babel/plugin-proposal-function-bind",
+    "@babel/plugin-syntax-dynamic-import",
+    ["@babel/plugin-proposal-class-properties", { "loose": false }],
+    "@babel/plugin-transform-runtime"
+  ]
 }
