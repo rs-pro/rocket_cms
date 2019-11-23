@@ -6,7 +6,7 @@ yarn = !options[:skip_yarn]
 no_dev = !options[:is_dev]
 spring = !options[:skip_spring]
 
-if Gem::Version.new(version) < Gem::Version.new('5.0.0')
+if Gem::Version.new(version) < Gem::Version.new('6.0.0')
   puts "You are using an old version of Rails (#{version})"
   puts "Please update"
   puts "Stopping"
@@ -24,25 +24,24 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 '}
-gem 'rails', '5.2.0'
+gem 'rails', '6.0.1'
 #{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg', '>= 0.18', '< 2.0'" end}
 gem 'turbolinks' #required for redirects even if using via webpack
 
-gem 'sass'
 
 #{
 "#{if mongoid then "gem 'rocket_cms_mongoid', path: '/data/rocket_cms'" else "gem 'rocket_cms_activerecord', path: '/data/rocket_cms'" end}
 gem 'rocket_cms', path: '/data/rocket_cms'" unless no_dev}
 #{"#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}" if no_dev}
 
-gem 'rails_admin', github: 'sferik/rails_admin'
-#{"gem 'friendly_id', github: 'norman/friendly_id'" unless mongoid}
+gem 'rails_admin'
+#{"gem 'friendly_id'" unless mongoid}
 
 gem 'slim'
-gem 'haml'
 
-gem 'sass-rails'
-gem 'rs-webpack-rails', '~> 0.11.1'
+#gem 'sass'
+#gem 'sass-rails'
+gem 'rs-webpack-rails'
 
 gem 'devise'
 gem 'devise-i18n'
@@ -54,9 +53,9 @@ gem 'puma'
 
 gem 'sentry-raven'
 
-gem 'uglifier'
+#gem 'uglifier'
 
-gem 'rs_russian'
+#gem 'rs_russian'
 #gem 'enumerize'
 #gem 'active_model_serializers'
 
@@ -163,7 +162,7 @@ puma
 
 "
 
-#create_file '.ruby-version', "2.5.0\n"
+#create_file '.ruby-version', "2.6.5\n"
 #create_file '.ruby-gemset', "#{app_name}\n"
 
 run 'bundle install --without production'
@@ -279,14 +278,6 @@ end
 
 create_file 'config/locales/ru.yml' do <<-TEXT
 ru:
-  attributes:
-    is_default: По умолчанию
-  mongoid:
-    models:
-      item: Товар
-    attributes:
-      item:
-        price: Цена
 TEXT
 end
 
@@ -314,20 +305,6 @@ end
 
 create_file 'config/initializers/rack.rb' do <<-TEXT
 Rack::Utils.multipart_part_limit = 0
-
-if Rails.env.development?
-  module Rack
-    class CommonLogger
-      alias_method :log_without_assets, :log
-      #{'ASSETS_PREFIX = "/#{Rails.application.config.assets.prefix[/\A\/?(.*?)\/?\z/, 1]}/"'}
-      def log(env, status, header, began_at)
-        unless env['REQUEST_PATH'].start_with?(ASSETS_PREFIX) || env['REQUEST_PATH'].start_with?('/uploads')  || env['REQUEST_PATH'].start_with?('/system')
-          log_without_assets(env, status, header, began_at)
-        end
-      end
-    end
-  end
-end
 TEXT
 end
 
