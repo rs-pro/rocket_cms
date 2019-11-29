@@ -45,7 +45,7 @@ module RocketCMS
       defined?(::Shrine)
     end
     def paperclip?
-      !shrine? && defined(::Paperclip)
+      !shrine? && defined?(::Paperclip)
     end
 
     def url_helper
