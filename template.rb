@@ -157,14 +157,14 @@ ORM: #{if mongoid then 'Mongoid' else 'ActiveRecord' end}
 
 To run (windows):
 ```
-npm start
+yarn start
 bundle exec rails s webrick
 ```
 
 
 To run (nix/mac):
 ```
-npm start
+yarn start
 puma
 ```
 
