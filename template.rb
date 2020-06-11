@@ -3,8 +3,11 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 yarn = !options[:skip_yarn]
-is_dev = options[:template].index("http").nil?
+is_dev = !options[:template].start_with?("http")
 spring = !options[:skip_spring]
+if is_dev
+  rocket_cms_path = File.realpath(options[:template] + "/..")
+end
 
 if Gem::Version.new(version) < Gem::Version.new('6.0.0')
   puts "You are using an old version of Rails (#{version})"
@@ -29,10 +32,9 @@ gem 'rails-i18n'
 #{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg', '>= 0.18', '< 2.0'" end}
 gem 'turbolinks' #required for redirects even if using via webpack
 
-
 #{
-"#{if mongoid then "gem 'rocket_cms_mongoid', path: '/data/rocket_cms'" else "gem 'rocket_cms_activerecord', path: '/data/rocket_cms'" end}
-gem 'rocket_cms', path: '/data/rocket_cms'" if is_dev}
+"#{if mongoid then "gem 'rocket_cms_mongoid', path: '#{rocket_cms_path}'" else "gem 'rocket_cms_activerecord', path: '#{rocket_cms_path}'" end}
+gem 'rocket_cms', path: '#{rocket_cms_path}'" if is_dev}
 #{"#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}" if !is_dev}
 
 gem 'glebtv-ckeditor'
