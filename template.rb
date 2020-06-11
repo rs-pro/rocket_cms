@@ -89,16 +89,21 @@ group :development do
   gem 'capistrano-rails', require: false
 end
 
-group :test do
+group :development, :test do
+  gem "factory_bot_rails"
   gem 'rspec-rails'
-  gem 'email_spec'
 #{if mongoid then "  gem 'mongoid-rspec'" else "" end}
-  gem 'ffaker'
-  gem 'factory_bot_rails'
-
   gem 'capybara'
-  gem 'capybara-webkit'
+  # https://github.com/mattheworiordan/capybara-screenshot/issues/243
+  gem 'capybara-screenshot'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
   gem 'database_cleaner'
+#{if mongoid then "  gem 'database_cleaner-mongoid'" else "" end}
+  #gem 'database_cleaner-redis'
+  gem 'ffaker'
+  gem 'timecop'
+  gem "pry-rails"
   gem 'childprocess'
 end
 
@@ -388,7 +393,7 @@ class Shrine
           case id
           when Integer
             str_id = "%09d".freeze % id
-            str_id.scan(/\d{3}/).join("/".freeze)
+            str_id.scan(/\\d{3}/).join("/".freeze)
           when String
             id.scan(/.{3}/).first(3).join("/".freeze)
           else
@@ -399,7 +404,7 @@ class Shrine
 
         def transform_class_name(class_name)
           if opts[:custom_pretty_location][:class_underscore]
-            class_name.gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2').gsub(/([a-z])([A-Z])/, '\1_\2').downcase
+            class_name.gsub(/([A-Z]+)([A-Z][a-z])/, '\\1_\\2').gsub(/([a-z])([A-Z])/, '\\1_\\2').downcase
           else
             class_name.downcase
           end
@@ -811,18 +816,57 @@ TEXT
 end
 
 create_file "spec/support/capybara.rb" do <<-TEXT
-require 'capybara/rspec'
-require 'capybara/webkit'
-
-# https://github.com/teamcapybara/capybara/blob/master/lib/capybara.rb#L35
-Capybara.configure do |config|
-  config.default_driver = :webkit
-  config.javascript_driver = :webkit
-
-  # use the custom server
-  config.server = :puma
-  config.run_server = true
-end
+  if ENV['CI']
+    Selenium::WebDriver::Chrome.path = '/usr/bin/google-chrome-stable'
+  else
+    begin
+      Selenium::WebDriver::Chrome.path = '/usr/bin/chromium'
+    rescue Selenium::WebDriver::Error::WebDriverError
+    end
+  end
+  
+  Capybara.register_driver :chrome_root do |app|
+      service = ::Selenium::WebDriver::Service.chrome#(args: { verbose: true, log_path: 'chromedriver.log' })
+      options = ::Selenium::WebDriver::Chrome::Options.new
+      options.args << '--headless' unless ENV['NO_HEADLESS']
+      options.args << '--no-sandbox'
+      options.args << '--window-size=1280,1024'
+  
+      Capybara::Selenium::Driver.new(app, browser: :chrome, options: options, service: service)
+  end
+  # не работает, установлено выше
+  # Capybara::Screenshot.webkit_options = { width: 1280, height: 1024 }
+  
+  if ENV['CHROME_VISIBLE']
+    Capybara.javascript_driver = :selenium_chrome
+  else
+    Capybara.javascript_driver = :chrome_root
+  end
+  Capybara.default_driver = :rack_test
+  Capybara.default_max_wait_time = 15
+  Capybara.register_server :puma do |app, port, host|
+    require 'rack/handler/puma'
+    Rack::Handler::Puma.run(app, Host: host, Port: port, Threads: "1:1")
+  end
+  
+  Capybara.configure do |config|
+    config.app_host = "http://\#{Rails.application.secrets.host}"
+    config.server = :puma
+    config.server_port = 9332
+    config.run_server = true
+    config.always_include_port = true
+  end
+  
+  
+  Capybara::Screenshot.register_driver(:selenium_chrome) do |driver, path|
+    driver.browser.save_screenshot(path)
+  end
+  Capybara::Screenshot.register_driver(:chrome_root) do |driver, path|
+    driver.browser.save_screenshot(path)
+  end
+  
+  Capybara::Screenshot.autosave_on_failure = true
+  
 TEXT
 end
 
