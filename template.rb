@@ -27,7 +27,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 '}
-gem 'rails', '6.0.1'
+gem 'rails', '6.0.3.4'
 gem 'rails-i18n'
 #{if mongoid then "gem 'mongoid', '~> 6.1.0'" else "gem 'pg', '>= 0.18', '< 2.0'" end}
 gem 'turbolinks' #required for redirects even if using via webpack
