@@ -167,7 +167,7 @@ GEM
     stringex (2.8.5)
     thor (1.0.1)
     thread_safe (0.3.6)
-    tzinfo (1.2.8)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     validates_email_format_of (1.6.3)
       i18n
