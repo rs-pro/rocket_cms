@@ -80,7 +80,7 @@ generator creates a new RVM gemset, so after cd'ing to app dir, you should run `
 
 Development mode template:
 
-    rails new my_app -T --database=postgresql -m /data/rocket_cms/template.rb --skip-spring --skip-javascript
+    rails new my_app -T --database=postgresql -m /a/rocket_cms/template.rb --skip-spring --skip-javascript
 
 
 ### Localization
